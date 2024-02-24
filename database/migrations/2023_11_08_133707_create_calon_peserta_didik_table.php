@@ -1,13 +1,5 @@
 <?php
 
-use App\Models\AsalSekolah;
-use App\Models\Ayah;
-use App\Models\BerkebutuhanKhusus;
-use App\Models\Ibu;
-use App\Models\ModaTransportasi;
-use App\Models\TempatTinggal;
-use App\Models\User;
-use App\Models\Wali;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

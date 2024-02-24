@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('persyaratan_umum', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('registrasi_id')->constrained('registrasi')->cascadeOnDelete();
+            $table->foreignId('pendaftaran_id')->constrained('pendaftaran')->cascadeOnDelete();
             $table->string('status_kelulusan_sekolah_asal')->nullable();
-            $table->string('ijazah')->nullable();
-            $table->string('akta')->nullable();
+            $table->string('dokumen_kelulusan')->nullable();
+            $table->string('dokumen_kelahiran')->nullable();
             $table->string('kartu_keluarga')->nullable();
             $table->string('ktp_ortu')->nullable();
-            $table->timestamps();
+            // $table->string('rapor')->nullable();
+            // TODO : Surat Tanggung Jawab Mutlak Ortu
         });
     }
 

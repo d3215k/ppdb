@@ -5,9 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Enums\UserType;
-use App\Models\Ayah;
 use App\Models\CalonPesertaDidik;
-use App\Models\GelombangPendaftaran;
+use App\Models\Gelombang;
 use App\Models\TahunPelajaran;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'aktif' => true,
         ]);
 
-        GelombangPendaftaran::create([
+        Gelombang::create([
             'tahun_pelajaran_id' => $tahun->id,
             'nama' => 'Gelombang 1',
             'mulai' => today(),
@@ -38,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'aktif' => true,
         ]);
 
-        GelombangPendaftaran::create([
+        Gelombang::create([
             'tahun_pelajaran_id' => $tahun->id,
             'nama' => 'Gelombang 2',
             'mulai' => today()->addMonth(3),

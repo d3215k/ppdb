@@ -6,25 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Registrasi extends Model
+class Pendaftaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'registrasi';
+    protected $table = 'pendaftaran';
 
     public function tahunPelajaran(): BelongsTo
     {
         return $this->belongsTo(TahunPelajaran::class);
     }
 
-    public function jalurPendaftaran(): BelongsTo
+    public function jalur(): BelongsTo
     {
-        return $this->belongsTo(JalurPendaftaran::class);
+        return $this->belongsTo(Pendaftaran::class);
     }
 
-    public function gelombangPendaftaran(): BelongsTo
+    public function gelombang(): BelongsTo
     {
-        return $this->belongsTo(GelombangPendaftaran::class);
+        return $this->belongsTo(Gelombang::class);
     }
 
     public function pilihanKesatu(): BelongsTo

@@ -12,6 +12,6 @@ class PersyaratanUmum extends Model
 
     public function registrasi(): BelongsTo
     {
-        return $this->belongsTo(Registrasi::class);
+        return $this->belongsTo(Pendaftaran::class);
     }
 }

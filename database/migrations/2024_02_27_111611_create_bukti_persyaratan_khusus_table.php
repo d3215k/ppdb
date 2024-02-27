@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('persyaratan_khusus', function (Blueprint $table) {
+        Schema::create('bukti_persyaratan_khusus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jalur_id')->constrained('jalur')->cascadeOnDelete();
-            $table->string('nama');
-            $table->boolean('aktif')->default(true);
+            $table->foreignId('pendaftaran_id')->constrained('pendaftaran')->cascadeOnDelete();
+            $table->foreignId('persyaratan_khusus_id')->constrained('persyaratan_khusus')->cascadeOnDelete();
+            $table->string('file');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('persyaratan_khusus');
+        Schema::dropIfExists('bukti_persyaratan_khusus');
     }
 };

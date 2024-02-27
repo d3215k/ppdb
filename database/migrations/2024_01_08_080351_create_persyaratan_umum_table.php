@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('dokumen_kelahiran')->nullable();
             $table->string('kartu_keluarga')->nullable();
             $table->string('ktp_ortu')->nullable();
-            // $table->string('rapor')->nullable();
-            // TODO : Surat Tanggung Jawab Mutlak Ortu
         });
     }
 

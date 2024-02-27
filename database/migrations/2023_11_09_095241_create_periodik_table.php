@@ -22,6 +22,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('jarak_km')->nullable();
             $table->unsignedSmallInteger('waktu_tempuh')->nullable();
             $table->unsignedSmallInteger('jumlah_saudara_kandung')->nullable();
+            $table->unsignedSmallInteger('no_sepatu')->nullable();
+            $table->string('ukuran_baju')->nullable();
             $table->timestamps();
         });
     }

@@ -38,6 +38,10 @@ return new class extends Migration
             $table->string('nomor_hp', 16)->nullable();
             $table->string('email')->nullable();
             $table->foreignId('asal_sekolah_id')->nullable()->constrained('asal_sekolah')->nullOnDelete();
+
+            $table->string('username')->nullable(); // akun dinas
+            $table->string('password')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -8,14 +8,16 @@ use Filament\Support\Contracts\HasLabel;
 enum UserType: int implements HasLabel, HasColor
 {
     case CALON_PESERTA_DIDIK = 1;
-    case ADVISOR = 2;
-    case ADMIN = 3;
+    case PENGUJI = 2;
+    case PANITIA = 3;
+    case ADMIN = 9;
 
     public function getLabel(): ?string
     {
         return match ($this) {
             self::CALON_PESERTA_DIDIK => 'Calon Peserta Didik',
-            self::ADVISOR => 'ADVISOR',
+            self::PENGUJI => 'Penguji',
+            self::PANITIA => 'Panitia',
             self::ADMIN => 'Admin',
         };
     }
@@ -24,7 +26,8 @@ enum UserType: int implements HasLabel, HasColor
     {
         return match ($this) {
             self::CALON_PESERTA_DIDIK => 'success',
-            self::ADVISOR => 'warning',
+            self::PENGUJI => 'warning',
+            self::PANITIA => 'info',
             self::ADMIN => 'danger',
         };
     }

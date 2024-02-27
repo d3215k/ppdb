@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'advisor1',
             'email' => 'advisor@example.com',
             'password' => bcrypt('password'),
-            'type' => UserType::ADVISOR
+            'type' => UserType::PANITIA
         ]);
 
         User::create([

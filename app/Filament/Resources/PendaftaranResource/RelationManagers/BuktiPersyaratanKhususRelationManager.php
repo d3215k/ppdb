@@ -19,9 +19,14 @@ class BuktiPersyaratanKhususRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\Select::make('persyaratan_khusus_id')
-                    ->options(
-                        $this->getOwnerRecord()->jalur->persyaratanKhusus->pluck('nama', 'id')
-                    )
+                    ->options(function () {
+                        $ids = $this->getOwnerRecord()->buktiPersyaratanKhusus->pluck('id');
+
+                        return $this->getOwnerRecord()
+                            ->jalur->persyaratanKhusus
+                            ->whereNotIn('id', $ids)
+                            ->pluck('nama', 'id');
+                    })
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('file')

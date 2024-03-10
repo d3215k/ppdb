@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\JenisKelamin;
 use App\Filament\Resources\CalonPesertaDidikResource\Pages;
 use App\Filament\Resources\CalonPesertaDidikResource\RelationManagers;
 use App\Models\CalonPesertaDidik;
@@ -26,18 +27,24 @@ class CalonPesertaDidikResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')
+                    ->label('Nama Lengkap')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('lp')
-                    ->required()
-                    ->maxLength(1),
+                Forms\Components\ToggleButtons::make('lp')
+                    ->inline()
+                    ->label('L/P')
+                    ->options(JenisKelamin::class)
+                    ->required(),
                 Forms\Components\TextInput::make('nisn')
+                    ->label('NISN')
                     ->maxLength(10),
                 Forms\Components\TextInput::make('kewarganegaraan')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('nik')
+                    ->label('NIK')
                     ->maxLength(16),
                 Forms\Components\TextInput::make('kk')
+                    ->label('Nomor KK')
                     ->maxLength(16),
                 Forms\Components\TextInput::make('tempat_lahir')
                     ->maxLength(255),
@@ -53,10 +60,13 @@ class CalonPesertaDidikResource extends Resource
                     ->preload()
                     ->searchable(),
                 Forms\Components\TextInput::make('address')
+                    ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('rt')
+                    ->label('RT')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('rw')
+                    ->label('RW')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('dusun')
                     ->maxLength(255),
@@ -69,9 +79,9 @@ class CalonPesertaDidikResource extends Resource
                 Forms\Components\TextInput::make('bujur')
                     ->maxLength(255),
                 Forms\Components\Select::make('tempat_tinggal_id')
-                    ->relationship('tempatTinggal', 'id'),
+                    ->relationship('tempatTinggal', 'nama'),
                 Forms\Components\Select::make('moda_transportasi_id')
-                    ->relationship('modaTransportasi', 'id'),
+                    ->relationship('modaTransportasi', 'nama'),
                 Forms\Components\TextInput::make('anak_ke')
                     ->numeric(),
                 Forms\Components\TextInput::make('nomor_hp')
@@ -83,11 +93,13 @@ class CalonPesertaDidikResource extends Resource
                     ->relationship('asalSekolah', 'nama')
                     ->preload()
                     ->searchable(),
-                Forms\Components\TextInput::make('username')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->maxLength(255),
+                Forms\Components\Fieldset::make('Akun PPDB Dinas')
+                    ->schema([
+                        Forms\Components\TextInput::make('username')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('password')
+                            ->maxLength(255),
+                    ])
             ]);
     }
 

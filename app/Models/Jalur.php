@@ -13,6 +13,8 @@ class Jalur extends Model
 
     protected $table = 'jalur';
 
+    public $timestamps = false;
+
     public function pendaftaran(): HasMany
     {
         return $this->hasMany(Pendaftaran::class);
@@ -21,6 +23,11 @@ class Jalur extends Model
     public function gelombang(): BelongsToMany
     {
         return $this->belongsToMany(Gelombang::class);
+    }
+
+    public function persyaratanKhusus(): HasMany
+    {
+        return $this->hasMany(PersyaratanKhusus::class);
     }
 
 }

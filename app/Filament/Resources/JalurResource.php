@@ -19,7 +19,7 @@ class JalurResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Sistem';
 
     public static function form(Form $form): Form
     {
@@ -29,6 +29,7 @@ class JalurResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('aktif')
+                    ->inline(false)
                     ->required(),
             ]);
     }
@@ -39,12 +40,7 @@ class JalurResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('aktif')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\ToggleColumn::make('aktif'),
             ])
             ->filters([
                 //
@@ -53,16 +49,16 @@ class JalurResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\PersyaratanKhususRelationManager::class,
         ];
     }
 

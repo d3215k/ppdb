@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\GelombangResource\Pages;
 use App\Filament\Resources\GelombangResource\RelationManagers;
 use App\Models\Gelombang;
+use App\Models\TahunPelajaran;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,14 +20,14 @@ class GelombangResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Sistem';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('tahun_pelajaran_id')
-                    ->numeric(),
+                Forms\Components\Select::make('tahun_pelajaran_id')
+                    ->options(TahunPelajaran::pluck('nama', 'id')),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
@@ -35,8 +36,10 @@ class GelombangResource extends Resource
                 Forms\Components\DatePicker::make('sampai')
                     ->required(),
                 Forms\Components\TextInput::make('link_wa_group')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
                 Forms\Components\Toggle::make('aktif')
+                    ->inline(false)
                     ->required(),
             ]);
     }
@@ -45,8 +48,7 @@ class GelombangResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('tahun_pelajaran_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('tahunPelajaran.nama')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
@@ -56,14 +58,20 @@ class GelombangResource extends Resource
                 Tables\Columns\TextColumn::make('sampai')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('link_wa_group')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('aktif')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('jalur_count')
+                    ->counts('jalur')
+                    ->label('Jalur Dibuka'),
+                Tables\Columns\ToggleColumn::make('aktif')
+                    ->afterStateUpdated(function ($record, $state) {
+                        if ($state) {
+                            Gelombang::query()
+                                ->whereNot('id', $record->id)
+                                ->where('tahun_pelajaran_id', $record->tahun_pelajaran_id)
+                                ->update([
+                                    'aktif' => false
+                                ]);
+                        }
+                    }),
             ])
             ->filters([
                 //
@@ -72,16 +80,16 @@ class GelombangResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\JalurRelationManager::class,
         ];
     }
 

@@ -10,6 +10,10 @@ class PersyaratanUmum extends Model
 {
     use HasFactory;
 
+    protected $table = 'persyaratan_umum';
+
+    public $timestamps = false;
+
     public function pendaftaran(): BelongsTo
     {
         return $this->belongsTo(Pendaftaran::class);

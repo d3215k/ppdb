@@ -29,8 +29,15 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->registration()
             ->profile()
+            ->spa()
             ->colors([
                 'primary' => Color::Red,
+            ])
+            ->navigationGroups([
+                'Tes',
+                'Admin',
+                'Referensi',
+                'Sistem',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

@@ -19,7 +19,7 @@ class KompetensiKeahlianResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Sistem';
 
     public static function form(Form $form): Form
     {
@@ -27,10 +27,17 @@ class KompetensiKeahlianResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nama')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
                 Forms\Components\Toggle::make('dipilih_kesatu')
+                    ->label('Dapat dipilih kesatu')
+                    ->inline(false)
+                    ->default(true)
                     ->required(),
                 Forms\Components\Toggle::make('dipilih_kedua')
+                    ->label('Dapat dipilih kedua')
+                    ->inline(false)
+                    ->default(true)
                     ->required(),
             ]);
     }
@@ -39,24 +46,11 @@ class KompetensiKeahlianResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('kode'),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('dipilih_kesatu')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('dipilih_kedua')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ToggleColumn::make('dipilih_kesatu'),
+                Tables\Columns\ToggleColumn::make('dipilih_kedua'),
             ])
             ->filters([
                 //
@@ -65,9 +59,9 @@ class KompetensiKeahlianResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
@@ -82,8 +76,8 @@ class KompetensiKeahlianResource extends Resource
     {
         return [
             'index' => Pages\ListKompetensiKeahlians::route('/'),
-            'create' => Pages\CreateKompetensiKeahlian::route('/create'),
-            'edit' => Pages\EditKompetensiKeahlian::route('/{record}/edit'),
+            // 'create' => Pages\CreateKompetensiKeahlian::route('/create'),
+            // 'edit' => Pages\EditKompetensiKeahlian::route('/{record}/edit'),
         ];
     }
 }

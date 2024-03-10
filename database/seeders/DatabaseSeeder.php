@@ -7,6 +7,8 @@ namespace Database\Seeders;
 use App\Enums\UserType;
 use App\Models\CalonPesertaDidik;
 use App\Models\Gelombang;
+use App\Models\Jalur;
+use App\Models\KompetensiKeahlian;
 use App\Models\TahunPelajaran;
 use App\Models\User;
 use Carbon\Carbon;
@@ -25,11 +27,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $tahun = TahunPelajaran::create([
-            'nama' => '2024',
+            'kode' => '2425',
+            'nama' => '2024/2025',
             'aktif' => true,
         ]);
 
         Gelombang::create([
+            'kode' => '1',
             'tahun_pelajaran_id' => $tahun->id,
             'nama' => 'Gelombang 1',
             'mulai' => today(),
@@ -38,15 +42,89 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Gelombang::create([
+            'kode' => '2',
             'tahun_pelajaran_id' => $tahun->id,
             'nama' => 'Gelombang 2',
             'mulai' => today()->addMonth(3),
             'sampai' => today()->addMonth(5),
-            'aktif' => true,
+            'aktif' => false,
+        ]);
+
+        Jalur::create([
+            'nama' => 'Afirmasi',
+        ]);
+
+        Jalur::create([
+            'nama' => 'Perpindahan Tugas Orang tua/Wali/Anak Guru',
+        ]);
+
+        Jalur::create([
+            'nama' => 'Prestasi',
+        ]);
+
+        Jalur::create([
+            'nama' => 'Prioritas Terdekat',
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'AGRIN',
+            'nama' => 'Agroindustri',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'MM',
+            'nama' => 'Multimedia',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'APAT',
+            'nama' => 'Agribisnis Perikanan Air Tawar',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'ATU',
+            'nama' => 'Agribisnis Ternak Unggas',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'ATR',
+            'nama' => 'Agribisnis Ternak Ruminansia',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'ATPH',
+            'nama' => 'Agribisnis Tanaman Pangan dan Hortikultura',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'APHP',
+            'nama' => 'Agribisnis Pengolahan Hasil Pertanian',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'PMHP',
+            'nama' => 'Pengawasan Mutu Hasil Pertanian',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => true,
         ]);
 
         User::create([
             'username' => 'advisor1',
+            'name' => 'Advisor 1',
             'email' => 'advisor@example.com',
             'password' => bcrypt('password'),
             'type' => UserType::PANITIA
@@ -54,6 +132,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'admin',
+            'name' => 'Administrator',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
             'type' => UserType::ADMIN

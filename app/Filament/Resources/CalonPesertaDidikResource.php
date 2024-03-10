@@ -19,7 +19,7 @@ class CalonPesertaDidikResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Referensi';
 
     public static function form(Form $form): Form
     {
@@ -45,9 +45,13 @@ class CalonPesertaDidikResource extends Resource
                 Forms\Components\TextInput::make('no_reg_akta')
                     ->maxLength(255),
                 Forms\Components\Select::make('agama_id')
-                    ->relationship('agama', 'id'),
+                    ->relationship('agama', 'nama')
+                    ->preload()
+                    ->searchable(),
                 Forms\Components\Select::make('berkebutuhan_khusus_id')
-                    ->relationship('berkebutuhanKhusus', 'id'),
+                    ->relationship('berkebutuhanKhusus', 'nama')
+                    ->preload()
+                    ->searchable(),
                 Forms\Components\TextInput::make('address')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('rt')
@@ -76,7 +80,9 @@ class CalonPesertaDidikResource extends Resource
                     ->email()
                     ->maxLength(255),
                 Forms\Components\Select::make('asal_sekolah_id')
-                    ->relationship('asalSekolah', 'id'),
+                    ->relationship('asalSekolah', 'nama')
+                    ->preload()
+                    ->searchable(),
                 Forms\Components\TextInput::make('username')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('password')

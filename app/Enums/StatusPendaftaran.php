@@ -5,7 +5,7 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum StatusRegistrasi: int implements HasLabel, HasColor
+enum StatusPendaftaran: int implements HasLabel, HasColor
 {
     case PENDAFTARAN = 1;
     //

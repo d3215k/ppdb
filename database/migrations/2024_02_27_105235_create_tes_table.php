@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('calon_peserta_didik_id')->constrained('calon_peserta_didik')->cascadeOnDelete();
             $table->unsignedInteger('minat_bakat')->nullable();
             $table->unsignedInteger('khusus')->nullable();
             $table->timestamps();

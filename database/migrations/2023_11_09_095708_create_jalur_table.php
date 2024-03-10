@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('jalur', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->boolean('aktif')->default(false);
             $table->softDeletes();
         });
     }

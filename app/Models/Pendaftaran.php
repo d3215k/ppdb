@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\StatusPendaftaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pendaftaran extends Model
 {
@@ -12,14 +16,28 @@ class Pendaftaran extends Model
 
     protected $table = 'pendaftaran';
 
+    protected $casts = [
+        'status' => StatusPendaftaran::class
+    ];
+
     public function tahunPelajaran(): BelongsTo
     {
         return $this->belongsTo(TahunPelajaran::class);
     }
 
+    public function calonPesertaDidik(): BelongsTo
+    {
+        return $this->belongsTo(CalonPesertaDidik::class);
+    }
+
     public function jalur(): BelongsTo
     {
-        return $this->belongsTo(Pendaftaran::class);
+        return $this->belongsTo(Jalur::class);
+    }
+
+    public function persyaratanUmum(): HasOne
+    {
+        return $this->hasOne(PersyaratanUmum::class);
     }
 
     public function gelombang(): BelongsTo
@@ -29,11 +47,16 @@ class Pendaftaran extends Model
 
     public function pilihanKesatu(): BelongsTo
     {
-        return $this->belongsTo(KompetensiKeahlian::class);
+        return $this->belongsTo(KompetensiKeahlian::class, 'pilihan_kesatu');
     }
 
     public function pilihanKedua(): BelongsTo
     {
-        return $this->belongsTo(KompetensiKeahlian::class);
+        return $this->belongsTo(KompetensiKeahlian::class, 'pilihan_kedua');
+    }
+
+    public function buktiPersyaratanKhusus(): HasMany
+    {
+        return $this->hasMany(BuktiPersyaratanKhusus::class);
     }
 }

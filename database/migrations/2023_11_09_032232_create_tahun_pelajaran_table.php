@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tahun_pelajaran', function (Blueprint $table) {
             $table->id();
+            $table->char('kode', 5);
             $table->string('nama');
             $table->boolean('aktif')->default(false);
             $table->softDeletes();

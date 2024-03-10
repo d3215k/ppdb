@@ -10,6 +10,8 @@ class PersyaratanKhusus extends Model
 {
     use HasFactory;
 
+    protected $table = 'persyaratan_khusus';
+
     public function pendaftaran(): BelongsTo
     {
         return $this->belongsTo(Pendaftaran::class);

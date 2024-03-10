@@ -19,7 +19,7 @@ class TahunPelajaranResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Sistem';
 
     public static function form(Form $form): Form
     {
@@ -39,12 +39,16 @@ class TahunPelajaranResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('aktif')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ToggleColumn::make('aktif')
+                    ->afterStateUpdated(function ($record, $state) {
+                        if ($state) {
+                            TahunPelajaran::query()
+                                ->whereNot('id', $record->id)
+                                ->update([
+                                    'aktif' => false
+                                ]);
+                        }
+                    })
             ])
             ->filters([
                 //

@@ -13,6 +13,11 @@ class CalonPesertaDidik extends Model
 
     protected $table = 'calon_peserta_didik';
 
+    public function pendaftaran(): HasOne
+    {
+        return $this->hasOne(Pendaftaran::class);
+    }
+
     public function agama(): BelongsTo
     {
         return $this->belongsTo(Agama::class);
@@ -56,5 +61,15 @@ class CalonPesertaDidik extends Model
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
+    }
+
+    public function btq(): HasOne
+    {
+        return $this->hasOne(BacaTulisQuran::class);
+    }
+
+    public function tes(): HasOne
+    {
+        return $this->hasOne(Tes::class);
     }
 }

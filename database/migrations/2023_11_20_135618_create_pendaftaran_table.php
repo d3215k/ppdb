@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreignId('pilihan_kedua')->nullable()->constrained('kompetensi_keahlian')->nullOnDelete();
             $table->unsignedTinyInteger('status')->default(StatusRegistrasi::PENDAFTARAN); // TODO
             $table->timestamps();
+
+            $table->unique(['calon_peserta_didik_id', 'tahun_pelajaran_id', 'jalur_id', 'gelombang_id'], 'unique_pendaftaran');
         });
     }
 

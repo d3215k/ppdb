@@ -10,9 +10,9 @@ class PersyaratanKhusus extends Model
 {
     use HasFactory;
 
-    public function registrasi(): BelongsTo
+    public function pendaftaran(): BelongsTo
     {
-        return $this->belongsTo(Registrasi::class);
+        return $this->belongsTo(Pendaftaran::class);
     }
 
 }

@@ -15,7 +15,7 @@ enum UserType: int implements HasLabel, HasColor
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::CALON_PESERTA_DIDIK => 'Calon Peserta Didik',
+            self::CALON_PESERTA_DIDIK => 'Pendaftar',
             self::PENGUJI => 'Penguji',
             self::PANITIA => 'Panitia',
             self::ADMIN => 'Admin',

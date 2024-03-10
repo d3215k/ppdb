@@ -16,9 +16,9 @@ class TahunPelajaran extends Model
 
     public $timestamps = false;
 
-    public function gelombangPendaftaran(): HasMany
+    public function gelombang(): HasMany
     {
-        return $this->hasMany(GelombangPendaftaran::class);
+        return $this->hasMany(Gelombang::class);
     }
 
 }

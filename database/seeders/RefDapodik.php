@@ -94,5 +94,60 @@ class RefDapodik extends Seeder
             ['id'],
             ['nama']
         );
+
+        DB::table('ref_pendidikan')->upsert(
+            [
+                ['id' => 1, 'nama' => 'D1'],
+                ['id' => 2, 'nama' => 'D2'],
+                ['id' => 3, 'nama' => 'D3'],
+                ['id' => 4, 'nama' => 'D4'],
+                ['id' => 5, 'nama' => 'informal'],
+                ['id' => 6, 'nama' => 'Lainnya'],
+                ['id' => 7, 'nama' => 'Non formal'],
+                ['id' => 8, 'nama' => 'Paket A'],
+                ['id' => 9, 'nama' => 'Paket B'],
+                ['id' => 10, 'nama' => 'Paket C'],
+                ['id' => 11, 'nama' => 'PAUD'],
+                ['id' => 12, 'nama' => 'Profesi'],
+                ['id' => 13, 'nama' => 'Putus SD'],
+                ['id' => 14, 'nama' => 'S1'],
+                ['id' => 15, 'nama' => 'S2'],
+                ['id' => 16, 'nama' => 'S2 Terapan'],
+                ['id' => 17, 'nama' => 'S3'],
+                ['id' => 18, 'nama' => 'S3 Terapan'],
+                ['id' => 19, 'nama' => 'TK / sederajat'],
+                ['id' => 20, 'nama' => 'SD / sederajat'],
+                ['id' => 11, 'nama' => 'SMP / sederajat'],
+                ['id' => 22, 'nama' => 'SMA / sederajat'],
+                ['id' => 23, 'nama' => 'SP-1'],
+                ['id' => 24, 'nama' => 'SP-2'],
+                ['id' => 25, 'nama' => 'Tidak Sekolah'],
+            ],
+            ['id'],
+            ['nama']
+        );
+
+        DB::table('ref_pekerjaan')->upsert(
+            [
+                ['id' => 1, 'nama' => 'Tidak bekerja'],
+                ['id' => 2, 'nama' => 'Nelayan'],
+                ['id' => 3, 'nama' => 'Petani'],
+                ['id' => 4, 'nama' => 'PNS/TNI/Polri'],
+                ['id' => 5, 'nama' => 'Karyawan Swasta'],
+                ['id' => 6, 'nama' => 'Pedagang Kecil'],
+                ['id' => 7, 'nama' => 'Pedagang Besar'],
+                ['id' => 8, 'nama' => 'Wiraswasta'],
+                ['id' => 9, 'nama' => 'Wirausaha'],
+                ['id' => 10, 'nama' => 'Buruh'],
+                ['id' => 11, 'nama' => 'Pensiunan'],
+                ['id' => 12, 'nama' => 'Tenaga Kerja Indonesia'],
+                ['id' => 13, 'nama' => 'Karyawan BUMN'],
+                ['id' => 14, 'nama' => 'Tidak dapat diterapkan'],
+                ['id' => 15, 'nama' => 'Sudah Meninggal'],
+                ['id' => 16, 'nama' => 'Lainnya'],
+            ],
+            ['id'],
+            ['nama']
+        );
     }
 }

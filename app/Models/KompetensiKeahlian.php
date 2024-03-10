@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KompetensiKeahlian extends Model
 {
     use HasFactory;
+
+    protected $table = 'kompetensi_keahlian';
+
 }

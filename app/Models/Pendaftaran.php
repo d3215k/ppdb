@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Pendaftaran extends Model
 {
@@ -28,6 +29,11 @@ class Pendaftaran extends Model
     public function calonPesertaDidik(): BelongsTo
     {
         return $this->belongsTo(CalonPesertaDidik::class);
+    }
+
+    public function rapor(): HasOneThrough
+    {
+        return $this->hasOneThrough(Rapor::class, CalonPesertaDidik::class);
     }
 
     public function jalur(): BelongsTo

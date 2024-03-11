@@ -29,6 +29,8 @@ class PendaftaranResource extends Resource
 
     protected static ?string $navigationGroup = 'Admin';
 
+    protected static ?int $navigationSort = 1;
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -71,8 +73,13 @@ class PendaftaranResource extends Resource
                     ->searchable()
                     ->required()
                     ->preload(),
+                Forms\Components\ToggleButtons::make('status')
+                    ->options(StatusPendaftaran::class)
+                    ->inline()
+                    ->columnSpanFull(),
                 Forms\Components\Section::make('Biodata')
                     ->collapsible()
+                    ->collapsed()
                     ->columns(2)
                     ->hiddenOn('create')
                     ->relationship('calonPesertaDidik')
@@ -150,8 +157,217 @@ class PendaftaranResource extends Resource
                                     ->maxLength(255),
                                 Forms\Components\TextInput::make('password')
                                     ->maxLength(255),
-                            ])
+                            ]),
+
+                        Forms\Components\Section::make('Rapor')
+                            ->collapsible()
+                            ->collapsed()
+                            ->columns(2)
+                            ->hiddenOn('create')
+                            ->relationship('rapor')
+                            ->schema([
+                                Forms\Components\FileUpload::make('halaman_identitas'),
+                                Forms\Components\FileUpload::make('halaman_nilai_semester'),
+                                Forms\Components\Fieldset::make('pai')
+                                    ->label('Pendidikan Agama Islam')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('pai_1')
+                                            ->label('Sem. I')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('pai_2')
+                                            ->label('Sem. II')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('pai_3')
+                                            ->label('Sem. III')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('pai_4')
+                                            ->label('Sem. IV')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('pai_5')
+                                            ->label('Sem. V')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(5),
+                                Forms\Components\Fieldset::make('bindo')
+                                    ->label('Bahasa Indonesia')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('bindo_1')
+                                            ->label('Sem. I')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bindo_2')
+                                            ->label('Sem. II')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bindo_3')
+                                            ->label('Sem. III')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bindo_4')
+                                            ->label('Sem. IV')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bindo_5')
+                                            ->label('Sem. V')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(5),
+                                Forms\Components\Fieldset::make('mtk')
+                                    ->label('Matematika')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('mtk_1')
+                                            ->label('Sem. I')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('mtk_2')
+                                            ->label('Sem. II')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('mtk_3')
+                                            ->label('Sem. III')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('mtk_4')
+                                            ->label('Sem. IV')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('mtk_5')
+                                            ->label('Sem. V')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(5),
+                                Forms\Components\Fieldset::make('ipa')
+                                    ->label('Ilmu Pengetahuan Alam')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('ipa_1')
+                                            ->label('Sem. I')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ipa_2')
+                                            ->label('Sem. II')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ipa_3')
+                                            ->label('Sem. III')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ipa_4')
+                                            ->label('Sem. IV')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ipa_5')
+                                            ->label('Sem. V')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(5),
+                                Forms\Components\Fieldset::make('ips')
+                                    ->label('Ilmu Pengetahuan Sosial')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('ips_1')
+                                            ->label('Sem. I')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ips_2')
+                                            ->label('Sem. II')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ips_3')
+                                            ->label('Sem. III')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ips_4')
+                                            ->label('Sem. IV')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('ips_5')
+                                            ->label('Sem. V')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(5),
+                                Forms\Components\Fieldset::make('bing')
+                                    ->label('Bahasa Inggris')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('bing_1')
+                                            ->label('Sem. I')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bing_2')
+                                            ->label('Sem. II')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bing_3')
+                                            ->label('Sem. III')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bing_4')
+                                            ->label('Sem. IV')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('bing_5')
+                                            ->label('Sem. V')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(5),
+                                Forms\Components\FileUpload::make('halaman_kehadiran'),
+                                Forms\Components\Fieldset::make('Jumlah Ketidakhadiran')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('sakit')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('izin')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                        Forms\Components\TextInput::make('alpa')
+                                            ->numeric()
+                                            ->maxValue(100)
+                                            ->minValue(0),
+                                    ])
+                                    ->columns(3),
+                            ]),
                     ]),
+
                 Forms\Components\Section::make('Persyaratan Umum')
                     ->collapsible()
                     ->collapsed()
@@ -177,7 +393,7 @@ class PendaftaranResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->label('Nama / Asal Sekolah')
-                    ->description(fn (Pendaftaran $record) => $record->calonPesertaDidik->asalSekolah->nama)
+                    ->description(fn (Pendaftaran $record) => $record->calonPesertaDidik->asalSekolah?->nama)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('gelombang.nama')
                     ->label('Gelombang / Jalur')
@@ -188,6 +404,7 @@ class PendaftaranResource extends Resource
                     ->description(fn (Pendaftaran $record) => $record->pilihanKedua->kode)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->badge()
                     ->sortable(),
             ])
             ->filters([

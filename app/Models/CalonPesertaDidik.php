@@ -72,4 +72,9 @@ class CalonPesertaDidik extends Model
     {
         return $this->hasOne(Tes::class);
     }
+
+    public function rapor(): HasOne
+    {
+        return $this->hasOne(Rapor::class);
+    }
 }

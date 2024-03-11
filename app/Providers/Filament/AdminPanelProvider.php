@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->spa()
             ->colors([
-                'primary' => Color::Red,
+                'primary' => Color::Teal,
             ])
             ->navigationGroups([
                 'Tes',

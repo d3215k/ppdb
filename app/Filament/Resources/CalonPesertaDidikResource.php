@@ -18,7 +18,9 @@ class CalonPesertaDidikResource extends Resource
 {
     protected static ?string $model = CalonPesertaDidik::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Referensi';
 
@@ -109,75 +111,6 @@ class CalonPesertaDidikResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('lp')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('nisn')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kewarganegaraan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('nik')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kk')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tempat_lahir')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_lahir')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('no_reg_akta')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('agama.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('berkebutuhanKhusus.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('rt')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('rw')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('dusun')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('desa_kelurahan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kode_pos')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('lintang')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('bujur')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tempatTinggal.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('modaTransportasi.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('anak_ke')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('nomor_hp')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('asalSekolah.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('username')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -186,9 +119,9 @@ class CalonPesertaDidikResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 

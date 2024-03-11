@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('isi');
             $table->datetime('terbit');
             $table->boolean('aktif')->default(true);
+            $table->boolean('pin')->default(false);
             $table->timestamps();
         });
     }

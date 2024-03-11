@@ -25,7 +25,7 @@ class PendaftaranResource extends Resource
 {
     protected static ?string $model = Pendaftaran::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationGroup = 'Admin';
 
@@ -192,11 +192,14 @@ class PendaftaranResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('gelombang_id')
+                    ->label('Gelombang')
                     ->options(Gelombang::pluck('nama', 'id')),
                 Tables\Filters\SelectFilter::make('jalur_id')
+                    ->label('Jalur')
                     ->options(Jalur::pluck('nama', 'id')),
                 Tables\Filters\SelectFilter::make('Asal Sekolah')
                     ->relationship('calonPesertaDidik.asalSekolah', 'nama')
+                    ->searchable()
                     ->options(AsalSekolah::pluck('nama', 'id')),
                 Tables\Filters\SelectFilter::make('pilihan_kesatu')
                     ->options(KompetensiKeahlian::pluck('nama', 'id')),
@@ -214,7 +217,7 @@ class PendaftaranResource extends Resource
                 // ]),
             ])
             ->filtersLayout(FiltersLayout::AboveContent)
-            ->filtersFormColumns(4);
+            ->filtersFormColumns(3);
     }
 
     public static function getRelations(): array

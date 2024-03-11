@@ -17,7 +17,7 @@ class JalurResource extends Resource
 {
     protected static ?string $model = Jalur::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-flag';
 
     protected static ?string $navigationGroup = 'Sistem';
 

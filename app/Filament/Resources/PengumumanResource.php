@@ -17,7 +17,7 @@ class PengumumanResource extends Resource
 {
     protected static ?string $model = Pengumuman::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
     protected static ?string $navigationGroup = 'Admin';
 
@@ -25,18 +25,23 @@ class PengumumanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
                 Forms\Components\TextInput::make('judul')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('isi')
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+                Forms\Components\RichEditor::make('isi')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\DateTimePicker::make('terbit')
+                    ->default(today())
+                    ->required(),
+                Forms\Components\Toggle::make('Pin')
+                    ->default(false)
+                    ->inline(false)
                     ->required(),
                 Forms\Components\Toggle::make('aktif')
+                    ->default(true)
+                    ->inline(false)
                     ->required(),
             ]);
     }
@@ -45,24 +50,14 @@ class PengumumanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('informan.name'),
                 Tables\Columns\TextColumn::make('judul')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('terbit')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('aktif')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ToggleColumn::make('aktif'),
+                Tables\Columns\ToggleColumn::make('pin'),
             ])
             ->filters([
                 //
@@ -71,9 +66,9 @@ class PengumumanResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 

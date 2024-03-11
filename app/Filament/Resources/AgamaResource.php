@@ -17,9 +17,11 @@ class AgamaResource extends Resource
 {
     protected static ?string $model = Agama::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
     protected static ?string $navigationGroup = 'Referensi';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

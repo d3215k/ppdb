@@ -18,7 +18,7 @@ class GelombangResource extends Resource
 {
     protected static ?string $model = Gelombang::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
     protected static ?string $navigationGroup = 'Sistem';
 
@@ -35,9 +35,6 @@ class GelombangResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('sampai')
                     ->required(),
-                Forms\Components\TextInput::make('link_wa_group')
-                    ->maxLength(255)
-                    ->columnSpanFull(),
                 Forms\Components\Toggle::make('aktif')
                     ->inline(false)
                     ->required(),

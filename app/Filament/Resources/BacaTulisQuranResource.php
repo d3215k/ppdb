@@ -20,7 +20,7 @@ class BacaTulisQuranResource extends Resource
 
     protected static ?string $modelLabel = 'Baca Tulis Qur\'an';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     protected static ?string $navigationGroup = 'Tes';
 

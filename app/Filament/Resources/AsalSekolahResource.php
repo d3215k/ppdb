@@ -17,7 +17,9 @@ class AsalSekolahResource extends Resource
 {
     protected static ?string $model = AsalSekolah::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationGroup = 'Referensi';
 

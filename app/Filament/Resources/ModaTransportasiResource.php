@@ -17,9 +17,11 @@ class ModaTransportasiResource extends Resource
 {
     protected static ?string $model = ModaTransportasi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
     protected static ?string $navigationGroup = 'Referensi';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

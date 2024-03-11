@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nama');
             $table->date('mulai');
             $table->date('sampai');
-            $table->string('link_wa_group')->nullable();
             $table->boolean('aktif')->default(false);
             $table->softDeletes();
         });

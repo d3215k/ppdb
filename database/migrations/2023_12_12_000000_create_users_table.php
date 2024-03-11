@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('calon_peserta_didik_id')->nullable()->constrained('calon_peserta_didik')->nullOnDelete();
-            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('name')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -23,6 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->unsignedTinyInteger('type')->default(UserType::CALON_PESERTA_DIDIK);
             $table->boolean('aktif')->default(true);
+            $table->timestamp('last-login')->nullable();
             $table->timestamps();
         });
     }

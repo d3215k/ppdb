@@ -66,64 +66,49 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Prioritas Terdekat',
         ]);
 
+        // KompetensiKeahlian::create([
+        //     'kode' => 'AGRIN',
+        //     'nama' => 'Agroindustri',
+        //     'dipilih_kesatu' => true,
+        //     'dipilih_kedua' => true,
+        // ]);
+
         KompetensiKeahlian::create([
-            'kode' => 'AGRIN',
-            'nama' => 'Agroindustri',
+            'kode' => 'DKV',
+            'nama' => 'Desain Komunikasi Visual',
+            'dipilih_kesatu' => true,
+            'dipilih_kedua' => false,
+        ]);
+
+        KompetensiKeahlian::create([
+            'kode' => 'AP',
+            'nama' => 'Agribisnis Perikanan',
             'dipilih_kesatu' => true,
             'dipilih_kedua' => true,
         ]);
 
         KompetensiKeahlian::create([
-            'kode' => 'MM',
-            'nama' => 'Multimedia',
+            'kode' => 'AT',
+            'nama' => 'Agribisnis Ternak',
             'dipilih_kesatu' => true,
             'dipilih_kedua' => true,
         ]);
 
         KompetensiKeahlian::create([
-            'kode' => 'APAT',
-            'nama' => 'Agribisnis Perikanan Air Tawar',
-            'dipilih_kesatu' => true,
-            'dipilih_kedua' => true,
-        ]);
-
-        KompetensiKeahlian::create([
-            'kode' => 'ATU',
-            'nama' => 'Agribisnis Ternak Unggas',
-            'dipilih_kesatu' => true,
-            'dipilih_kedua' => true,
-        ]);
-
-        KompetensiKeahlian::create([
-            'kode' => 'ATR',
-            'nama' => 'Agribisnis Ternak Ruminansia',
-            'dipilih_kesatu' => true,
-            'dipilih_kedua' => true,
-        ]);
-
-        KompetensiKeahlian::create([
-            'kode' => 'ATPH',
-            'nama' => 'Agribisnis Tanaman Pangan dan Hortikultura',
+            'kode' => 'ATN',
+            'nama' => 'Agribisnis Tanaman',
             'dipilih_kesatu' => true,
             'dipilih_kedua' => true,
         ]);
 
         KompetensiKeahlian::create([
             'kode' => 'APHP',
-            'nama' => 'Agribisnis Pengolahan Hasil Pertanian',
+            'nama' => 'Agriteknologi Pengolahan Hasil Pertanian',
             'dipilih_kesatu' => true,
-            'dipilih_kedua' => true,
-        ]);
-
-        KompetensiKeahlian::create([
-            'kode' => 'PMHP',
-            'nama' => 'Pengawasan Mutu Hasil Pertanian',
-            'dipilih_kesatu' => true,
-            'dipilih_kedua' => true,
+            'dipilih_kedua' => false,
         ]);
 
         User::create([
-            'username' => 'advisor1',
             'name' => 'Advisor 1',
             'email' => 'advisor@example.com',
             'password' => bcrypt('password'),
@@ -131,7 +116,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'username' => 'admin',
             'name' => 'Administrator',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
@@ -158,7 +142,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             $cpd->user()->create([
-                'username' => '32023000000000'. $item,
+                'name' => 'nama CPD',
                 'email' => "cpd{$item}@example.com",
                 'password' => bcrypt('password'),
             ]);

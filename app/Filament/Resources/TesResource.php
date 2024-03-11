@@ -20,7 +20,7 @@ class TesResource extends Resource
 
     protected static ?string $modelLabel = 'Minat dan Bakat';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-check';
 
     protected static ?string $navigationGroup = 'Tes';
 

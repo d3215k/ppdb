@@ -32,9 +32,9 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->profile()
             ->spa()
-            ->colors([
-                'primary' => Color::Teal,
-            ])
+            // ->colors([
+            //     'primary' => Color::Teal,
+            // ])
             ->navigationGroups([
                 'Tes',
                 'Panitia',

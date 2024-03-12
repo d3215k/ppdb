@@ -15,11 +15,11 @@
                 aria-hidden="true"
                 >
                 <div
-                    class="mx-auto h-2.5 w-1 grow-0 rounded-t bg-gradient-to-b from-transparent to-red-100 dark:to-red-900"
+                    class="mx-auto h-2.5 w-1 grow-0 rounded-t bg-gradient-to-b from-transparent to-primary-100 dark:to-primary-900"
                 ></div>
-                <div class="mx-auto w-1 grow bg-red-100 dark:bg-red-900"></div>
+                <div class="mx-auto w-1 grow bg-primary-100 dark:bg-primary-900"></div>
                 <div
-                    class="mx-auto h-2.5 w-1 grow-0 rounded-b bg-gradient-to-t from-transparent to-red-100 dark:to-red-900"
+                    class="mx-auto h-2.5 w-1 grow-0 rounded-b bg-gradient-to-t from-transparent to-primary-100 dark:to-primary-900"
                 ></div>
                 </div>
                 <!-- END Vertical Guide -->
@@ -32,7 +32,7 @@
                     class="absolute bottom-0 left-0 top-0 mt-5 flex w-10 -translate-x-full justify-center md:w-12"
                     >
                     <div
-                        class="size-3 rounded-full bg-red-500 ring ring-red-100 ring-opacity-100 ring-offset-2 dark:bg-red-300 dark:ring-red-900 dark:ring-offset-gray-900"
+                        class="size-3 rounded-full bg-primary-500 ring ring-primary-100 ring-opacity-100 ring-offset-2 dark:bg-primary-300 dark:ring-primary-900 dark:ring-offset-gray-900"
                     ></div>
                     </div>
                     <div
@@ -44,13 +44,13 @@
                         to
                         <a
                         href="javascript:void(0)"
-                        class="font-medium text-red-600 hover:text-red-400 dark:text-red-400 dark:hover:text-red-300"
+                        class="font-medium text-primary-600 hover:text-primary-400 dark:text-primary-400 dark:hover:text-primary-300"
                         >download it</a
                         >
                         and let us know
                         <a
                         href="javascript:void(0)"
-                        class="font-medium text-red-600 hover:text-red-400 dark:text-red-400 dark:hover:text-red-300"
+                        class="font-medium text-primary-600 hover:text-primary-400 dark:text-primary-400 dark:hover:text-primary-300"
                         >what you think</a
                         >!
                     </p>
@@ -64,7 +64,7 @@
                     class="absolute bottom-0 left-0 top-0 mt-5 flex w-10 -translate-x-full justify-center md:w-12"
                     >
                     <div
-                        class="size-3 rounded-full bg-red-500 ring ring-red-100 ring-opacity-100 ring-offset-2 dark:bg-red-300 dark:ring-red-900 dark:ring-offset-gray-900"
+                        class="size-3 rounded-full bg-primary-500 ring ring-primary-100 ring-opacity-100 ring-offset-2 dark:bg-primary-300 dark:ring-primary-900 dark:ring-offset-gray-900"
                     ></div>
                     </div>
                     <div
@@ -76,7 +76,7 @@
                         the
                         <a
                         href="javascript:void(0)"
-                        class="font-medium text-red-600 hover:text-red-400 dark:text-red-400 dark:hover:text-red-300"
+                        class="font-medium text-primary-600 hover:text-primary-400 dark:text-primary-400 dark:hover:text-primary-300"
                         >schedule</a
                         >
                         for more information about any downtime.

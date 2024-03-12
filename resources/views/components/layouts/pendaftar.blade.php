@@ -15,7 +15,7 @@
     class="mx-auto flex min-h-dvh w-full min-w-[320px] flex-col bg-gray-100 dark:bg-gray-800/50 dark:text-gray-100"
     >
     <!-- Page Header -->
-    <header id="page-header" class="z-1 flex flex-none items-center bg-red-900">
+    <header id="page-header" class="z-1 flex flex-none items-center bg-primary-900">
     <div class="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
         <div class="flex justify-between py-4">
         <!-- Left Section -->
@@ -31,30 +31,36 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden items-center space-x-2 lg:flex">
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm font-medium text-red-600 dark:border-transparent dark:bg-white/10 dark:text-white"
-            >
-                <span>Dashboard</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-red-50 hover:text-red-600 active:border-red-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Data Identitas</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-red-50 hover:text-red-600 active:border-red-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Projects</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-red-50 hover:text-red-600 active:border-red-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Sales</span>
-            </a>
+                <a
+                    href="javascript:void(0)"
+                    class="group flex items-center space-x-2 rounded-lg border border-primary-100 bg-primary-50 px-3 py-2 text-sm font-medium text-primary-600 dark:border-transparent dark:bg-white/10 dark:text-white"
+                >
+                    <span>Dashboard</span>
+                </a>
+                <a
+                    href="javascript:void(0)"
+                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                >
+                    <span>Biodata</span>
+                </a>
+                <a
+                    href="javascript:void(0)"
+                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                >
+                    <span>Rapor</span>
+                </a>
+                <a
+                    href="javascript:void(0)"
+                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                >
+                    <span>Unggah Berkas</span>
+                </a>
+                <a
+                    href="javascript:void(0)"
+                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                >
+                    <span>Pendaftaran</span>
+                </a>
             </nav>
             <!-- END Desktop Navigation -->
         </div>
@@ -72,21 +78,11 @@
                 x-bind:aria-expanded="userDropdownOpen"
                 type="button"
                 id="tk-dropdown-layouts-user"
-                class="inline-flex items-center justify-center space-x-2 px-3 py-2 text-sm font-semibold leading-5 text-red-800 rounded-lg hover:text-red-900 hover:shadow-sm focus:ring focus:ring-red-300 focus:ring-opacity-25 active:shadow-none dark:bg-transparent dark:text-gray-100 dark:hover:border-red-500 dark:hover:text-gray-50 dark:focus:ring-red-600 dark:focus:ring-opacity-60"
+                class="inline-flex items-center justify-center space-x-2 px-3 py-2 text-sm font-semibold leading-5 text-primary-800 rounded-lg hover:text-primary-900 hover:shadow-sm focus:ring focus:ring-primary-300 focus:ring-opacity-25 active:shadow-none dark:bg-transparent dark:text-gray-100 dark:hover:border-primary-500 dark:hover:text-gray-50 dark:focus:ring-primary-600 dark:focus:ring-opacity-60"
                 aria-haspopup="true"
                 >
-                <svg
-                    class="hi-mini hi-user-circle inline-block size-5 sm:hidden"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                >
-                    <path
-                    fill-rule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-5.5-2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM10 12a5.99 5.99 0 00-4.793 2.39A6.483 6.483 0 0010 16.5a6.483 6.483 0 004.793-2.11A5.99 5.99 0 0010 12z"
-                    clip-rule="evenodd"
-                    />
+                <svg class="inline-block size-5 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                 </svg>
                 <span class="hidden sm:inline">John</span>
                 <svg
@@ -124,11 +120,11 @@
                 <div
                 class="divide-y divide-gray-100 rounded-lg bg-white ring-1 ring-black ring-opacity-5 dark:divide-gray-700 dark:bg-gray-800 dark:ring-gray-700"
                 >
-                <div class="space-y-1 p-2.5">
+                <div class="space-y-1">
                     <a
                     role="menuitem"
-                    href="javascript:void(0)"
-                    class="group flex items-center justify-between space-x-2 rounded-lg border border-transparent px-2.5 py-2 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-800 active:border-red-100 dark:text-gray-200 dark:hover:bg-gray-700/75 dark:hover:text-white dark:active:border-gray-600"
+                    href="{{ route('filament.app.auth.profile') }}"
+                    class="group flex items-center justify-between space-x-2 rounded-lg border border-transparent px-2.5 py-2 text-sm font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-800 active:border-primary-100 dark:text-gray-200 dark:hover:bg-gray-700/75 dark:hover:text-white dark:active:border-gray-600"
                     >
                         <svg
                             class="hi-mini hi-user-circle inline-block size-5 flex-none opacity-25 group-hover:opacity-50"
@@ -146,28 +142,29 @@
                         <span class="grow">Profil</span>
                     </a>
                 </div>
-                <div class="space-y-1 p-2.5">
-                    <form onsubmit="return false;">
-                    <button
-                        type="submit"
-                        role="menuitem"
-                        class="group flex w-full items-center justify-between space-x-2 rounded-lg border border-transparent px-2.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-800 active:border-red-100 dark:text-gray-200 dark:hover:bg-gray-700/75 dark:hover:text-white dark:active:border-gray-600"
-                    >
-                        <svg
-                        class="hi-mini hi-lock-closed inline-block size-5 flex-none opacity-25 group-hover:opacity-50"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
+                <div class="space-y-1">
+                    <form action="{{ route('filament.app.auth.logout') }}" method="POST">
+                        @csrf
+                        <button
+                            type="submit"
+                            role="menuitem"
+                            class="group flex w-full items-center justify-between space-x-2 rounded-lg border border-transparent px-2.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-800 active:border-primary-100 dark:text-gray-200 dark:hover:bg-gray-700/75 dark:hover:text-white dark:active:border-gray-600"
                         >
-                        <path
-                            fill-rule="evenodd"
-                            d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
-                            clip-rule="evenodd"
-                        />
-                        </svg>
-                        <span class="grow">Sign out</span>
-                    </button>
+                            <svg
+                            class="hi-mini hi-lock-closed inline-block size-5 flex-none opacity-25 group-hover:opacity-50"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                                clip-rule="evenodd"
+                            />
+                            </svg>
+                            <span class="grow">Keluar</span>
+                        </button>
                     </form>
                 </div>
                 </div>
@@ -181,19 +178,10 @@
             <button
                 x-on:click="mobileNavOpen = !mobileNavOpen"
                 type="button"
-                class="inline-flex items-center justify-center space-x-2 rounded-lg border border-red-200 bg-white px-3 py-2 text-sm font-semibold leading-5 text-red-800 hover:border-red-300 hover:text-red-900 hover:shadow-sm focus:ring focus:ring-red-300 focus:ring-opacity-25 active:border-red-200 active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-gray-100 dark:hover:border-red-500 dark:hover:border-opacity-75 dark:hover:text-gray-50 dark:focus:ring-red-600 dark:focus:ring-opacity-60 dark:active:border-red-500 dark:active:border-opacity-50"
+                class="inline-flex items-center justify-center space-x-2 rounded-lg bg-white px-3 py-2 text-sm font-semibold leading-5 text-primary-800 hover:text-primary-900 hover:shadow-sm focus:ring focus:ring-primary-300 focus:ring-opacity-25 active:shadow-none dark:bg-transparent dark:text-gray-100 dark:hover:border-opacity-75 dark:hover:text-gray-50 dark:focus:ring-primary-600 dark:focus:ring-opacity-60"
             >
-                <svg
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                class="hi-solid hi-menu inline-block size-5"
-                >
-                <path
-                    fill-rule="evenodd"
-                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                    clip-rule="evenodd"
-                ></path>
+                <svg class="inline-block size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
             </div>
@@ -206,28 +194,34 @@
         <div x-cloak x-show="mobileNavOpen" class="dark lg:hidden">
         <nav class="flex flex-col space-y-2 border-t py-4 dark:border-white/10">
             <a
-            href="javascript:void(0)"
-            class="group flex items-center space-x-2 rounded-lg border border-red-50 bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:border-transparent dark:bg-gray-700/75 dark:text-white"
+                href="javascript:void(0)"
+                class="group flex items-center space-x-2 rounded-lg border border-primary-50 bg-primary-50 px-3 py-2 text-sm font-semibold text-primary-600 dark:border-transparent dark:bg-primary-700/75 dark:text-white"
             >
-            <span>Dashboard</span>
+                <span>Dashboard</span>
             </a>
             <a
-            href="javascript:void(0)"
-            class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-red-50 hover:text-red-600 active:border-red-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                href="javascript:void(0)"
+                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
             >
-            <span>Data Identitas</span>
+                <span>Biodata</span>
             </a>
             <a
-            href="javascript:void(0)"
-            class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-red-50 hover:text-red-600 active:border-red-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                href="javascript:void(0)"
+                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
             >
-            <span>Projects</span>
+                <span>Rapor</span>
             </a>
             <a
-            href="javascript:void(0)"
-            class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-red-50 hover:text-red-600 active:border-red-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+                href="javascript:void(0)"
+                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
             >
-            <span>Sales</span>
+                <span>Unggah Berkas</span>
+            </a>
+            <a
+                href="javascript:void(0)"
+                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
+            >
+                <span>Pendaftaran</span>
             </a>
         </nav>
         </div>
@@ -239,7 +233,7 @@
     <!-- Page Content -->
     <main id="page-content" class="flex max-w-full flex-auto flex-col">
     <!-- Page Heading -->
-    <div class="dark h-48 bg-red-900 text-gray-100">
+    <div class="dark h-48 bg-primary-900 text-gray-100">
         <div class="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
             <div class="flex items-center py-4">
                 {{ $heading }}
@@ -276,40 +270,16 @@
     class="flex flex-none items-center bg-white dark:bg-gray-800"
     >
     <div
-        class="container mx-auto flex flex-col px-4 text-center text-sm md:flex-row md:justify-between md:text-left lg:px-8 xl:max-w-7xl"
+        class="container mx-auto px-4 text-center text-sm"
     >
         <div class="pb-1 pt-4 md:pb-4">
-        <a
-            href="https://tailkit.com"
-            class="font-medium text-red-600 hover:text-red-400 dark:text-red-400 dark:hover:text-red-300"
-            target="_blank"
-            >Tailkit</a
-        >
-        ©
-        </div>
-        <div class="inline-flex items-center justify-center pb-4 pt-1 md:pt-4">
-        <span>Crafted with</span>
-        <svg
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-            class="hi-solid hi-heart mx-1 inline-block size-4 text-red-600"
-        >
-            <path
-            fill-rule="evenodd"
-            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-            clip-rule="evenodd"
-            ></path>
-        </svg>
-        <span>
-            by
-            <a
-            href="https://pixelcave.com"
-            class="font-medium text-red-600 hover:text-red-400 dark:text-red-400 dark:hover:text-red-300"
-            target="_blank"
-            >pixelcave</a
-            ></span
-        >
+            ©
+            {{ date('Y') }}
+            <span
+                class="font-medium text-primary-600 hover:text-primary-400 dark:text-primary-400 dark:hover:text-primary-300"
+                >{{ config('app.name') }}</
+            >
+
         </div>
     </div>
     </footer>

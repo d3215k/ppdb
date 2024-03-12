@@ -32,10 +32,6 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->profile()
             ->spa()
-            ->when(
-                false,
-                fn (Panel $panel) => $panel->topNavigation()
-            )
             ->colors([
                 'primary' => Color::Teal,
             ])

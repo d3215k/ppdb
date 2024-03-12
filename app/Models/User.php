@@ -72,7 +72,7 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function getIsPendaftarAttribute(): bool
     {
-        return $this->type === UserType::ADMIN;
+        return $this->type === UserType::PENDAFTAR;
     }
 
     public function getIsPengujiAttribute(): bool

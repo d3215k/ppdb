@@ -6,6 +6,7 @@ use App\Filament\Resources\BacaTulisQuranResource\Pages;
 use App\Filament\Resources\BacaTulisQuranResource\RelationManagers;
 use App\Models\BacaTulisQuran;
 use App\Models\CalonPesertaDidik;
+use App\Traits\EnsureOnlyPengujiCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BacaTulisQuranResource extends Resource
 {
+    use EnsureOnlyPengujiCanAccess;
+
     protected static ?string $model = CalonPesertaDidik::class;
 
     protected static ?string $modelLabel = 'Baca Tulis Qur\'an';

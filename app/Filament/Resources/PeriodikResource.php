@@ -87,6 +87,7 @@ class PeriodikResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->sortable()

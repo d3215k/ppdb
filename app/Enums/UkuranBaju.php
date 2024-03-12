@@ -12,8 +12,8 @@ enum UkuranBaju: string implements HasLabel
     case L = 'L';
     case XL = 'XL';
     case XXL = 'XXL';
-    case _3XL = '3XL';
-    case _4XL = '3XL';
+    // case _3XL = '3XL';
+    // case _4XL = '3XL';
 
     public function getLabel(): ?string
     {
@@ -23,8 +23,8 @@ enum UkuranBaju: string implements HasLabel
             self::L => 'L',
             self::XL => 'XL',
             self::XXL => 'XXL',
-            self::_3XL => '3XL',
-            self::_4XL => '4XL',
+            // self::_3XL => '3XL',
+            // self::_4XL => '4XL',
         };
     }
 }

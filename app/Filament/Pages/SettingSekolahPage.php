@@ -19,7 +19,7 @@ class SettingSekolahPage extends SettingsPage
 
     protected static ?string $navigationGroup = 'Sistem';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 6;
 
     public function form(Form $form): Form
     {

@@ -17,7 +17,8 @@ class CalonPesertaDidik extends Model
 
     public function pendaftaran(): HasOne
     {
-        return $this->hasOne(Pendaftaran::class);
+        return $this->hasOne(Pendaftaran::class)
+            ->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
     }
 
     public function agama(): BelongsTo
@@ -38,6 +39,11 @@ class CalonPesertaDidik extends Model
     public function modaTransportasi(): BelongsTo
     {
         return $this->belongsTo(ModaTransportasi::class);
+    }
+
+    public function periodik(): HasOne
+    {
+        return $this->hasOne(Periodik::class);
     }
 
     public function ayah(): HasOne

@@ -24,6 +24,9 @@ return new class extends Migration
             $table->unsignedSmallInteger('jumlah_saudara_kandung')->nullable();
             $table->unsignedSmallInteger('no_sepatu')->nullable();
             $table->string('ukuran_baju')->nullable();
+            $table->boolean('tindik')->nullable();
+            $table->boolean('tato')->nullable();
+            $table->boolean('cat_rambut')->nullable();
             $table->timestamps();
         });
     }

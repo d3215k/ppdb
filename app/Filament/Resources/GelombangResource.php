@@ -22,6 +22,8 @@ class GelombangResource extends Resource
 
     protected static ?string $navigationGroup = 'Sistem';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form

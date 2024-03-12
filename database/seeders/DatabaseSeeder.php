@@ -11,6 +11,7 @@ use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
 use App\Models\TahunPelajaran;
 use App\Models\User;
+use App\Settings\SettingSekolah;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -32,46 +33,13 @@ class DatabaseSeeder extends Seeder
             'aktif' => true,
         ]);
 
-        Gelombang::create([
-            'kode' => '1',
+        session([
             'tahun_pelajaran_id' => $tahun->id,
-            'nama' => 'Gelombang 1',
-            'mulai' => today(),
-            'sampai' => today()->addMonth(2),
-            'aktif' => true,
         ]);
 
-        Gelombang::create([
-            'kode' => '2',
-            'tahun_pelajaran_id' => $tahun->id,
-            'nama' => 'Gelombang 2',
-            'mulai' => today()->addMonth(3),
-            'sampai' => today()->addMonth(5),
-            'aktif' => false,
-        ]);
-
-        Jalur::create([
-            'nama' => 'Afirmasi',
-        ]);
-
-        Jalur::create([
-            'nama' => 'Perpindahan Tugas Orang tua/Wali/Anak Guru',
-        ]);
-
-        Jalur::create([
-            'nama' => 'Prestasi',
-        ]);
-
-        Jalur::create([
-            'nama' => 'Prioritas Terdekat',
-        ]);
-
-        // KompetensiKeahlian::create([
-        //     'kode' => 'AGRIN',
-        //     'nama' => 'Agroindustri',
-        //     'dipilih_kesatu' => true,
-        //     'dipilih_kedua' => true,
-        // ]);
+        $setting = new SettingSekolah();
+        $setting->tahun_pelajaran_aktif = $tahun->id;
+        $setting->save();
 
         KompetensiKeahlian::create([
             'kode' => 'DKV',
@@ -81,14 +49,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         KompetensiKeahlian::create([
-            'kode' => 'AP',
+            'kode' => 'APR',
             'nama' => 'Agribisnis Perikanan',
             'dipilih_kesatu' => true,
             'dipilih_kedua' => true,
         ]);
 
         KompetensiKeahlian::create([
-            'kode' => 'AT',
+            'kode' => 'ATR',
             'nama' => 'Agribisnis Ternak',
             'dipilih_kesatu' => true,
             'dipilih_kedua' => true,
@@ -108,9 +76,64 @@ class DatabaseSeeder extends Seeder
             'dipilih_kedua' => false,
         ]);
 
+        Gelombang::create([
+            'kode' => '1',
+            'nama' => 'Gelombang 1',
+            'mulai' => today(),
+            'sampai' => today()->addMonth(2),
+            'aktif' => true,
+        ]);
+
+        Gelombang::create([
+            'kode' => '2',
+            'nama' => 'Gelombang 2',
+            'mulai' => today()->addMonth(3),
+            'sampai' => today()->addMonth(5),
+            'aktif' => false,
+        ]);
+
+        $ketm = Jalur::create([
+            'nama' => 'Afirmasi KETM',
+        ]);
+
+        $pdbk = Jalur::create([
+            'nama' => 'Afirmasi PDBK (DISABILITAS/CIBI)',
+        ]);
+
+        $tertentu = Jalur::create([
+            'nama' => 'Afirmasi Kondisi Tertentu',
+        ]);
+
+        $terdekat = Jalur::create([
+            'nama' => 'Prioritas Terdekat',
+        ]);
+
+        $ortu = Jalur::create([
+            'nama' => 'Perpindahan Tugas Orang tua/Wali/Anak Guru',
+        ]);
+
+        $industri = Jalur::create([
+            'nama' => 'Persiapan Kelas Industri (Raport Unggulan)',
+        ]);
+
+        $kejuaraan = Jalur::create([
+            'nama' => 'Prestasi Kejuaraan',
+        ]);
+
+        $umum = Jalur::create([
+            'nama' => 'Raport Umum',
+        ]);
+
+        // KompetensiKeahlian::create([
+        //     'kode' => 'AGRIN',
+        //     'nama' => 'Agroindustri',
+        //     'dipilih_kesatu' => true,
+        //     'dipilih_kedua' => true,
+        // ]);
+
         User::create([
-            'name' => 'Advisor 1',
-            'email' => 'advisor@example.com',
+            'name' => 'Panitia 1',
+            'email' => 'panitia@example.com',
             'password' => bcrypt('password'),
             'type' => UserType::PANITIA
         ]);
@@ -125,7 +148,7 @@ class DatabaseSeeder extends Seeder
         foreach (range(1,10) as $item) {
 
             $cpd = CalonPesertaDidik::create([
-                'nama' => 'Nama Peserta Didik '. $item,
+                'nama' => 'Peserta Didik '. $item,
                 'lp' => 'L',
                 'agama_id' => 1,
                 'berkebutuhan_khusus_id' => rand(1,16),
@@ -148,12 +171,12 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
 
     }
 }

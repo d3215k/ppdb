@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('calon_peserta_didik', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tahun_pelajaran_id')->constrained('tahun_pelajaran')->cascadeOnDelete();
             $table->string('nama');
             $table->char('lp', 1);
             $table->char('nisn', 10)->nullable();

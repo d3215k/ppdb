@@ -15,7 +15,7 @@ class CreatePendaftaran extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $tahun = TahunPelajaran::first();
+        $tahun = TahunPelajaran::whereAktif(true)->first();
         $gelombang = Gelombang::find($data['gelombang_id']);
         $data['tahun_pelajaran_id'] = $tahun->id;
         $data['nomor'] = GenerateNumber::pendaftaran($tahun, $gelombang);

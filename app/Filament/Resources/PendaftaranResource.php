@@ -27,14 +27,13 @@ class PendaftaranResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Panitia';
 
     protected static ?int $navigationSort = 1;
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('tahun_pelajaran_id', TahunPelajaran::first()->id)
             ->with([
                 'calonPesertaDidik',
                 'calonPesertaDidik.asalSekolah',
@@ -76,6 +75,7 @@ class PendaftaranResource extends Resource
                 Forms\Components\ToggleButtons::make('status')
                     ->options(StatusPendaftaran::class)
                     ->inline()
+                    ->hiddenOn('create')
                     ->columnSpanFull(),
                 Forms\Components\Section::make('Biodata')
                     ->collapsible()

@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Events\TahunPelajaranAktifChanged;
 use App\Filament\Resources\TahunPelajaranResource\Pages;
 use App\Filament\Resources\TahunPelajaranResource\RelationManagers;
 use App\Models\TahunPelajaran;
+use App\Settings\SettingSekolah;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,10 +23,15 @@ class TahunPelajaranResource extends Resource
 
     protected static ?string $navigationGroup = 'Sistem';
 
+    protected static ?string $navigationParentItem = 'Setting';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('kode')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
@@ -37,6 +44,8 @@ class TahunPelajaranResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('kode')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('aktif')
@@ -47,14 +56,23 @@ class TahunPelajaranResource extends Resource
                                 ->update([
                                     'aktif' => false
                                 ]);
+
+                            $setting = new SettingSekolah();
+                            $setting->tahun_pelajaran_aktif = $record->id;
+                            $setting->save();
+
+                            TahunPelajaranAktifChanged::dispatch($record->id);
                         }
                     })
             ])
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\AttachAction::make(),
+            ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -66,7 +84,7 @@ class TahunPelajaranResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // RelationManagers\KuotaJalurRelationManager::class
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\StatusPendaftaran;
+use App\Traits\WithTahunPelajaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class Pendaftaran extends Model
 {
     use HasFactory;
+    use WithTahunPelajaran;
 
     protected $table = 'pendaftaran';
 

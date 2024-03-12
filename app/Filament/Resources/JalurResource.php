@@ -40,7 +40,12 @@ class JalurResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                // Tables\Columns\ToggleColumn::make('aktif'),
+                Tables\Columns\TextColumn::make('kuota_sum_kuotakuota')
+                    ->sum('kuota', 'kuota.kuota')
+                    ->label('Kuota'),
+                Tables\Columns\TextColumn::make('gelombang_count')
+                    ->counts('gelombang')
+                    ->label('Gelombang Dibuka'),
             ])
             ->filters([
                 //
@@ -52,12 +57,14 @@ class JalurResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public static function getRelations(): array
     {
         return [
+            RelationManagers\KuotaRelationManager::class,
             RelationManagers\PersyaratanKhususRelationManager::class,
         ];
     }

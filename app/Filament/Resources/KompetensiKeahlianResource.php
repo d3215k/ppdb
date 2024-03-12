@@ -49,6 +49,9 @@ class KompetensiKeahlianResource extends Resource
                 Tables\Columns\TextColumn::make('kode'),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('kuota_sum_kuotakuota')
+                    ->sum('kuota', 'kuota.kuota')
+                    ->label('Kuota'),
                 Tables\Columns\ToggleColumn::make('dipilih_kesatu'),
                 Tables\Columns\ToggleColumn::make('dipilih_kedua'),
             ])
@@ -62,13 +65,14 @@ class KompetensiKeahlianResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\KuotaRelationManager::class,
         ];
     }
 
@@ -76,8 +80,8 @@ class KompetensiKeahlianResource extends Resource
     {
         return [
             'index' => Pages\ListKompetensiKeahlians::route('/'),
-            // 'create' => Pages\CreateKompetensiKeahlian::route('/create'),
-            // 'edit' => Pages\EditKompetensiKeahlian::route('/{record}/edit'),
+            'create' => Pages\CreateKompetensiKeahlian::route('/create'),
+            'edit' => Pages\EditKompetensiKeahlian::route('/{record}/edit'),
         ];
     }
 }

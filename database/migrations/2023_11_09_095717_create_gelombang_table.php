@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('gelombang', function (Blueprint $table) {
             $table->id();
             $table->char('kode', 5);
-            $table->foreignId('tahun_pelajaran_id')->nullable()->constrained('tahun_pelajaran')->cascadeOnDelete();
+            $table->foreignId('tahun_pelajaran_id')->constrained('tahun_pelajaran')->cascadeOnDelete();
             $table->string('nama');
             $table->date('mulai');
             $table->date('sampai');

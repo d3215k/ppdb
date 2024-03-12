@@ -26,8 +26,6 @@ class GelombangResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('tahun_pelajaran_id')
-                    ->options(TahunPelajaran::pluck('nama', 'id')),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
@@ -45,8 +43,6 @@ class GelombangResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('tahunPelajaran.nama')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mulai')
@@ -80,7 +76,8 @@ class GelombangResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public static function getRelations(): array

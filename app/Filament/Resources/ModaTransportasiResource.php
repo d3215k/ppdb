@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ModaTransportasiResource\Pages;
 use App\Filament\Resources\ModaTransportasiResource\RelationManagers;
 use App\Models\ModaTransportasi;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ModaTransportasiResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = ModaTransportasi::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';

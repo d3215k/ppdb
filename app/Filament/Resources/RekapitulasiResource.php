@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RekapitulasiResource\Pages;
 use App\Filament\Resources\RekapitulasiResource\RelationManagers;
 use App\Models\Rekapitulasi;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RekapitulasiResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = Rekapitulasi::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';

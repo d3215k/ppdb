@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AsalSekolahResource\Pages;
 use App\Filament\Resources\AsalSekolahResource\RelationManagers;
 use App\Models\AsalSekolah;
+use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AsalSekolahResource extends Resource
 {
+    use EnsureOnlyPanitiaCanAccess;
+
     protected static ?string $model = AsalSekolah::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';

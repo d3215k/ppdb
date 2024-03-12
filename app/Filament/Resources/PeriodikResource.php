@@ -7,6 +7,7 @@ use App\Filament\Resources\PeriodikResource\Pages;
 use App\Filament\Resources\PeriodikResource\RelationManagers;
 use App\Models\CalonPesertaDidik;
 use App\Models\Periodik;
+use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PeriodikResource extends Resource
 {
+    use EnsureOnlyPanitiaCanAccess;
+
     protected static ?string $model = CalonPesertaDidik::class;
 
     protected static ?string $modelLabel = 'Cek Fisik';

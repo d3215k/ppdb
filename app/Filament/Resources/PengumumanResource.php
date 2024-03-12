@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PengumumanResource\Pages;
 use App\Filament\Resources\PengumumanResource\RelationManagers;
 use App\Models\Pengumuman;
+use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PengumumanResource extends Resource
 {
+    use EnsureOnlyPanitiaCanAccess;
+
     protected static ?string $model = Pengumuman::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';

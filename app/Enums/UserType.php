@@ -7,7 +7,7 @@ use Filament\Support\Contracts\HasLabel;
 
 enum UserType: int implements HasLabel, HasColor
 {
-    case CALON_PESERTA_DIDIK = 1;
+    case PENDAFTAR = 1;
     case PENGUJI = 2;
     case PANITIA = 3;
     case ADMIN = 9;
@@ -15,7 +15,7 @@ enum UserType: int implements HasLabel, HasColor
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::CALON_PESERTA_DIDIK => 'Pendaftar',
+            self::PENDAFTAR => 'Pendaftar',
             self::PENGUJI => 'Penguji',
             self::PANITIA => 'Panitia',
             self::ADMIN => 'Admin',
@@ -25,7 +25,7 @@ enum UserType: int implements HasLabel, HasColor
     public function getColor(): string | array | null
     {
         return match ($this) {
-            self::CALON_PESERTA_DIDIK => 'success',
+            self::PENDAFTAR => 'success',
             self::PENGUJI => 'warning',
             self::PANITIA => 'info',
             self::ADMIN => 'danger',

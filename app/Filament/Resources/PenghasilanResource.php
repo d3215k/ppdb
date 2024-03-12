@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PenghasilanResource\Pages;
 use App\Filament\Resources\PenghasilanResource\RelationManagers;
 use App\Models\Penghasilan;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PenghasilanResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = Penghasilan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->unsignedTinyInteger('type')->default(UserType::CALON_PESERTA_DIDIK);
+            $table->unsignedTinyInteger('type')->default(UserType::PENDAFTAR);
             $table->boolean('aktif')->default(true);
             $table->timestamp('last-login')->nullable();
             $table->timestamps();

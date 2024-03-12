@@ -6,6 +6,7 @@ use App\Filament\Resources\TesResource\Pages;
 use App\Filament\Resources\TesResource\RelationManagers;
 use App\Models\CalonPesertaDidik;
 use App\Models\Tes;
+use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TesResource extends Resource
 {
+    use EnsureOnlyPanitiaCanAccess;
+
     protected static ?string $model = CalonPesertaDidik::class;
 
     protected static ?string $modelLabel = 'Minat dan Bakat';

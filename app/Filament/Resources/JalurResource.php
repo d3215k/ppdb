@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\JalurResource\Pages;
 use App\Filament\Resources\JalurResource\RelationManagers;
 use App\Models\Jalur;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class JalurResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = Jalur::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';

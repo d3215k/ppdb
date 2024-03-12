@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BerkebutuhanKhususResource\Pages;
 use App\Filament\Resources\BerkebutuhanKhususResource\RelationManagers;
 use App\Models\BerkebutuhanKhusus;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BerkebutuhanKhususResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = BerkebutuhanKhusus::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-lifebuoy';

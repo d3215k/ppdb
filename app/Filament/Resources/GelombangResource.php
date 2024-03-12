@@ -6,6 +6,7 @@ use App\Filament\Resources\GelombangResource\Pages;
 use App\Filament\Resources\GelombangResource\RelationManagers;
 use App\Models\Gelombang;
 use App\Models\TahunPelajaran;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GelombangResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = Gelombang::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';

@@ -7,6 +7,7 @@ use App\Filament\Resources\TahunPelajaranResource\Pages;
 use App\Filament\Resources\TahunPelajaranResource\RelationManagers;
 use App\Models\TahunPelajaran;
 use App\Settings\SettingSekolah;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TahunPelajaranResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = TahunPelajaran::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

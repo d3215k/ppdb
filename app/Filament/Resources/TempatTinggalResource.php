@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TempatTinggalResource\Pages;
 use App\Filament\Resources\TempatTinggalResource\RelationManagers;
 use App\Models\TempatTinggal;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TempatTinggalResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = TempatTinggal::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';

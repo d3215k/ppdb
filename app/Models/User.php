@@ -64,4 +64,24 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         return $this->belongsTo(CalonPesertaDidik::class);
     }
+
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->type === UserType::ADMIN;
+    }
+
+    public function getIsPendaftarAttribute(): bool
+    {
+        return $this->type === UserType::ADMIN;
+    }
+
+    public function getIsPengujiAttribute(): bool
+    {
+        return $this->type === UserType::PENGUJI;
+    }
+
+    public function getIsPanitiaAttribute(): bool
+    {
+        return $this->type === UserType::PANITIA;
+    }
 }

@@ -5,12 +5,15 @@ namespace App\Filament\Pages;
 use App\Events\TahunPelajaranAktifChanged;
 use App\Models\TahunPelajaran;
 use App\Settings\SettingSekolah;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 
 class SettingSekolahPage extends SettingsPage
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     protected static string $settings = SettingSekolah::class;

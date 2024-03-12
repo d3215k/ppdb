@@ -12,6 +12,7 @@ use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
 use App\Models\Pendaftaran;
 use App\Models\TahunPelajaran;
+use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PendaftaranResource extends Resource
 {
+    use EnsureOnlyPanitiaCanAccess;
+
     protected static ?string $model = Pendaftaran::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';

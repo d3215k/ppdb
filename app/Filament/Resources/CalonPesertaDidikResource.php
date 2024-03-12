@@ -6,6 +6,7 @@ use App\Enums\JenisKelamin;
 use App\Filament\Resources\CalonPesertaDidikResource\Pages;
 use App\Filament\Resources\CalonPesertaDidikResource\RelationManagers;
 use App\Models\CalonPesertaDidik;
+use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CalonPesertaDidikResource extends Resource
 {
+    use EnsureOnlyPanitiaCanAccess;
+
     protected static ?string $model = CalonPesertaDidik::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';

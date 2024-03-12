@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PendidikanResource\Pages;
 use App\Filament\Resources\PendidikanResource\RelationManagers;
 use App\Models\Pendidikan;
+use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PendidikanResource extends Resource
 {
+    use EnsureOnlyAdminCanAccess;
+
     protected static ?string $model = Pendidikan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';

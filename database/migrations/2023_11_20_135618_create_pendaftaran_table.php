@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('status')->default(StatusPendaftaran::PENDAFTARAN); // TODO
             $table->timestamps();
 
-            $table->unique(['calon_peserta_didik_id', 'tahun_pelajaran_id', 'jalur_id', 'gelombang_id'], 'unique_pendaftaran');
+            $table->unique(['calon_peserta_didik_id', 'tahun_pelajaran_id', 'gelombang_id'], 'unique_pendaftaran');
         });
     }
 

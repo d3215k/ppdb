@@ -12,7 +12,7 @@ class Dashboard extends \Filament\Pages\Dashboard
     public function mount()
     {
         if (auth()->user()->isPendaftar) {
-            return to_route('pendaftar.beranda');
+            return to_route('pendaftar.dashboard');
         }
     }
 

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @filamentStyles
     @vite('resources/css/app.css')
-    @livewireStyles
 </head>
 <body>
     <!-- Page Container -->
@@ -31,36 +30,21 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden items-center space-x-2 lg:flex">
-                <a
-                    href="javascript:void(0)"
-                    class="group flex items-center space-x-2 rounded-lg border border-primary-100 bg-primary-50 px-3 py-2 text-sm font-medium text-primary-600 dark:border-transparent dark:bg-white/10 dark:text-white"
-                >
-                    <span>Dashboard</span>
-                </a>
-                <a
-                    href="javascript:void(0)"
-                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-                >
-                    <span>Biodata</span>
-                </a>
-                <a
-                    href="javascript:void(0)"
-                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-                >
-                    <span>Rapor</span>
-                </a>
-                <a
-                    href="javascript:void(0)"
-                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-                >
-                    <span>Unggah Berkas</span>
-                </a>
-                <a
-                    href="javascript:void(0)"
-                    class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-                >
-                    <span>Pendaftaran</span>
-                </a>
+                <x-nav-link :href="route('pendaftar.dashboard')" :active="request()->routeIs('pendaftar.dashboard')">
+                    {{ __('Dashboard') }}
+                </x-nav-link>
+                <x-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
+                    {{ __('biodata') }}
+                </x-nav-link>
+                <x-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
+                    {{ __('rapor') }}
+                </x-nav-link>
+                <x-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
+                    {{ __('berkas') }}
+                </x-nav-link>
+                <x-nav-link :href="route('pendaftar.pendaftaran')" :active="request()->routeIs('pendaftar.pendaftaran')">
+                    {{ __('pendaftaran') }}
+                </x-nav-link>
             </nav>
             <!-- END Desktop Navigation -->
         </div>
@@ -84,7 +68,7 @@
                 <svg class="inline-block size-5 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                 </svg>
-                <span class="hidden sm:inline">John</span>
+                <span class="hidden sm:inline">{{ auth()->user()->name }}</span>
                 <svg
                     class="hi-mini hi-chevron-down hidden size-5 opacity-40 sm:inline-block"
                     xmlns="http://www.w3.org/2000/svg"
@@ -192,38 +176,23 @@
 
         <!-- Mobile Navigation -->
         <div x-cloak x-show="mobileNavOpen" class="dark lg:hidden">
-        <nav class="flex flex-col space-y-2 border-t py-4 dark:border-white/10">
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-primary-50 bg-primary-50 px-3 py-2 text-sm font-semibold text-primary-600 dark:border-transparent dark:bg-primary-700/75 dark:text-white"
-            >
-                <span>Dashboard</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Biodata</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Rapor</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Unggah Berkas</span>
-            </a>
-            <a
-                href="javascript:void(0)"
-                class="group flex items-center space-x-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-800 hover:bg-primary-50 hover:text-primary-600 active:border-primary-100 dark:text-gray-200 dark:hover:bg-white/10 dark:hover:text-white dark:active:border-white/20"
-            >
-                <span>Pendaftaran</span>
-            </a>
-        </nav>
+            <nav class="flex flex-col space-y-2 border-t py-4 dark:border-white/10">
+                <x-mobile-nav-link :href="route('pendaftar.dashboard')" :active="request()->routeIs('pendaftar.dashboard')">
+                    {{ __('Dashboard') }}
+                </x-mobile-nav-link>
+                <x-mobile-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
+                    {{ __('biodata') }}
+                </x-mobile-nav-link>
+                <x-mobile-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
+                    {{ __('rapor') }}
+                </x-mobile-nav-link>
+                <x-mobile-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
+                    {{ __('berkas') }}
+                </x-mobile-nav-link>
+                <x-mobile-nav-link :href="route('pendaftar.pendaftaran')" :active="request()->routeIs('pendaftar.pendaftaran')">
+                    {{ __('pendaftaran') }}
+                </x-mobile-nav-link>
+            </nav>
         </div>
         <!-- END Mobile Navigation -->
     </div>
@@ -244,7 +213,7 @@
 
     <!-- Page Section -->
     <div class="container mx-auto -mt-28 p-4 lg:-mt-32 lg:p-8 xl:max-w-7xl">
-        <div class="space-y-4">
+        <div class="space-y-12">
             <!--
 
             ADD YOUR MAIN CONTENT BELOW
@@ -286,8 +255,9 @@
     <!-- END Page Footer -->
     </div>
     <!-- END Page Container -->
+
+    @livewire('notifications')
     @filamentScripts
     @vite('resources/js/app.js')
-    @livewireScripts
 </body>
 </html>

@@ -5,10 +5,6 @@
         </div>
     </x-slot>
 
-    {{-- @livewire('pendaftar.papan-pengumuman-component') --}}
-
-    {{-- @livewire('pendaftar.pendaftaran-baru-component') --}}
-
-    {{-- @livewire('pendaftar.pendaftaran-saya-component') --}}
+    @livewire('pendaftar.pendaftaran-component')
 
 </x-layouts.pendaftar>

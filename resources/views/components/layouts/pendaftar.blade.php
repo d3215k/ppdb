@@ -34,16 +34,13 @@
                     {{ __('Dashboard') }}
                 </x-nav-link>
                 <x-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
-                    {{ __('biodata') }}
+                    {{ __('Biodata') }}
                 </x-nav-link>
                 <x-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
-                    {{ __('rapor') }}
+                    {{ __('Rapor') }}
                 </x-nav-link>
                 <x-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
-                    {{ __('berkas') }}
-                </x-nav-link>
-                <x-nav-link :href="route('pendaftar.pendaftaran')" :active="request()->routeIs('pendaftar.pendaftaran')">
-                    {{ __('pendaftaran') }}
+                    {{ __('Berkas Persyaratan') }}
                 </x-nav-link>
             </nav>
             <!-- END Desktop Navigation -->
@@ -181,16 +178,13 @@
                     {{ __('Dashboard') }}
                 </x-mobile-nav-link>
                 <x-mobile-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
-                    {{ __('biodata') }}
+                    {{ __('Biodata') }}
                 </x-mobile-nav-link>
                 <x-mobile-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
-                    {{ __('rapor') }}
+                    {{ __('Rapor') }}
                 </x-mobile-nav-link>
                 <x-mobile-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
-                    {{ __('berkas') }}
-                </x-mobile-nav-link>
-                <x-mobile-nav-link :href="route('pendaftar.pendaftaran')" :active="request()->routeIs('pendaftar.pendaftaran')">
-                    {{ __('pendaftaran') }}
+                    {{ __('Berkas Persyaratan') }}
                 </x-mobile-nav-link>
             </nav>
         </div>

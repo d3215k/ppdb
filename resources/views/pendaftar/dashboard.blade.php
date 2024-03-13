@@ -5,10 +5,12 @@
         </div>
     </x-slot>
 
-    {{-- @livewire('pendaftar.papan-pengumuman-component') --}}
+    @livewire('pendaftar.papan-pengumuman-component')
 
     {{-- @livewire('pendaftar.pendaftaran-baru-component') --}}
 
-    @livewire('pendaftar.pendaftaran-saya-component')
+    @foreach ($pendaftaran as $record)
+        <livewire:pendaftar.pendaftaran-saya-component :pendaftaran="$record" />
+    @endforeach
 
 </x-layouts.pendaftar>

@@ -5,9 +5,20 @@
                 {{ $this->form }}
             </x-filament::section>
 
-            <x-filament::button type="submit" class="mt-4">
-                Simpan
-            </x-filament::button>
+            <div class="mt-4 flex justify-between">
+                <x-filament::button type="submit">
+                    Simpan
+                </x-filament::button>
+                <x-filament::button
+                    outlined
+                    href="{{ route('pendaftar.rapor') }}"
+                    tag="a"
+                    wire:navigate
+                    color="gray"
+                >
+                    Data Rapor
+                </x-filament::button>
+            </div>
         </form>
         <x-filament-actions::modals />
     </div>

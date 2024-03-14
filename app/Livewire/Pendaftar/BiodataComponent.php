@@ -36,10 +36,6 @@ class BiodataComponent extends Component implements HasForms
 
     public function mount()
     {
-        if (!$this->calonPesertaDidik()) {
-            return to_route('pendaftar.dashboard');
-        }
-
         $this->calonPesertaDidikForm->fill(
             $this->calonPesertaDidik()?->toArray()
         );

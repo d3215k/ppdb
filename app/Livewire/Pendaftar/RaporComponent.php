@@ -49,10 +49,6 @@ class RaporComponent extends Component implements HasForms
 
     public function mount()
     {
-        if (!$this->rapor()) {
-            return to_route('pendaftar.dashboard');
-        }
-
         $this->form->fill(
             $this->rapor()?->toArray()
         );

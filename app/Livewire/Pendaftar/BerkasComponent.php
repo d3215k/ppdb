@@ -37,10 +37,6 @@ class BerkasComponent extends Component implements HasForms
 
     public function mount()
     {
-        if (!auth()->user()->calon_peserta_didik_id) {
-            return to_route('pendaftar.dashboard');
-        }
-
         $this->persyaratanUmumForm->fill(
             PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()?->toArray()
         );

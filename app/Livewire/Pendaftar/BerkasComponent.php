@@ -60,7 +60,7 @@ class BerkasComponent extends Component implements HasForms
     public function mount(): void
     {
         $this->persyaratanUmumForm->fill(
-            PersyaratanUmum::where('pendaftaran_id', $this->pendaftaran()->id)->first()?->toArray()
+            PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()?->toArray()
         );
 
         $this->persyaratanKhususForm->fill(

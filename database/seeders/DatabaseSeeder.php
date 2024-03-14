@@ -151,7 +151,6 @@ class DatabaseSeeder extends Seeder
                 'nama' => 'Peserta Didik '. $item,
                 'lp' => 'L',
                 'agama_id' => 1,
-                'berkebutuhan_khusus_id' => rand(1,16),
                 'tempat_tinggal_id' => rand(1,7),
                 'moda_transportasi_id' => rand(1,9),
             ]);

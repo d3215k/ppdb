@@ -5,10 +5,21 @@
         </div>
     </x-slot>
 
-    @livewire('pendaftar.papan-pengumuman-component')
+    @if ($pengumuman->isNotEmpty())
+        <livewire:pendaftar.papan-pengumuman-component />
+    @endif
 
-    {{-- @livewire('pendaftar.pendaftaran-baru-component') --}}
+    @if ($pendaftaran)
+        <livewire:pendaftar.pendaftaran-saya-component lazy="on-load" :pendaftaran="$pendaftaran" />
+    @else
+        @if ($gelombang->isNotEmpty())
+            <livewire:pendaftar.pendaftaran-baru-component />
+        @else
+            <div>
+                Tidak ada gelombang yang dibuka
+            </div>
+        @endif
+    @endif
 
-    <livewire:pendaftar.pendaftaran-saya-component lazy="on-load" :pendaftaran="$pendaftaran" />
 
 </x-layouts.pendaftar>

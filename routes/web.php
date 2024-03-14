@@ -7,7 +7,7 @@ use App\Http\Controllers\Pendaftar\PendaftaranController;
 use App\Http\Controllers\Pendaftar\RaporController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('pendaftar')->name('pendaftar.')->group(function () {
+Route::prefix('pendaftar')->name('pendaftar.')->middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/biodata', BiodataController::class)->name('biodata');
     Route::get('/rapor', RaporController::class)->name('rapor');

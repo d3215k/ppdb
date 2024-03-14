@@ -1,13 +1,19 @@
 <div class="relative bg-white shadow-sm">
     <!-- Ribbon -->
     <div class="absolute -right-2.5 -top-2.5 z-10 size-28 overflow-hidden">
-        <span class="absolute top-0 size-2.5 bg-red-900"></span>
-        <span class="absolute bottom-0 right-0 size-2.5 bg-red-900"></span>
-        <a href="javascript:void(0)"
-            class="absolute bottom-0 right-0 flex w-[calc(100%*1.4142)] origin-bottom-right rotate-45 items-center justify-center gap-1.5 bg-red-600 p-2.5 text-center text-sm leading-tight text-white hover:bg-red-700 active:bg-red-600"
+        <span @class(['absolute top-0 size-2.5', 'bg-red-900' => !$isComplete, 'bg-blue-900' => $isComplete])></span>
+        <span @class(['absolute bottom-0 right-0 size-2.5', 'bg-red-900' => !$isComplete, 'bg-blue-900' => $isComplete])></span>
+        <div
+            @class([
+                'absolute bottom-0 right-0 flex w-[calc(100%*1.4142)] origin-bottom-right rotate-45 items-center justify-center gap-1.5  p-2.5 text-center text-sm leading-tight text-white',
+                'bg-red-600 hover:bg-red-700 active:bg-red-600' => !$isComplete,
+                'bg-blue-600 hover:bg-blue-700 active:bg-blue-600' => $isComplete,
+            ])
         >
-            <span class="text-xs uppercase font-semibold">Belum Lengkap</span>
-        </a>
+            <span class="text-xs uppercase font-semibold">
+                {{ $isComplete ? 'Lengkap' : 'Belum Lengkap' }}
+            </span>
+        </div>
     </div>
     <!-- END Ribbon -->
 

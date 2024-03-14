@@ -33,4 +33,12 @@ class Gelombang extends Model
         return $this->belongsTo(TahunPelajaran::class);
     }
 
+    public function scopeAktifDibuka($query)
+    {
+        $query
+            ->whereAktif(true)
+            ->where('mulai', '<=', today())
+            ->where('sampai', '>=', today());
+    }
+
 }

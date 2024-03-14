@@ -1,9 +1,5 @@
-<x-card heading="Daftar PPDB">
-    <div class="py-4">
-        <form wire:submit="handleSubmit">
-            {{ $this->form }}
-        </form>
+<x-filament::section heading="Formulir Pendaftaran {{ config('app.name') }} Tahun {{ session('tahun_pelajaran') }}">
+    {{ $this->form }}
 
-        <x-filament-actions::modals />
-    </div>
-</x-card>
+    <x-filament-actions::modals />
+</x-filament::section>

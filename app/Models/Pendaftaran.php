@@ -43,11 +43,6 @@ class Pendaftaran extends Model
         return $this->belongsTo(Jalur::class);
     }
 
-    public function persyaratanUmum(): HasOne
-    {
-        return $this->hasOne(PersyaratanUmum::class);
-    }
-
     public function gelombang(): BelongsTo
     {
         return $this->belongsTo(Gelombang::class);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('persyaratan_umum', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('pendaftaran')->cascadeOnDelete();
+            $table->foreignId('calon_peserta_didik_id')->constrained('calon_peserta_didik')->cascadeOnDelete();
             $table->string('status_kelulusan_sekolah_asal')->nullable();
             $table->string('dokumen_kelulusan')->nullable();
             $table->string('dokumen_kelahiran')->nullable();

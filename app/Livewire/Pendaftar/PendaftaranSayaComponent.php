@@ -3,6 +3,7 @@
 namespace App\Livewire\Pendaftar;
 
 use App\Models\Pendaftaran;
+use App\Models\PersyaratanKhusus;
 use Livewire\Component;
 
 class PendaftaranSayaComponent extends Component
@@ -10,6 +11,8 @@ class PendaftaranSayaComponent extends Component
     public Pendaftaran $pendaftaran;
 
     public ?array $data  = [];
+
+    public bool $isComplete = false;
 
     public function mount()
     {
@@ -27,6 +30,12 @@ class PendaftaranSayaComponent extends Component
 
     public function getAlurPendaftaran(): void
     {
+        $isBiodataComplete = $this->pendaftaran->calonPesertaDidik->isComplete();
+        $isRaporComplete = $this->pendaftaran->calonPesertaDidik->rapor->isComplete();
+        $isBerkasComplete = $this->pendaftaran->calonPesertaDidik->persyaratanUmum->isComplete() & $this->pendaftaran->buktiPersyaratanKhusus->count() >= PersyaratanKhusus::whereAktif(true)->where('jalur_id', $this->pendaftaran->jalur_id)->count();
+
+        $this->isComplete = $isBiodataComplete && $isRaporComplete && $isBerkasComplete;
+
         $this->data = [
             [
                 'heading' => 'Pendaftaran',
@@ -37,19 +46,19 @@ class PendaftaranSayaComponent extends Component
             [
                 'heading' => 'Biodata',
                 'description' => 'Isi data profil lengkap',
-                'isComplete' => false,
+                'isComplete' =>$isBiodataComplete,
                 'href' => route('pendaftar.biodata'),
             ],
             [
                 'heading' => 'Rapor',
                 'description' => 'Semester 1 sampai 5',
-                'isComplete' => false,
+                'isComplete' => $isRaporComplete,
                 'href' => route('pendaftar.rapor'),
             ],
             [
                 'heading' => 'Pemberkasan',
                 'description' => 'Unggah Berkas Persyaratan',
-                'isComplete' => false,
+                'isComplete' => $isBerkasComplete,
                 'href' => route('pendaftar.berkas'),
             ],
         ];

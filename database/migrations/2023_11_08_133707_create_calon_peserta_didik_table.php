@@ -25,11 +25,14 @@ return new class extends Migration
             $table->string('no_reg_akta')->nullable();
             $table->foreignId('agama_id')->nullable()->constrained('ref_agama')->nullOnDelete();
             $table->foreignId('berkebutuhan_khusus_id')->nullable()->constrained('ref_berkebutuhan_khusus')->nullOnDelete();
-            $table->string('address')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('rt')->nullable();
             $table->string('rw')->nullable();
             $table->string('dusun')->nullable();
             $table->string('desa_kelurahan')->nullable();
+            $table->string('kecamatan')->nullable();
+            $table->string('kabupaten_kota')->nullable();
+            $table->string('provinsi')->nullable();
             $table->string('kode_pos')->nullable();
             $table->string('lintang')->nullable();
             $table->string('bujur')->nullable();
@@ -37,7 +40,9 @@ return new class extends Migration
             $table->foreignId('moda_transportasi_id')->nullable()->constrained('ref_moda_transportasi')->nullOnDelete();
             $table->unsignedSmallInteger('anak_ke')->nullable();
             $table->string('nomor_hp', 16)->nullable();
+            $table->string('nomor_hp_ortu', 16)->nullable();
             $table->string('email')->nullable();
+            $table->string('foto')->nullable();
             $table->foreignId('asal_sekolah_id')->nullable()->constrained('asal_sekolah')->nullOnDelete();
 
             $table->string('username')->nullable(); // akun dinas

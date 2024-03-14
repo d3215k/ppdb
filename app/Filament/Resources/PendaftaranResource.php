@@ -120,7 +120,7 @@ class PendaftaranResource extends Resource
                             ->relationship('berkebutuhanKhusus', 'nama')
                             ->preload()
                             ->searchable(),
-                        Forms\Components\TextInput::make('address')
+                        Forms\Components\TextInput::make('alamat')
                             ->columnSpanFull()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('rt')

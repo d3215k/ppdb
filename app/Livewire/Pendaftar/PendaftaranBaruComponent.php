@@ -12,6 +12,7 @@ use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
 use App\Models\ModaTransportasi;
 use App\Models\Pendaftaran;
+use App\Models\Rapor;
 use App\Models\TahunPelajaran;
 use App\Models\TempatTinggal;
 use App\Support\GenerateNumber;
@@ -22,6 +23,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Notifications\Notification;
@@ -59,61 +61,79 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 ->maxLength(255),
                             Forms\Components\ToggleButtons::make('lp')
                                 ->inline()
-                                ->label('L/P')
+                                ->label('Jenis Kelamin')
                                 ->options(JenisKelamin::class)
                                 ->required()
                                 ,
                             Forms\Components\TextInput::make('nisn')
-                                ->required()
+                                // ->required()
                                 ->label('NISN')
                                 ->maxLength(10),
                             Forms\Components\TextInput::make('nik')
                                 ->label('NIK')
-                                ->required()
+                                // ->required()
                                 ->maxLength(16),
                             Forms\Components\TextInput::make('tempat_lahir')
-                                ->required()
+                                // ->required()
                                 ->maxLength(126),
                             Forms\Components\DatePicker::make('tanggal_lahir')
-                                ->required(),
-                            Forms\Components\TextInput::make('ibu')
-                                ->label('Nama Ibu')
-                                ->required()
-                                ->maxLength(128),
-                            Forms\Components\TextInput::make('ayah')
-                                ->label('Nama Ayah')
-                                ->required()
-                                ->maxLength(128),
-                            Forms\Components\TextInput::make('address')
+                                // ->required()
+                                ,
+                                Forms\Components\TextInput::make('alamat')
                                 ->label('Alamat Rumah')
-                                ->required()
+                                // ->required()
                                 ->columnSpanFull()
                                 ->maxLength(255),
                             Forms\Components\TextInput::make('rt')
                                 ->label('RT')
-                                ->required()
+                                ->nullable()
                                 ->numeric(),
                             Forms\Components\TextInput::make('rw')
                                 ->label('RW')
-                                ->required()
-                                ->numeric(),
-                            Forms\Components\TextInput::make('dusun')
                                 ->nullable()
-                                ->maxLength(126),
+                                ->numeric(),
                             Forms\Components\TextInput::make('desa_kelurahan')
                                 ->label('Desa/Kelurahan')
-                                ->required()
+                                // ->required()
+                                ->maxLength(126),
+                            Forms\Components\TextInput::make('kecamatan')
+                                ->label('Kecamatan')
+                                // ->required()
+                                ->maxLength(126),
+                            Forms\Components\TextInput::make('kabupaten_kota')
+                                ->label('Kabupaten/kota')
+                                // ->required()
+                                ->maxLength(126),
+                            Forms\Components\TextInput::make('provinsi')
+                                ->label('Provinsi')
+                                // ->required()
+                                ->maxLength(126),
+                            Forms\Components\TextInput::make('kabupaten_kota')
+                                ->label('kabupaten_kota')
+                                // ->required()
                                 ->maxLength(126),
                             Forms\Components\TextInput::make('kode_pos')
-                                ->required()
+                                // ->nullable()
                                 ->numeric(),
+                            Forms\Components\TextInput::make('ibu')
+                                ->label('Nama Ibu')
+                                // ->required()
+                                ->maxLength(128),
+                            Forms\Components\TextInput::make('ayah')
+                                ->label('Nama Ayah')
+                                // ->required()
+                                ->maxLength(128),
                             Forms\Components\TextInput::make('nomor_hp')
                                 ->label('Nomor HP (Aktif WA)')
-                                ->required()
+                                // ->required()
+                                ->maxLength(16),
+                            Forms\Components\TextInput::make('nomor_hp_ortu')
+                                ->label('Nomor HP Orang Tua (Aktif WA)')
+                                // ->required()
                                 ->maxLength(16),
                             Forms\Components\TextInput::make('email')
                                 ->email()
-                                ->required()
+                                // ->required()
                                 ->maxLength(255)
                                 ->default(auth()->user()->email),
                         ]),
@@ -123,56 +143,62 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 ->label('Asal Sekolah')
                                 ->options(AsalSekolah::pluck('nama', 'id'))
                                 ->preload()
-                                ->required()
+                                // ->required()
                                 ->searchable(),
                         ]),
                     Wizard\Step::make('Gelombang dan Jalur Pendaftaran')
                         ->schema([
-                            Select::make('gelombang_id')
+                            ToggleButtons::make('gelombang_id')
                                 ->label('Gelombang Pendaftaran')
                                 ->options(
                                     function () {
-                                        return Gelombang::pluck('nama', 'id');
+                                        return Gelombang::query()
+                                            ->aktifDibuka()
+                                            ->pluck('nama', 'id');
                                     }
                                 )
-                                ->searchable()
-                                ->preload()
-                                ->required()
+                                ->inline()
+                                // ->required()
                                 ->reactive(),
-                            Select::make('jalur_id')
+                            ToggleButtons::make('jalur_id')
                                 ->label('Jalur Pendaftaran')
+                                ->inline()
                                 ->options(fn (Get $get): Collection => Jalur::query()
-                                    // ->where('skema_id', $get('skema_id'))
+                                    ->whereHas('gelombang', fn ($query) => $query->where('gelombang_id', $get('gelombang_id')))
                                     ->pluck('nama', 'id')
                                 )
-                                ->required()
+                                // ->required()
                                 ->reactive()
                                 ->hidden(fn (Get $get): bool => ! $get('gelombang_id')),
                         ]),
                     Wizard\Step::make('Pilihan Kompetensi Keahlian')
                         ->schema([
-                            Select::make('pilihan_kesatu')
+                            ToggleButtons::make('pilihan_kesatu')
                                 ->label('Pilihan Kompetensi Keahlian Pertama')
                                 ->options(fn (): Collection => KompetensiKeahlian::query()
                                     ->where('dipilih_kesatu', true)
                                     ->pluck('nama', 'id')
                                 )
-                                ->required()
+                                ->inline()
+                                // ->required()
                                 ->reactive(),
-                            Select::make('pilihan_kedua')
+                            ToggleButtons::make('pilihan_kedua')
                                 ->label('Pilihan Kompetensi Keahlian Kedua')
                                 ->options(fn (Get $get): Collection => KompetensiKeahlian::query()
                                     ->where('dipilih_kedua', true)
                                     ->whereNot('id', $get('pilihan_kesatu'))
                                     ->pluck('nama', 'id')
                                 )
-                                ->required()
+                                ->inline()
+                                // ->required()
                                 ->reactive()
                                 ->hidden(fn (Get $get): bool => ! $get('pilihan_kesatu')),
                         ]),
+                        // TODO : Halaman Konfirmasi
+                        // Demikian data di atas adalah data sebenarnya dan dapat dipertanggungjawabkan, jika data tersebut tidak sesuai dengan sebenarnya, kami siap menerima sanksi sesuai dengan ketentuan yang berlaku.
                     ])->submitAction(new HtmlString(Blade::render(<<<BLADE
                         <x-filament::button
-                            type="submit"
+                            wire:click="handleSubmit"
                             size="sm"
                         >
                             Submit
@@ -182,7 +208,7 @@ class PendaftaranBaruComponent extends Component implements HasForms
             ->statePath('data');
     }
 
-    public function handleSubmit(): void
+    public function handleSubmit()
     {
         try {
             DB::beginTransaction();
@@ -200,12 +226,13 @@ class PendaftaranBaruComponent extends Component implements HasForms
                     'nik' => $data['nik'],
                     'tempat_lahir' => $data['tempat_lahir'],
                     'tanggal_lahir' => $data['tanggal_lahir'],
-                    'address' => $data['address'],
+                    'alamat' => $data['alamat'],
                     'rt' => $data['rt'],
                     'rw' => $data['rw'],
                     'desa_kelurahan' => $data['desa_kelurahan'],
                     'kode_pos' => $data['kode_pos'],
                     'nomor_hp' => $data['nomor_hp'],
+                    'nomor_hp_ortu' => $data['nomor_hp_ortu'],
                     'email' => $data['email'],
                     'asal_sekolah_id' => $data['asal_sekolah_id'],
                 ]
@@ -217,6 +244,14 @@ class PendaftaranBaruComponent extends Component implements HasForms
 
             $cpd->ibu()->updateOrCreate([
                 'nama' => $data['ibu']
+            ]);
+
+            $cpd->rapor()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
+            $cpd->persyaratanUmum()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
             ]);
 
             $tahun = TahunPelajaran::whereAktif(true)->first();
@@ -240,6 +275,7 @@ class PendaftaranBaruComponent extends Component implements HasForms
 
             Notification::make()->title('berhasil')->success()->send();
             DB::commit();
+            return to_route('pendaftar.dashboard');
         } catch (\Throwable $th) {
             Notification::make()->title($th->getMessage())->danger()->send();
             DB::rollBack();

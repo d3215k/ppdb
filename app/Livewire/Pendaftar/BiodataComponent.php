@@ -57,6 +57,12 @@ class BiodataComponent extends Component implements HasForms
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('foto')
+                    ->label('Photo')
+                    ->image()
+                    ->maxSize(512)
+                    ->nullable()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('nama')
                     ->label('Nama Lengkap')
                     ->required()
@@ -90,7 +96,7 @@ class BiodataComponent extends Component implements HasForms
                     ->options(BerkebutuhanKhusus::pluck('nama', 'id'))
                     ->preload()
                     ->searchable(),
-                Forms\Components\TextInput::make('address')
+                Forms\Components\TextInput::make('alamat')
                     ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('rt')
@@ -100,6 +106,8 @@ class BiodataComponent extends Component implements HasForms
                     ->label('RW')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('dusun')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('desa_kelurahan')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('desa_kelurahan')
                     ->maxLength(255),
@@ -116,6 +124,7 @@ class BiodataComponent extends Component implements HasForms
                 Forms\Components\TextInput::make('anak_ke')
                     ->numeric(),
                 Forms\Components\TextInput::make('nomor_hp')
+                    ->label('Nomor HP (Aktif Whatsapp)')
                     ->maxLength(16),
                 Forms\Components\TextInput::make('email')
                     ->email()

@@ -9,8 +9,6 @@
 
     {{-- @livewire('pendaftar.pendaftaran-baru-component') --}}
 
-    @foreach ($pendaftaran as $record)
-        <livewire:pendaftar.pendaftaran-saya-component :pendaftaran="$record" />
-    @endforeach
+    <livewire:pendaftar.pendaftaran-saya-component lazy="on-load" :pendaftaran="$pendaftaran" />
 
 </x-layouts.pendaftar>

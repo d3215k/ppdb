@@ -1,4 +1,4 @@
-<div class="rounded-lg bg-white shadow-sm dark:bg-gray-900 overflow-hidden">
+<div class="bg-white shadow-sm overflow-hidden">
     @isset($heading)
         <div class="bg-gray-50 px-5 py-4 dark:bg-gray-700/50">
             <h3 class="mb-1 text-xl font-semibold">{{ $heading }}</h3>

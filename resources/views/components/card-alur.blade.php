@@ -1,11 +1,4 @@
-<!-- Card -->
-@props([
-    'isComplete' => false,
-    'heading' => '',
-    'description' => '',
-])
-
-<div
+<a href="{{ $href }}" wire:navigate
     @class([
         'flex flex-col overflow-hidden border-1 border-gray-200 shadow-sm dark:bg-gray-800 dark:text-gray-100',
         'bg-gray-100' => !$isComplete,
@@ -37,5 +30,5 @@
             </dd>
         </dl>
     </div>
-</div>
+</a>
 <!-- END Card -->

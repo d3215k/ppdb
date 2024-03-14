@@ -34,15 +34,19 @@
                 <x-nav-link :href="route('pendaftar.dashboard')" :active="request()->routeIs('pendaftar.dashboard')">
                     {{ __('Dashboard') }}
                 </x-nav-link>
-                <x-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
-                    {{ __('Biodata') }}
-                </x-nav-link>
-                <x-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
-                    {{ __('Rapor') }}
-                </x-nav-link>
-                <x-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
-                    {{ __('Berkas Persyaratan') }}
-                </x-nav-link>
+
+                @if (session()->has('hasCalonPesertaDidik'))
+                    <x-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
+                        {{ __('Biodata') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
+                        {{ __('Rapor') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
+                        {{ __('Berkas Persyaratan') }}
+                    </x-nav-link>
+                @endif
+
             </nav>
             <!-- END Desktop Navigation -->
         </div>
@@ -178,15 +182,18 @@
                 <x-mobile-nav-link :href="route('pendaftar.dashboard')" :active="request()->routeIs('pendaftar.dashboard')">
                     {{ __('Dashboard') }}
                 </x-mobile-nav-link>
-                <x-mobile-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
-                    {{ __('Biodata') }}
-                </x-mobile-nav-link>
-                <x-mobile-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
-                    {{ __('Rapor') }}
-                </x-mobile-nav-link>
-                <x-mobile-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
-                    {{ __('Berkas Persyaratan') }}
-                </x-mobile-nav-link>
+
+                @if (session()->has('hasCalonPesertaDidik'))
+                    <x-mobile-nav-link :href="route('pendaftar.biodata')" :active="request()->routeIs('pendaftar.biodata')">
+                        {{ __('Biodata') }}
+                    </x-mobile-nav-link>
+                    <x-mobile-nav-link :href="route('pendaftar.rapor')" :active="request()->routeIs('pendaftar.rapor')">
+                        {{ __('Rapor') }}
+                    </x-mobile-nav-link>
+                    <x-mobile-nav-link :href="route('pendaftar.berkas')" :active="request()->routeIs('pendaftar.berkas')">
+                        {{ __('Berkas Persyaratan') }}
+                    </x-mobile-nav-link>
+                @endif
             </nav>
         </div>
         <!-- END Mobile Navigation -->

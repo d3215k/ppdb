@@ -48,7 +48,8 @@ class BerkasComponent extends Component implements HasForms
     #[Computed()]
     public function pendaftaran()
     {
-        return Pendaftaran::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first();
+        return Pendaftaran::query()
+            ->aktif()->first();
     }
 
     #[Computed()]
@@ -63,9 +64,11 @@ class BerkasComponent extends Component implements HasForms
             PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()?->toArray()
         );
 
-        $this->persyaratanKhususForm->fill(
-            BuktiPersyaratanKhusus::where('pendaftaran_id', $this->pendaftaran()->id)->pluck('file', 'id')->toArray()
-        );
+        if ($this->pendaftaran()) {
+            $this->persyaratanKhususForm->fill(
+                BuktiPersyaratanKhusus::where('pendaftaran_id', $this->pendaftaran()->id)->pluck('file', 'id')->toArray()
+            );
+        }
     }
 
     protected function getForms(): array
@@ -100,16 +103,18 @@ class BerkasComponent extends Component implements HasForms
 
     public function persyaratanKhususForm(Form $form): Form
     {
-        $persyaratanKhusus = PersyaratanKhusus::where('jalur_id', $this->pendaftaran()->jalur_id)
-            ->get();
-
         $fields = [];
 
-        foreach ($persyaratanKhusus as $syarat) {
-            $fields[] = Forms\Components\FileUpload::make($syarat->id)
-                ->label($syarat->nama)
-                ->downloadable()
-                ->required();
+        if ($this->pendaftaran()) {
+            $persyaratanKhusus = PersyaratanKhusus::where('jalur_id', $this->pendaftaran()->jalur_id)
+                ->get();
+
+            foreach ($persyaratanKhusus as $syarat) {
+                $fields[] = Forms\Components\FileUpload::make($syarat->id)
+                    ->label($syarat->nama)
+                    ->downloadable()
+                    ->required();
+            }
         }
 
         return $form
@@ -123,25 +128,27 @@ class BerkasComponent extends Component implements HasForms
         try {
             DB::beginTransaction();
 
-            $khusus = $this->persyaratanKhususForm->getState();
+            if ($this->pendaftaran()) {
+                $khusus = $this->persyaratanKhususForm->getState();
 
-            foreach ($this->persyaratanKhusus() as $syarat) {
-                BuktiPersyaratanKhusus::updateOrCreate(
-                    [
-                        'pendaftaran_id' => $this->pendaftaran()->id,
-                        'persyaratan_khusus_id' => $syarat->id,
-                    ],
-                    [
-                        'file' => $khusus[$syarat->id],
-                    ]
-                );
+                foreach ($this->persyaratanKhusus() as $syarat) {
+                    BuktiPersyaratanKhusus::updateOrCreate(
+                        [
+                            'pendaftaran_id' => $this->pendaftaran()->id,
+                            'persyaratan_khusus_id' => $syarat->id,
+                        ],
+                        [
+                            'file' => $khusus[$syarat->id],
+                        ]
+                    );
+                }
             }
 
             $umum = $this->persyaratanUmumForm->getState();
 
             PersyaratanUmum::updateOrCreate(
                 [
-                    'pendaftaran_id' => $this->pendaftaran()->id,
+                    'calon_peserta_didik_id' => auth()->user()->calon_peserta_didik_id,
                 ],
                 $umum,
             );

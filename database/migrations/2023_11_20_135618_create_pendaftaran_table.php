@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('gelombang_id')->constrained('gelombang')->cascadeOnDelete();
             $table->foreignId('pilihan_kesatu')->nullable()->constrained('kompetensi_keahlian')->nullOnDelete();
             $table->foreignId('pilihan_kedua')->nullable()->constrained('kompetensi_keahlian')->nullOnDelete();
+            $table->foreignId('kompetensi_keahlian')->nullable()->constrained('kompetensi_keahlian')->nullOnDelete();
             $table->unsignedTinyInteger('status')->default(StatusPendaftaran::PENDAFTARAN); // TODO
             $table->timestamps();
 

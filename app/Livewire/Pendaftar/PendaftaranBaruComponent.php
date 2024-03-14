@@ -238,6 +238,12 @@ class PendaftaranBaruComponent extends Component implements HasForms
                 ]
             );
 
+            if ($cpd) {
+                session([
+                    'hasCalonPesertaDidik' => true,
+                ]);
+            }
+
             $cpd->ayah()->updateOrCreate([
                 'nama' => $data['ayah']
             ]);
@@ -247,6 +253,10 @@ class PendaftaranBaruComponent extends Component implements HasForms
             ]);
 
             $cpd->rapor()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
+            $cpd->periodik()->updateOrCreate([
                 'calon_peserta_didik_id' => $cpd->id
             ]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\CalonPesertaDidik;
 use App\Models\TahunPelajaran;
 
 class StoreAktifTahunPelajaranToSession
@@ -32,5 +33,17 @@ class StoreAktifTahunPelajaranToSession
             'tahun_pelajaran_id' => $id,
             'tahun_pelajaran' => $nama,
         ]);
+
+        if ($event->user->isPendaftar) {
+            $cpd = CalonPesertaDidik::find(auth()->user()->calon_peserta_didik_id);
+
+            if ($cpd) {
+                session([
+                    'hasCalonPesertaDidik' => true,
+                ]);
+            }
+
+        }
+
     }
 }

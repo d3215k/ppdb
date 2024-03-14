@@ -3,6 +3,7 @@
 namespace App\Livewire\Pendaftar;
 
 use App\Enums\JenisKelamin;
+use App\Enums\UkuranBaju;
 use App\Models\Agama;
 use App\Models\AsalSekolah;
 use App\Models\BerkebutuhanKhusus;
@@ -12,6 +13,7 @@ use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
 use App\Models\ModaTransportasi;
 use App\Models\Pendaftaran;
+use App\Models\Periodik;
 use App\Models\TahunPelajaran;
 use App\Models\TempatTinggal;
 use App\Support\GenerateNumber;
@@ -38,7 +40,8 @@ class BiodataComponent extends Component implements HasForms
 {
     use InteractsWithForms;
 
-    public ?array $data = [];
+    public ?array $cpd = [];
+    public ?array $periodik = [];
 
     #[Computed()]
     public function calonPesertaDidik()
@@ -48,12 +51,51 @@ class BiodataComponent extends Component implements HasForms
 
     public function mount(): void
     {
-        $this->form->fill(
-            $this->calonPesertaDidik()->toArray()
+        $this->calonPesertaDidikForm->fill(
+            $this->calonPesertaDidik()?->toArray()
+        );
+
+        $this->periodikForm->fill(
+            Periodik::find(auth()->user()->calon_peserta_didik_id)?->toArray()
         );
     }
 
-    public function form(Form $form): Form
+    public function getForms(): array
+    {
+        return [
+            'periodikForm',
+            'calonPesertaDidikForm',
+        ];
+    }
+
+    public function periodikForm(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('tinggi')
+                    ->nullable()
+                    ->suffix('cm')
+                    ->numeric(),
+                Forms\Components\TextInput::make('berat')
+                    ->nullable()
+                    ->suffix('Kg')
+                    ->numeric(),
+                Forms\Components\TextInput::make('lingkar_kepala')
+                    ->nullable()
+                    ->numeric(),
+                Forms\Components\TextInput::make('no_sepatu')
+                    ->nullable()
+                    ->numeric(),
+                Forms\Components\ToggleButtons::make('ukuran_baju')
+                    ->inline()
+                    ->nullable()
+                    ->options(UkuranBaju::class),
+            ])
+            ->columns(2)
+            ->statePath('periodik');
+        }
+
+    public function calonPesertaDidikForm(Form $form): Form
     {
         return $form
             ->schema([
@@ -135,7 +177,7 @@ class BiodataComponent extends Component implements HasForms
                     ->searchable(),
             ])
             ->columns(2)
-            ->statePath('data');
+            ->statePath('cpd');
     }
 
     public function handleSubmit(): void
@@ -143,9 +185,17 @@ class BiodataComponent extends Component implements HasForms
         try {
             DB::beginTransaction();
 
-            $data = $this->form->getState();
+            $cpd = $this->calonPesertaDidikForm->getState();
+            $periodik = $this->periodikForm->getState();
 
-            $this->calonPesertaDidik()->update($data);
+            $this->calonPesertaDidik()->update($cpd);
+
+            Periodik::updateOrCreate(
+                [
+                    'calon_peserta_didik_id' => auth()->user()->calon_peserta_didik_id
+                ],
+                $periodik
+            );
 
             Notification::make()->title('berhasil')->success()->send();
             DB::commit();

@@ -23,6 +23,12 @@ class Pendaftaran extends Model
         'status' => StatusPendaftaran::class
     ];
 
+    public function scopeAktif($query)
+    {
+        $query->where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)
+            ->whereNotIn('status', [StatusPendaftaran::TIDAK_LULUS, StatusPendaftaran::MENGUNDURKAN_DIRI]);
+    }
+
     public function tahunPelajaran(): BelongsTo
     {
         return $this->belongsTo(TahunPelajaran::class);

@@ -5,10 +5,11 @@
                 {{ $this->persyaratanUmumForm }}
             </x-filament::section>
 
-            <x-filament::section heading="Persyaratan Khusus">
-                {{ $this->persyaratanKhususForm }}
-            </x-filament::section>
-
+            @if ($this->pendaftaran())
+                <x-filament::section heading="Persyaratan Khusus">
+                    {{ $this->persyaratanKhususForm }}
+                </x-filament::section>
+            @endif
 
             <div class="mt-4 flex justify-between">
                 <x-filament::button type="submit">

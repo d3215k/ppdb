@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusPendaftaran;
 use App\Traits\WithTahunPelajaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,13 @@ class CalonPesertaDidik extends Model
     {
         return $this->hasOne(Pendaftaran::class)
             ->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
+    }
+
+    public function kompetensiKeahlian(): HasOne
+    {
+        return $this->pendaftaran()
+            ->where('status', StatusPendaftaran::LULUS)
+            ->first();
     }
 
     public function agama(): BelongsTo
@@ -93,24 +101,33 @@ class CalonPesertaDidik extends Model
 
     public function isComplete(): bool
     {
-        return isset($this->nama)
-            & isset($this->lp)
-            & isset($this->nisn)
-            & isset($this->kewarganegaraan)
-            & isset($this->nik)
-            & isset($this->tempat_lahir)
-            & isset($this->tanggal_lahir)
-            & isset($this->agama_id)
-            & isset($this->alamat)
-            & isset($this->desa_kelurahan)
-            & isset($this->tempat_tinggal_id)
-            & isset($this->moda_transportasi_id)
-            & isset($this->anak_ke)
-            & isset($this->nomor_hp)
-            & isset($this->email)
-            & isset($this->asal_sekolah_id)
-            & isset($this->username)
-            & isset($this->password)
-            ;
+        $requiredProperties = [
+            'nama',
+            'lp',
+            'nisn',
+            'kewarganegaraan',
+            'nik',
+            'tempat_lahir',
+            'tanggal_lahir',
+            'agama_id',
+            'alamat',
+            'desa_kelurahan',
+            'tempat_tinggal_id',
+            'moda_transportasi_id',
+            'anak_ke',
+            'nomor_hp',
+            'email',
+            'asal_sekolah_id',
+            'username',
+            'password',
+        ];
+
+        foreach ($requiredProperties as $property) {
+            if (!isset($this->$property)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

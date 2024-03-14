@@ -21,10 +21,19 @@ class PersyaratanUmum extends Model
 
     public function isComplete(): bool
     {
-        return isset($this->dokumen_kelulusan)
-            & isset($this->dokumen_kelahiran)
-            & isset($this->kartu_keluarga)
-            & isset($this->ktp_ortu)
-            ;
+        $requiredProperties = [
+            'dokumen_kelulusan',
+            'dokumen_kelahiran',
+            'kartu_keluarga',
+            'ktp_ortu',
+        ];
+
+        foreach ($requiredProperties as $property) {
+            if (!isset($this->$property)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -33,6 +33,8 @@ class SettingSekolahPage extends SettingsPage
                     ->options(TahunPelajaran::pluck('nama', 'id')),
                 Forms\Components\FileUpload::make('logo')
                     ->nullable(),
+                Forms\Components\TextInput::make('nomor_hp_cs')
+                    ->nullable(),
             ]);
     }
 

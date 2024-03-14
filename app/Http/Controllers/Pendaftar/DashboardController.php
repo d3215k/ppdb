@@ -22,9 +22,8 @@ class DashboardController extends Controller
 
         $pengumuman = Pengumuman::all();
 
-        $pendaftaran = Pendaftaran::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)
-            ->whereNotIn('status', [StatusPendaftaran::TIDAK_LULUS, StatusPendaftaran::MENGUNDURKAN_DIRI])
-            ->first();
+        $pendaftaran = Pendaftaran::query()
+            ->aktif()->first();
 
         return view('pendaftar.dashboard', [
             'pendaftaran' => $pendaftaran,

@@ -54,19 +54,9 @@ class CalonPesertaDidik extends Model
         return $this->hasOne(Periodik::class);
     }
 
-    public function ayah(): HasOne
+    public function ortu(): HasOne
     {
-        return $this->hasOne(Ayah::class);
-    }
-
-    public function ibu(): HasOne
-    {
-        return $this->hasOne(Ibu::class);
-    }
-
-    public function wali(): HasOne
-    {
-        return $this->hasOne(Wali::class);
+        return $this->hasOne(Ortu::class);
     }
 
     public function asalSekolah(): BelongsTo

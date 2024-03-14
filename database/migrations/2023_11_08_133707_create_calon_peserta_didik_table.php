@@ -43,7 +43,9 @@ return new class extends Migration
             $table->string('nomor_hp_ortu', 16)->nullable();
             $table->string('email')->nullable();
             $table->string('foto')->nullable();
+
             $table->foreignId('asal_sekolah_id')->nullable()->constrained('asal_sekolah')->nullOnDelete();
+            $table->string('asal_sekolah_temp')->nullable();
 
             $table->string('username')->nullable(); // akun dinas
             $table->string('password')->nullable();

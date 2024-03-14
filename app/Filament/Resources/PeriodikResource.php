@@ -70,14 +70,17 @@ class PeriodikResource extends Resource
                         Forms\Components\ToggleButtons::make('tato')
                             ->required()
                             ->boolean()
+                            ->grouped()
                             ->inline(),
                         Forms\Components\ToggleButtons::make('tindik')
                             ->required()
                             ->boolean()
+                            ->grouped()
                             ->inline(),
                         Forms\Components\ToggleButtons::make('cat_rambut')
                             ->required()
                             ->boolean()
+                            ->grouped()
                             ->inline(),
 
                     ])

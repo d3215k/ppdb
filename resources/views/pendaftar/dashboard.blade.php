@@ -1,11 +1,17 @@
 <x-layouts.pendaftar>
     <x-slot name="heading">
         <div class="grow">
-            <h1 class="text-2xl font-semibold">Dashboard</h1>
+            <h1 class="text-2xl font-semibold">
+                @if (! $pendaftaran)
+                    Formulir {{ config('app.name') }} Tahun {{ session('tahun_pelajaran') }}
+                @else
+                    Dashboard
+                @endif
+            </h1>
         </div>
     </x-slot>
 
-    @if ($pengumuman->isNotEmpty())
+    @if ($pengumuman->isNotEmpty() && ! $pendaftaran)
         <livewire:pendaftar.papan-pengumuman-component lazy="on-load" />
     @endif
 

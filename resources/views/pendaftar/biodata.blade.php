@@ -5,6 +5,10 @@
         </div>
     </x-slot>
 
-    @livewire('pendaftar.biodata-component')
+    <div class="space-y-4">
+        @livewire('pendaftar.biodata-component')
+        @livewire('pendaftar.ortu-component')
+        @livewire('pendaftar.periodik-component')
+    </div>
 
 </x-layouts.pendaftar>

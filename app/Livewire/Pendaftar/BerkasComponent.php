@@ -61,16 +61,20 @@ class BerkasComponent extends Component implements HasForms
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('dokumen_kelulusan')
-                    ->required()
+                    // ->required()
+                    ->nullable()
                     ->downloadable(),
                 Forms\Components\FileUpload::make('dokumen_kelahiran')
-                    ->required()
+                    // ->required()
+                    ->nullable()
                     ->downloadable(),
                 Forms\Components\FileUpload::make('kartu_keluarga')
-                    ->required()
+                    // ->required()
+                    ->nullable()
                     ->downloadable(),
                 Forms\Components\FileUpload::make('ktp_ortu')
-                    ->required()
+                    // ->required()
+                    ->nullable()
                     ->downloadable(),
 
             ])

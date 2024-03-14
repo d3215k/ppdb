@@ -155,12 +155,9 @@ class DatabaseSeeder extends Seeder
                 'moda_transportasi_id' => rand(1,9),
             ]);
 
-            $cpd->ayah()->create([
-                'nama' => 'Ayah '. $item,
-            ]);
-
-            $cpd->ibu()->create([
-                'nama' => 'Ibu '. $item,
+            $cpd->ortu()->create([
+                'nama_ayah' => 'Ayah '. $item,
+                'nama_ibu' => 'Ibu '. $item,
             ]);
 
             $cpd->user()->create([

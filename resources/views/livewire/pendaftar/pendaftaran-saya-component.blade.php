@@ -18,7 +18,7 @@
     <!-- END Ribbon -->
 
     <div class="bg-gray-50 px-5 py-4">
-        <h3 class="mb-1 text-xl font-semibold">Pendaftaran PPDB Tahun {{ session('tahun_pelajaran') }}</h3>
+        <h3 class="text-xl font-semibold">Pendaftaran PPDB Tahun {{ session('tahun_pelajaran') }}</h3>
     </div>
 
     <div class="px-5 py-2 text-sm">
@@ -41,7 +41,7 @@
         </h4>
     </div>
     <div class="px-5">
-        <div class="grid grid-cols-1 py-4 gap-4 md:grid-cols-4">
+        <div class="grid grid-cols-1 py-4 gap-4 md:grid-cols-2 lg:grid-cols-4">
             @foreach ($data as $item)
                 <x-card-alur
                     heading="{{ $item['heading'] }}"

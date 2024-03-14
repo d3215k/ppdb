@@ -371,20 +371,20 @@ class PendaftaranResource extends Resource
                             ]),
                     ]),
 
-                Forms\Components\Section::make('Persyaratan Umum')
-                    ->collapsible()
-                    ->collapsed()
-                    ->hiddenOn('create')
-                    ->columns(2)
-                    ->relationship('persyaratanUmum')
-                    ->schema([
-                        Forms\Components\FileUpload::make('dokumen_kelulusan'),
-                        Forms\Components\FileUpload::make('dokumen_kelahiran'),
-                        Forms\Components\FileUpload::make('kartu_keluarga'),
-                        Forms\Components\FileUpload::make('ktp_ortu'),
-                        Forms\Components\Toggle::make('status_kelulusan_sekolah_asal')
-                            ->inline(false),
-                    ]),
+                // Forms\Components\Section::make('Persyaratan Umum')
+                //     ->collapsible()
+                //     ->collapsed()
+                //     ->hiddenOn('create')
+                //     ->columns(2)
+                //     ->relationship('persyaratanUmum')
+                //     ->schema([
+                //         Forms\Components\FileUpload::make('dokumen_kelulusan'),
+                //         Forms\Components\FileUpload::make('dokumen_kelahiran'),
+                //         Forms\Components\FileUpload::make('kartu_keluarga'),
+                //         Forms\Components\FileUpload::make('ktp_ortu'),
+                //         Forms\Components\Toggle::make('status_kelulusan_sekolah_asal')
+                //             ->inline(false),
+                //     ]),
             ]);
     }
 

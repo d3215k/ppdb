@@ -2,8 +2,8 @@
     <div class="py-4">
         <form wire:submit="handleSubmit">
             <div class="space-y-4">
-                <x-filament::section heading="Biodata">
-                    {{ $this->calonPesertaDidikForm }}
+                <x-filament::section heading="Data Periodik">
+                    {{ $this->form }}
                 </x-filament::section>
             </div>
 

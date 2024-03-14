@@ -1,5 +1,7 @@
-<x-filament::section heading="Formulir Pendaftaran {{ config('app.name') }} Tahun {{ session('tahun_pelajaran') }}">
+{{-- <x-filament::section heading="Formulir Pendaftaran {{ config('app.name') }} Tahun {{ session('tahun_pelajaran') }}"> --}}
+<div>
     {{ $this->form }}
-
     <x-filament-actions::modals />
-</x-filament::section>
+</div>
+
+{{-- </x-filament::section> --}}

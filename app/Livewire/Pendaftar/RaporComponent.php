@@ -47,8 +47,12 @@ class RaporComponent extends Component implements HasForms
         return Rapor::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first();
     }
 
-    public function mount(): void
+    public function mount()
     {
+        if (!$this->rapor()) {
+            return to_route('pendaftar.dashboard');
+        }
+
         $this->form->fill(
             $this->rapor()?->toArray()
         );

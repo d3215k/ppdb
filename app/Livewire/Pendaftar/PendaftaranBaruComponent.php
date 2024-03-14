@@ -3,23 +3,16 @@
 namespace App\Livewire\Pendaftar;
 
 use App\Enums\JenisKelamin;
-use App\Models\Agama;
 use App\Models\AsalSekolah;
-use App\Models\BerkebutuhanKhusus;
 use App\Models\CalonPesertaDidik;
 use App\Models\Gelombang;
 use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
-use App\Models\ModaTransportasi;
 use App\Models\Pendaftaran;
-use App\Models\Rapor;
 use App\Models\TahunPelajaran;
-use App\Models\TempatTinggal;
+use App\Models\User;
 use App\Support\GenerateNumber;
 use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -29,10 +22,11 @@ use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
+use Illuminate\Validation\Rules\Unique;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class PendaftaranBaruComponent extends Component implements HasForms
@@ -41,9 +35,17 @@ class PendaftaranBaruComponent extends Component implements HasForms
 
     public ?array $data = [];
 
+    #[Computed()]
+    public function calonPesertaDidik()
+    {
+        return CalonPesertaDidik::find(auth()->user()->calon_peserta_didik_id);
+    }
+
     public function mount(): void
     {
-        $this->form->fill();
+        $this->form->fill(
+            $this->calonPesertaDidik()?->toArray()
+        );
     }
 
     public function form(Form $form): Form
@@ -57,7 +59,6 @@ class PendaftaranBaruComponent extends Component implements HasForms
                             Forms\Components\TextInput::make('nama')
                                 ->label('Nama Lengkap')
                                 ->required()
-                                ->default(auth()->user()->name)
                                 ->maxLength(255),
                             Forms\Components\ToggleButtons::make('lp')
                                 ->inline()
@@ -68,10 +69,32 @@ class PendaftaranBaruComponent extends Component implements HasForms
                             Forms\Components\TextInput::make('nisn')
                                 // ->required()
                                 ->label('NISN')
+                                ->unique(
+                                    table: 'calon_peserta_didik',
+                                    column: 'nisn',
+                                    ignorable: fn () => $this->calonPesertaDidik(),
+                                    modifyRuleUsing: function (Unique $rule) {
+                                        return $rule->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
+                                    }
+                                )
+                                ->validationMessages([
+                                    'unique' => 'NISN sudah terdaftar.',
+                                ])
                                 ->maxLength(10),
                             Forms\Components\TextInput::make('nik')
                                 ->label('NIK')
                                 // ->required()
+                                ->unique(
+                                    table: 'calon_peserta_didik',
+                                    column: 'nik',
+                                    ignorable: fn () => $this->calonPesertaDidik(),
+                                    modifyRuleUsing: function (Unique $rule) {
+                                        return $rule->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
+                                    }
+                                )
+                                ->validationMessages([
+                                    'unique' => 'NIK sudah terdaftar.',
+                                ])
                                 ->maxLength(16),
                             Forms\Components\TextInput::make('tempat_lahir')
                                 // ->required()
@@ -215,33 +238,38 @@ class PendaftaranBaruComponent extends Component implements HasForms
 
             $data = $this->form->getState();
 
-            $cpd = CalonPesertaDidik::updateOrCreate(
-                [
-                    'id' => auth()->user()->calon_peserta_didik_id,
-                ],
-                [
-                    'nama' => $data['nama'],
-                    'lp' => $data['lp'],
-                    'nisn' => $data['nisn'],
-                    'nik' => $data['nik'],
-                    'tempat_lahir' => $data['tempat_lahir'],
-                    'tanggal_lahir' => $data['tanggal_lahir'],
-                    'alamat' => $data['alamat'],
-                    'rt' => $data['rt'],
-                    'rw' => $data['rw'],
-                    'desa_kelurahan' => $data['desa_kelurahan'],
-                    'kode_pos' => $data['kode_pos'],
-                    'nomor_hp' => $data['nomor_hp'],
-                    'nomor_hp_ortu' => $data['nomor_hp_ortu'],
-                    'email' => $data['email'],
-                    'asal_sekolah_id' => $data['asal_sekolah_id'],
-                ]
-            );
+            $payload = [
+                'nama' => $data['nama'],
+                'lp' => $data['lp'],
+                'nisn' => $data['nisn'],
+                'nik' => $data['nik'],
+                'tempat_lahir' => $data['tempat_lahir'],
+                'tanggal_lahir' => $data['tanggal_lahir'],
+                'alamat' => $data['alamat'],
+                'rt' => $data['rt'],
+                'rw' => $data['rw'],
+                'desa_kelurahan' => $data['desa_kelurahan'],
+                'kode_pos' => $data['kode_pos'],
+                'nomor_hp' => $data['nomor_hp'],
+                'nomor_hp_ortu' => $data['nomor_hp_ortu'],
+                'email' => $data['email'],
+                'asal_sekolah_id' => $data['asal_sekolah_id'],
+            ];
 
-            if ($cpd) {
-                session([
-                    'hasCalonPesertaDidik' => true,
+            if (!isset(auth()->user()->calon_peserta_didik_id)) {
+                $cpd = CalonPesertaDidik::create($payload);
+
+                User::where('id', auth()->id())->update([
+                    'calon_peserta_didik_id' => $cpd->id
                 ]);
+
+            } else {
+                $cpd = CalonPesertaDidik::updateOrCreate(
+                    [
+                        'id' => auth()->user()->calon_peserta_didik_id,
+                    ],
+                    $payload
+                );
             }
 
             $cpd->ayah()->updateOrCreate([
@@ -269,7 +297,7 @@ class PendaftaranBaruComponent extends Component implements HasForms
             $data['tahun_pelajaran_id'] = $tahun->id;
             $data['nomor'] = GenerateNumber::pendaftaran($tahun, $gelombang);
 
-            $pendaftaran = Pendaftaran::updateOrCreate(
+            Pendaftaran::updateOrCreate(
                 [
                     'tahun_pelajaran_id' => $tahun->id,
                     'calon_peserta_didik_id' => $cpd->id,
@@ -282,6 +310,12 @@ class PendaftaranBaruComponent extends Component implements HasForms
                     'pilihan_kedua' => $data['pilihan_kedua'],
                 ]
             );
+
+            if ($cpd) {
+                session([
+                    'hasCalonPesertaDidik' => true,
+                ]);
+            }
 
             Notification::make()->title('berhasil')->success()->send();
             DB::commit();

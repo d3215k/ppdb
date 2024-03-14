@@ -2,39 +2,17 @@
 
 namespace App\Livewire\Pendaftar;
 
-use App\Enums\JenisKelamin;
-use App\Models\Agama;
-use App\Models\AsalSekolah;
-use App\Models\BerkebutuhanKhusus;
 use App\Models\BuktiPersyaratanKhusus;
-use App\Models\CalonPesertaDidik;
-use App\Models\Gelombang;
-use App\Models\Jalur;
-use App\Models\KompetensiKeahlian;
-use App\Models\ModaTransportasi;
 use App\Models\Pendaftaran;
 use App\Models\PersyaratanKhusus;
 use App\Models\PersyaratanUmum;
-use App\Models\Rapor;
-use App\Models\TahunPelajaran;
-use App\Models\TempatTinggal;
-use App\Support\GenerateNumber;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\HtmlString;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -48,8 +26,7 @@ class BerkasComponent extends Component implements HasForms
     #[Computed()]
     public function pendaftaran()
     {
-        return Pendaftaran::query()
-            ->aktif()->first();
+        return Pendaftaran::query()->aktif()->first();
     }
 
     #[Computed()]
@@ -58,8 +35,12 @@ class BerkasComponent extends Component implements HasForms
         return PersyaratanKhusus::where('jalur_id', $this->pendaftaran()->jalur_id)->get();
     }
 
-    public function mount(): void
+    public function mount()
     {
+        if (!auth()->user()->calon_peserta_didik_id) {
+            return to_route('pendaftar.dashboard');
+        }
+
         $this->persyaratanUmumForm->fill(
             PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()?->toArray()
         );

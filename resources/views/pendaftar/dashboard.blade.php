@@ -6,7 +6,7 @@
     </x-slot>
 
     @if ($pengumuman->isNotEmpty())
-        <livewire:pendaftar.papan-pengumuman-component />
+        <livewire:pendaftar.papan-pengumuman-component lazy="on-load" />
     @endif
 
     @if ($pendaftaran)

@@ -8,31 +8,16 @@ use App\Models\Agama;
 use App\Models\AsalSekolah;
 use App\Models\BerkebutuhanKhusus;
 use App\Models\CalonPesertaDidik;
-use App\Models\Gelombang;
-use App\Models\Jalur;
-use App\Models\KompetensiKeahlian;
 use App\Models\ModaTransportasi;
-use App\Models\Pendaftaran;
 use App\Models\Periodik;
-use App\Models\TahunPelajaran;
 use App\Models\TempatTinggal;
-use App\Support\GenerateNumber;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\HtmlString;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -49,8 +34,12 @@ class BiodataComponent extends Component implements HasForms
         return CalonPesertaDidik::find(auth()->user()->calon_peserta_didik_id);
     }
 
-    public function mount(): void
+    public function mount()
     {
+        if (!$this->calonPesertaDidik()) {
+            return to_route('pendaftar.dashboard');
+        }
+
         $this->calonPesertaDidikForm->fill(
             $this->calonPesertaDidik()?->toArray()
         );
@@ -116,11 +105,22 @@ class BiodataComponent extends Component implements HasForms
                     ->required(),
                 Forms\Components\TextInput::make('nisn')
                     ->label('NISN')
+                    ->unique(
+                        table: 'calon_peserta_didik',
+                        column: 'nisn',
+                        ignorable: fn () => $this->calonPesertaDidik(),
+                    )
                     ->maxLength(10),
                 Forms\Components\TextInput::make('kewarganegaraan')
+                    ->default('Indonesia')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('nik')
                     ->label('NIK')
+                    ->unique(
+                        table: 'calon_peserta_didik',
+                        column: 'nik',
+                        ignorable: fn () => $this->calonPesertaDidik(),
+                    )
                     ->maxLength(16),
                 Forms\Components\TextInput::make('kk')
                     ->label('Nomor KK')
@@ -148,8 +148,6 @@ class BiodataComponent extends Component implements HasForms
                     ->label('RW')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('dusun')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('desa_kelurahan')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('desa_kelurahan')
                     ->maxLength(255),

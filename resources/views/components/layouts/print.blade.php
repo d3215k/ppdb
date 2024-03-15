@@ -29,7 +29,7 @@
 
     </head>
     <body
-        {{-- onload="window.print()" --}}
+        onload="window.print()"
     >
         <div class="font-sans antialiased text-gray-900">
             {{ $slot }}

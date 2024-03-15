@@ -6,7 +6,7 @@ export default {
         './resources/**/*.blade.php',
         './app/Filament/**/*.php',
         './app/Livewire/**/*.php',
-        './resources/views/filament/**/*.blade.php',
+        './resources/views/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
     ],
 }

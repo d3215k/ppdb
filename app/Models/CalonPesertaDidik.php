@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\JenisKelamin;
 use App\Enums\StatusPendaftaran;
 use App\Traits\WithTahunPelajaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,10 @@ class CalonPesertaDidik extends Model
 {
     use HasFactory;
     use WithTahunPelajaran;
+
+    protected $casts = [
+        'lp' => JenisKelamin::class
+    ];
 
     protected $table = 'calon_peserta_didik';
 
@@ -27,6 +32,11 @@ class CalonPesertaDidik extends Model
         return $this->pendaftaran()
             ->where('status', StatusPendaftaran::LULUS)
             ->first();
+    }
+
+    public function getAlamatLengkapAttribute()
+    {
+        return $this->alamat . ' RT ' . $this->rt . ' RW ' . $this->rw . ' Desa/Kelurahan ' . $this->desa_kelurahan . ' Kecamatan ' . $this->kecamatan;
     }
 
     public function agama(): BelongsTo

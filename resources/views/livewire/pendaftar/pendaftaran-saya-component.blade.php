@@ -17,12 +17,21 @@
     </div>
     <!-- END Ribbon -->
 
-    <div class="bg-gray-50 px-5 py-4">
+    <div class="bg-gray-50 px-5 py-4 md:items-center flex flex-col md:flex-row gap-4">
         <h3 class="text-xl font-semibold">Pendaftaran PPDB Tahun {{ session('tahun_pelajaran') }}</h3>
+        <x-filament::button
+            icon="heroicon-m-printer"
+            href="{{ route('pendaftar.cetak') }}"
+            tag="a"
+            target="_blank"
+        >
+            Cetak Bukti Pendaftaran
+        </x-filament::button>
     </div>
 
     <div class="px-5 py-2 text-sm">
         <dl class="divide-y divide-gray-100">
+            <x-item-list title="Nomor Pendaftaran" description="{{ $pendaftaran->nomor }}" />
             <x-item-list title="Nama Lengkap" description="{{ $pendaftaran->calonPesertaDidik->nama }}" />
             <x-item-list title="NISN" description="{{ $pendaftaran->calonPesertaDidik->nisn }}" />
             <x-item-list title="Asal Sekolah" description="{{ $pendaftaran->calonPesertaDidik->asalSekolah->nama ?? '-' }}" />

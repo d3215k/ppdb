@@ -16,6 +16,7 @@ class TahunPelajaranAktifChanged
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $tahun;
+    public $user;
 
     /**
      * Create a new event instance.
@@ -23,6 +24,7 @@ class TahunPelajaranAktifChanged
     public function __construct($tahunId)
     {
         $this->tahun = TahunPelajaran::find($tahunId);
+        $this->user = auth()->user();
     }
 
 }

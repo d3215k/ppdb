@@ -126,6 +126,17 @@ class BiodataComponent extends Component implements HasForms
                 Forms\Components\TextInput::make('dusun')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('desa_kelurahan')
+                    ->label('Desa/Kelurahan')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('kecamatan')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('kabupaten_kota')
+                    ->label('Kabupaten/Kota')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('provinsi')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('kode_pos')

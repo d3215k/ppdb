@@ -34,7 +34,7 @@ class StoreAktifTahunPelajaranToSession
             'tahun_pelajaran' => $nama,
         ]);
 
-        if ($event->user->isPendaftar) {
+        if ($event?->user?->isPendaftar) {
             $cpd = CalonPesertaDidik::find(auth()->user()->calon_peserta_didik_id);
 
             if ($cpd) {

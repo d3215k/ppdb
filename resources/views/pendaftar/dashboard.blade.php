@@ -11,7 +11,7 @@
         </div>
     </x-slot>
 
-    @if ($pengumuman->isNotEmpty() && ! $pendaftaran)
+    @if ($pengumuman->isNotEmpty() && $pendaftaran)
         <livewire:pendaftar.papan-pengumuman-component lazy="on-load" />
     @endif
 

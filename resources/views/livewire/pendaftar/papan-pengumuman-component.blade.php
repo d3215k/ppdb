@@ -18,32 +18,29 @@
                 <!-- END Vertical Guide -->
 
                 <!-- Timeline -->
-                <ul class="relative space-y-4 pl-10 md:pl-12">
-                    <!-- Event -->
-                    <li class="relative">
-                        <div
-                        class="absolute bottom-0 left-0 top-0 mt-5 flex w-10 -translate-x-full justify-center md:w-12"
-                        >
+                <ul class="relative space-y-12 pl-10 md:pl-12">
+                    @foreach ($pengumuman as $item)
+                        <!-- Event -->
+                        <li class="relative">
                             <div
-                                class="size-3 rounded-full bg-red-500 ring ring-red-100 ring-opacity-100 ring-offset-2 dark:bg-red-300 dark:ring-red-900 dark:ring-offset-gray-900"
-                            ></div>
-                        </div>
-                        <div>
-                            <div class="mb-2">
-                                <h4 class="font-semibold text-lg leading-tight">Link grup WA PPDB SMKN 1 Cibadak tahun 2024/2025</h4>
-                                <p class="text-sm text-gray-500 mt-1">Diterbitkan Admin pada Sabtu, 13 Maret 2024</p>
+                            class="absolute bottom-0 left-0 top-0 mt-2 flex w-10 -translate-x-full justify-center md:w-12"
+                            >
+                                <div
+                                    class="size-3 rounded-full bg-red-500 ring ring-red-100 ring-opacity-100 ring-offset-2 dark:bg-red-300 dark:ring-red-900 dark:ring-offset-gray-900"
+                                ></div>
                             </div>
-                            <div class="space-y-4 text-sm">
-                                <p>
-                                    Untuk mempermudah dalam mendapatkan Informasi terbaru mengenai PPDB SMKN 1 Cibadak tahun pelajaran 2023/2024, seluruh calon peserta didik baru Wajib bergabung kedalam Grup WhatsApp Peserta PPDB SMKN 1 Cibadak 2023/2024.
-                                </p>
-                                <p>
-                                    Berikut Linknya : https://bit.ly/GRUPWA1PPDBSMKN1CBD-2324
-                                </p>
+                            <div>
+                                <div class="mb-2">
+                                    <h4 class="font-semibold text-lg leading-tight">{{ $item->judul }}</h4>
+                                    <p class="text-sm text-gray-500 mt-1">Diterbitkan {{ $item->informan->name }} pada {{ $item->terbit->isoFormat('dddd, DD MMMM Y') }}</p>
+                                </div>
+                                <div class="space-y-4 text-sm prose max-w-screen-lg">
+                                    {!! $item->isi !!}
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <!-- END Event -->
+                        </li>
+                        <!-- END Event -->
+                    @endforeach
                 </ul>
                 <!-- END Timeline -->
             </div>

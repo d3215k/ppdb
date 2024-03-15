@@ -14,6 +14,10 @@ class Pengumuman extends Model
 
     protected $table = 'pengumuman';
 
+    protected $casts = [
+        'terbit' => 'datetime'
+    ];
+
     public function informan(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

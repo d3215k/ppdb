@@ -32,7 +32,7 @@ class BerkasComponent extends Component implements HasForms
     #[Computed()]
     public function persyaratanKhusus()
     {
-        return PersyaratanKhusus::where('jalur_id', $this->pendaftaran()->jalur_id)->get();
+        return PersyaratanKhusus::where('jalur_id', $this->pendaftaran->jalur_id)->get();
     }
 
     public function mount()
@@ -41,9 +41,9 @@ class BerkasComponent extends Component implements HasForms
             PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()?->toArray()
         );
 
-        if ($this->pendaftaran()) {
+        if ($this->pendaftaran) {
             $this->persyaratanKhususForm->fill(
-                BuktiPersyaratanKhusus::where('pendaftaran_id', $this->pendaftaran()->id)->pluck('file', 'id')->toArray()
+                BuktiPersyaratanKhusus::where('pendaftaran_id', $this->pendaftaran->id)->pluck('file', 'id')->toArray()
             );
         }
     }
@@ -86,8 +86,8 @@ class BerkasComponent extends Component implements HasForms
     {
         $fields = [];
 
-        if ($this->pendaftaran()) {
-            $persyaratanKhusus = PersyaratanKhusus::where('jalur_id', $this->pendaftaran()->jalur_id)
+        if ($this->pendaftaran) {
+            $persyaratanKhusus = PersyaratanKhusus::where('jalur_id', $this->pendaftaran->jalur_id)
                 ->get();
 
             foreach ($persyaratanKhusus as $syarat) {
@@ -112,13 +112,13 @@ class BerkasComponent extends Component implements HasForms
         try {
             DB::beginTransaction();
 
-            if ($this->pendaftaran()) {
+            if ($this->pendaftaran) {
                 $khusus = $this->persyaratanKhususForm->getState();
 
                 foreach ($this->persyaratanKhusus() as $syarat) {
                     BuktiPersyaratanKhusus::updateOrCreate(
                         [
-                            'pendaftaran_id' => $this->pendaftaran()->id,
+                            'pendaftaran_id' => $this->pendaftaran->id,
                             'persyaratan_khusus_id' => $syarat->id,
                         ],
                         [

@@ -34,7 +34,7 @@ class BiodataComponent extends Component implements HasForms
     public function mount()
     {
         $this->calonPesertaDidikForm->fill(
-            $this->calonPesertaDidik()->toArray()
+            $this->calonPesertaDidik->toArray()
         );
     }
 
@@ -52,6 +52,7 @@ class BiodataComponent extends Component implements HasForms
             ->schema([
                 Forms\Components\FileUpload::make('foto')
                     ->label('Photo')
+                    ->downloadable()
                     ->image()
                     ->maxSize(512)
                     ->nullable()
@@ -70,7 +71,7 @@ class BiodataComponent extends Component implements HasForms
                     ->unique(
                         table: 'calon_peserta_didik',
                         column: 'nisn',
-                        ignorable: fn () => $this->calonPesertaDidik(),
+                        ignorable: fn () => $this->calonPesertaDidik,
                     )
                     ->length(10)
                     ->required(),
@@ -83,7 +84,7 @@ class BiodataComponent extends Component implements HasForms
                     ->unique(
                         table: 'calon_peserta_didik',
                         column: 'nik',
-                        ignorable: fn () => $this->calonPesertaDidik(),
+                        ignorable: fn () => $this->calonPesertaDidik,
                     )
                     ->required()
                     ->maxLength(16),
@@ -185,7 +186,7 @@ class BiodataComponent extends Component implements HasForms
 
             $cpd = $this->calonPesertaDidikForm->getState();
 
-            $this->calonPesertaDidik()->update($cpd);
+            $this->calonPesertaDidik->update($cpd);
 
             Notification::make()->title('Biodata Berhasil disimpan!')->success()->send();
             DB::commit();

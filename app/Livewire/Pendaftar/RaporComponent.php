@@ -2,36 +2,14 @@
 
 namespace App\Livewire\Pendaftar;
 
-use App\Enums\JenisKelamin;
-use App\Models\Agama;
-use App\Models\AsalSekolah;
-use App\Models\BerkebutuhanKhusus;
-use App\Models\CalonPesertaDidik;
-use App\Models\Gelombang;
-use App\Models\Jalur;
-use App\Models\KompetensiKeahlian;
-use App\Models\ModaTransportasi;
-use App\Models\Pendaftaran;
 use App\Models\Rapor;
-use App\Models\TahunPelajaran;
-use App\Models\TempatTinggal;
-use App\Support\GenerateNumber;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\HtmlString;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -50,7 +28,7 @@ class RaporComponent extends Component implements HasForms
     public function mount()
     {
         $this->form->fill(
-            $this->rapor()?->toArray()
+            $this->rapor->toArray()
         );
     }
 
@@ -269,19 +247,16 @@ class RaporComponent extends Component implements HasForms
 
     public function handleSubmit(): void
     {
+        $this->validate();
+
         try {
             DB::beginTransaction();
 
             $data = $this->form->getState();
 
-            Rapor::updateOrCreate(
-                [
-                    'calon_peserta_didik_id' => auth()->user()->calon_peserta_didik_id,
-                ],
-                $data,
-            );
+            $this->rapor->update($data);
 
-            Notification::make()->title('berhasil')->success()->send();
+            Notification::make()->title('Data Rapor berhasil disimpan!')->success()->send();
 
             DB::commit();
         } catch (\Throwable $th) {

@@ -16,4 +16,9 @@ class Ortu extends Model
     {
         return $this->belongsTo(CalonPesertaDidik::class);
     }
+
+    public function getLengkapAttribute()
+    {
+        return $this->nama_ayah . ' / ' . $this->nama_ibu;
+    }
 }

@@ -22,7 +22,7 @@
                 <x-item-list title="Nama Calon Siswa" description="{{ $pendaftaran->calonPesertaDidik->nama }}" />
                 <x-item-list title="Jenis Kelamin" description="{{ $pendaftaran->calonPesertaDidik->lp->getLabel() }}" />
                 <x-item-list title="Asal Sekolah" description="{{ $pendaftaran->calonPesertaDidik->asalSekolah->nama ?? '-' }}" />
-                <x-item-list title="Nama Orang Tua" description="{{ $pendaftaran->calonPesertaDidik->ortu->nama_ayah ?? '-' }}" />
+                <x-item-list title="Nama Orang Tua" description="{{ $pendaftaran->calonPesertaDidik->ortu->lengkap ?? '-' }}" />
                 <x-item-list title="Alamat" description="{{ $pendaftaran->calonPesertaDidik->alamat_lengkap ?? '-' }}" />
                 <x-item-list title="No Handphone" description="{{ $pendaftaran->calonPesertaDidik->nomor_hp ?? '-' }}" />
                 <x-item-list title="No Handphone Orang Tua" description="{{ $pendaftaran->calonPesertaDidik->nomor_hp_ortu ?? '-' }}" />

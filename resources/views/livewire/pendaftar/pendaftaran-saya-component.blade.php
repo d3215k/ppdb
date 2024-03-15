@@ -32,14 +32,18 @@
     <div class="px-5 py-2 text-sm">
         <dl class="divide-y divide-gray-100">
             <x-item-list title="Nomor Pendaftaran" description="{{ $pendaftaran->nomor }}" />
-            <x-item-list title="Nama Lengkap" description="{{ $pendaftaran->calonPesertaDidik->nama }}" />
-            <x-item-list title="NISN" description="{{ $pendaftaran->calonPesertaDidik->nisn }}" />
-            <x-item-list title="Asal Sekolah" description="{{ $pendaftaran->calonPesertaDidik->asalSekolah->nama ?? '-' }}" />
-            <x-item-list title="Gelombang" description="{{ $pendaftaran->gelombang->nama }}" />
-            <x-item-list title="Jalur" description="{{ $pendaftaran->jalur->nama }}" />
-            <x-item-list title="Pilihan Jurusan Pertama" description="{{ $pendaftaran->pilihanKesatu->nama }}" />
-            <x-item-list title="Pilihan Jurusan Kedua" description="{{ $pendaftaran->pilihanKedua->nama }}" />
-            <x-item-list title="Tanggal Mendaftar" description="{{ $pendaftaran->created_at->isoFormat('dddd, D MMMM Y H:m') }}" />
+                <x-item-list title="Waktu Pendataan" description="{{ $pendaftaran->created_at->isoFormat('dddd, D MMMM Y H:m') }}" />
+                    <x-item-list title="Nama Calon Siswa" description="{{ $pendaftaran->calonPesertaDidik->nama }}" />
+                    <x-item-list title="Jenis Kelamin" description="{{ $pendaftaran->calonPesertaDidik->lp->getLabel() }}" />
+                    <x-item-list title="Asal Sekolah" description="{{ $pendaftaran->calonPesertaDidik->asalSekolah->nama ?? '-' }}" />
+                    <x-item-list title="Nama Orang Tua" description="{{ $pendaftaran->calonPesertaDidik->ortu->lengkap ?? '-' }}" />
+                    <x-item-list title="Alamat" description="{{ $pendaftaran->calonPesertaDidik->alamat_lengkap ?? '-' }}" />
+                    <x-item-list title="No Handphone" description="{{ $pendaftaran->calonPesertaDidik->nomor_hp ?? '-' }}" />
+                    <x-item-list title="No Handphone Orang Tua" description="{{ $pendaftaran->calonPesertaDidik->nomor_hp_ortu ?? '-' }}" />
+                    <x-item-list title="Gelombang" description="{{ $pendaftaran->gelombang->nama }}" />
+                    <x-item-list title="Jalur" description="{{ $pendaftaran->jalur->nama }}" />
+                    <x-item-list title="Pilihan Jurusan Pertama" description="{{ $pendaftaran->pilihanKesatu->nama }}" />
+                    <x-item-list title="Pilihan Jurusan Kedua" description="{{ $pendaftaran->pilihanKedua->nama }}" />
         </dl>
     </div>
 

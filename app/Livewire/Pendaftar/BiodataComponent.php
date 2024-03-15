@@ -3,16 +3,11 @@
 namespace App\Livewire\Pendaftar;
 
 use App\Enums\JenisKelamin;
-use App\Enums\UkuranBaju;
 use App\Models\Agama;
 use App\Models\AsalSekolah;
 use App\Models\BerkebutuhanKhusus;
 use App\Models\CalonPesertaDidik;
 use App\Models\ModaTransportasi;
-use App\Models\Pekerjaan;
-use App\Models\Pendidikan;
-use App\Models\Penghasilan;
-use App\Models\Periodik;
 use App\Models\TempatTinggal;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -53,6 +48,7 @@ class BiodataComponent extends Component implements HasForms
     public function calonPesertaDidikForm(Form $form): Form
     {
         return $form
+            // ->disabled() // TODO : lockable
             ->schema([
                 Forms\Components\FileUpload::make('foto')
                     ->label('Photo')
@@ -76,7 +72,7 @@ class BiodataComponent extends Component implements HasForms
                         column: 'nisn',
                         ignorable: fn () => $this->calonPesertaDidik(),
                     )
-                    ->maxLength(10)
+                    ->length(10)
                     ->required(),
                 Forms\Components\TextInput::make('kewarganegaraan')
                     ->default('Indonesia')
@@ -94,13 +90,14 @@ class BiodataComponent extends Component implements HasForms
                 Forms\Components\TextInput::make('kk')
                     ->label('Nomor KK')
                     ->required()
-                    ->maxLength(16),
+                    ->length(16),
                 Forms\Components\TextInput::make('tempat_lahir')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('tanggal_lahir')
                     ->required(),
                 Forms\Components\TextInput::make('no_reg_akta')
+                    ->label('No. Reg Akta')
                     ->maxLength(255),
                 Forms\Components\Select::make('agama_id')
                     ->required()
@@ -167,10 +164,13 @@ class BiodataComponent extends Component implements HasForms
                     ->email()
                     ->maxLength(255),
                 Forms\Components\Select::make('asal_sekolah_id')
-                    ->label('Asal Sekolah')
+                    ->label('Pilih Asal Sekolah')
                     ->options(AsalSekolah::pluck('nama', 'id'))
                     ->preload()
                     ->searchable(),
+                Forms\Components\TextInput::make('asal_sekolah_temp')
+                    ->label('Asal Sekolah')
+                    ->placeholder('Ketik nama sekolah disini jika tidak ditemukan pada daftar. Kosongkan jika sudah ditemukan!')
             ])
             ->columns(2)
             ->statePath('cpd');
@@ -178,6 +178,8 @@ class BiodataComponent extends Component implements HasForms
 
     public function handleSubmit(): void
     {
+        $this->validate();
+
         try {
             DB::beginTransaction();
 

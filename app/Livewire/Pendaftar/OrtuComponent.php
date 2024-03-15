@@ -2,19 +2,12 @@
 
 namespace App\Livewire\Pendaftar;
 
-use App\Enums\JenisKelamin;
-use App\Enums\UkuranBaju;
-use App\Models\Agama;
-use App\Models\AsalSekolah;
 use App\Models\BerkebutuhanKhusus;
 use App\Models\CalonPesertaDidik;
-use App\Models\ModaTransportasi;
 use App\Models\Ortu;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
 use App\Models\Penghasilan;
-use App\Models\Periodik;
-use App\Models\TempatTinggal;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -173,7 +166,7 @@ class OrtuComponent extends Component implements HasForms
             Notification::make()->title('Data Wali Berhasil disimpan!')->success()->send();
             DB::commit();
         } catch (\Throwable $th) {
-            Notification::make()->title($th->getMessage())->danger()->send();
+            Notification::make()->title('Whoops!')->body('Ada yang salah')->danger()->send();
             DB::rollBack();
             report($th->getMessage());
         }

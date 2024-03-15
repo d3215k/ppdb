@@ -50,6 +50,8 @@ return new class extends Migration
             $table->string('username')->nullable(); // akun dinas
             $table->string('password')->nullable();
 
+            $table->boolean('locked')->default(false);
+
             $table->softDeletes();
             $table->timestamps();
         });

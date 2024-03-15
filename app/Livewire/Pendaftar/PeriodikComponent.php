@@ -2,22 +2,15 @@
 
 namespace App\Livewire\Pendaftar;
 
-use App\Enums\JenisKelamin;
+use App\Enums\JarakRumah;
 use App\Enums\UkuranBaju;
-use App\Models\Agama;
-use App\Models\AsalSekolah;
-use App\Models\BerkebutuhanKhusus;
 use App\Models\CalonPesertaDidik;
-use App\Models\ModaTransportasi;
-use App\Models\Pekerjaan;
-use App\Models\Pendidikan;
-use App\Models\Penghasilan;
 use App\Models\Periodik;
-use App\Models\TempatTinggal;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +32,7 @@ class PeriodikComponent extends Component implements HasForms
     public function mount()
     {
         $this->form->fill(
-            Periodik::find(auth()->user()->calon_peserta_didik_id)?->toArray()
+            Periodik::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()->toArray()
         );
     }
 
@@ -58,6 +51,25 @@ class PeriodikComponent extends Component implements HasForms
                 Forms\Components\TextInput::make('lingkar_kepala')
                     ->nullable()
                     ->numeric(),
+                Forms\Components\TextInput::make('jumlah_saudara_kandung')
+                    ->label('Jumlah Saudara Kandung')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\Radio::make('jarak_rumah')
+                    ->options(JarakRumah::class)
+                    ->required()
+                    ->reactive(),
+                Forms\Components\TextInput::make('jarak_km')
+                    ->label('Sebutkan')
+                    ->suffix('kilometer')
+                    ->default(0)
+                    ->numeric()
+                    ->hidden(fn (Get $get): bool => ! $get('jarak_rumah')),
+                Forms\Components\TextInput::make('waktu_tempuh')
+                    ->label('Waktu tempuh ke sekolah')
+                    ->default(0)
+                    ->suffix('menit')
+                    ->numeric(),
                 Forms\Components\TextInput::make('no_sepatu')
                     ->nullable()
                     ->numeric(),
@@ -66,17 +78,17 @@ class PeriodikComponent extends Component implements HasForms
                     ->nullable()
                     ->options(UkuranBaju::class),
                 Forms\Components\ToggleButtons::make('tato')
-                    ->required()
+                    // ->required()
                     ->boolean()
                     ->grouped()
                     ->inline(),
                 Forms\Components\ToggleButtons::make('tindik')
-                    ->required()
+                    // ->required()
                     ->boolean()
                     ->grouped()
                     ->inline(),
                 Forms\Components\ToggleButtons::make('cat_rambut')
-                    ->required()
+                    // ->required()
                     ->boolean()
                     ->grouped()
                     ->inline(),
@@ -87,6 +99,8 @@ class PeriodikComponent extends Component implements HasForms
 
     public function handleSubmit(): void
     {
+        $this->validate();
+
         try {
             DB::beginTransaction();
 

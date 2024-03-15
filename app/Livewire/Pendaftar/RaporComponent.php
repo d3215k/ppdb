@@ -285,7 +285,7 @@ class RaporComponent extends Component implements HasForms
 
             DB::commit();
         } catch (\Throwable $th) {
-            Notification::make()->title($th->getMessage())->danger()->send();
+            Notification::make()->title('Whoops!')->body('Ada yang salah')->danger()->send();
             DB::rollBack();
             report($th->getMessage());
         }

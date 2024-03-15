@@ -95,8 +95,10 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 )
                                 ->validationMessages([
                                     'unique' => 'NISN sudah terdaftar.',
+                                    'required' => 'NISN wajib diisi.'
                                 ])
-                                ->maxLength(10),
+                                ->maxLength(10)
+                                ->minLength(10),
                             Forms\Components\TextInput::make('nik')
                                 ->label('NIK')
                                 ->required()
@@ -110,8 +112,10 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 )
                                 ->validationMessages([
                                     'unique' => 'NIK sudah terdaftar.',
+                                    'required' => 'NIK wajib diisi.'
                                 ])
-                                ->maxLength(16),
+                                ->maxLength(16)
+                                ->minLength(16),
                             Forms\Components\TextInput::make('tempat_lahir')
                                 ->required()
                                 ->maxLength(126),
@@ -161,11 +165,11 @@ class PendaftaranBaruComponent extends Component implements HasForms
                             Forms\Components\TextInput::make('nomor_hp')
                                 ->label('Nomor HP (Aktif WA)')
                                 ->required()
-                                ->maxLength(16),
+                                ->length(16),
                             Forms\Components\TextInput::make('nomor_hp_ortu')
                                 ->label('Nomor HP Orang Tua (Aktif WA)')
                                 ->required()
-                                ->maxLength(16),
+                                ->length(16),
                             Forms\Components\TextInput::make('email')
                                 ->email()
                                 ->required()
@@ -177,7 +181,7 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 ->label('Cari dan Pilih Asal Sekolah')
                                 ->options(AsalSekolah::pluck('nama', 'id'))
                                 ->preload()
-                                ->required()
+                                // ->required()
                                 ->searchable(),
                             Forms\Components\TextInput::make('asal_sekolah_temp')
                                 ->label('Asal Sekolah')
@@ -247,6 +251,8 @@ class PendaftaranBaruComponent extends Component implements HasForms
 
     public function handleSubmit()
     {
+        $this->validate();
+
         try {
             DB::beginTransaction();
 
@@ -338,8 +344,11 @@ class PendaftaranBaruComponent extends Component implements HasForms
             }
 
             Notification::make()->title('Pendaftaran Berhasil!')->success()->send();
+
             DB::commit();
+
             return to_route('pendaftar.dashboard');
+
         } catch (\Throwable $th) {
             Notification::make()->title('Whoops!')->body('Ada yang salah')->danger()->send();
             DB::rollBack();

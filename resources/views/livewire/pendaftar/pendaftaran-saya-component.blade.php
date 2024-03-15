@@ -35,7 +35,7 @@
                 <x-item-list title="Waktu Pendataan" description="{{ $pendaftaran->created_at->isoFormat('dddd, D MMMM Y H:m') }}" />
                     <x-item-list title="Nama Calon Siswa" description="{{ $pendaftaran->calonPesertaDidik->nama }}" />
                     <x-item-list title="Jenis Kelamin" description="{{ $pendaftaran->calonPesertaDidik->lp->getLabel() }}" />
-                    <x-item-list title="Asal Sekolah" description="{{ $pendaftaran->calonPesertaDidik->asalSekolah->nama ?? '-' }}" />
+                    <x-item-list title="Asal Sekolah" description="{{ $pendaftaran->calonPesertaDidik->asalSekolah?->nama ? $pendaftaran->calonPesertaDidik->asalSekolah?->nama : ($pendaftaran->calonPesertaDidik->asal_sekolah_temp ? $pendaftaran->calonPesertaDidik->asal_sekolah_temp : '-') }}" />
                     <x-item-list title="Nama Orang Tua" description="{{ $pendaftaran->calonPesertaDidik->ortu->lengkap ?? '-' }}" />
                     <x-item-list title="Alamat" description="{{ $pendaftaran->calonPesertaDidik->alamat_lengkap ?? '-' }}" />
                     <x-item-list title="No Handphone" description="{{ $pendaftaran->calonPesertaDidik->nomor_hp ?? '-' }}" />

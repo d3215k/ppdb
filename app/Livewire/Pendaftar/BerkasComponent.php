@@ -94,7 +94,8 @@ class BerkasComponent extends Component implements HasForms
                 $fields[] = Forms\Components\FileUpload::make($syarat->id)
                     ->label($syarat->nama)
                     ->downloadable()
-                    ->required();
+                    // ->required()
+                    ;
             }
         }
 
@@ -106,6 +107,8 @@ class BerkasComponent extends Component implements HasForms
 
     public function handleSubmit(): void
     {
+        $this->validate();
+
         try {
             DB::beginTransaction();
 
@@ -134,11 +137,11 @@ class BerkasComponent extends Component implements HasForms
                 $umum,
             );
 
-            Notification::make()->title('berhasil')->success()->send();
+            Notification::make()->title('Berkas Berhasil disimpan!')->success()->send();
 
             DB::commit();
         } catch (\Throwable $th) {
-            Notification::make()->title($th->getMessage())->danger()->send();
+            Notification::make()->title('Whoops!')->body('Ada yang salah')->danger()->send();
             DB::rollBack();
             report($th->getMessage());
         }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pendaftar;
 
 use App\Models\Rapor;
+use App\Traits\WithPlaceholder;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -16,6 +17,7 @@ use Livewire\Component;
 class RaporComponent extends Component implements HasForms
 {
     use InteractsWithForms;
+    use WithPlaceholder;
 
     public ?array $data = [];
 

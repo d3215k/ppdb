@@ -160,6 +160,18 @@ class DatabaseSeeder extends Seeder
                 'nama_ibu' => 'Ibu '. $item,
             ]);
 
+            $cpd->rapor()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
+            $cpd->periodik()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
+            $cpd->persyaratanUmum()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
             $cpd->user()->create([
                 'name' => 'nama CPD',
                 'email' => "cpd{$item}@example.com",

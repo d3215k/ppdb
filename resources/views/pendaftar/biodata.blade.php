@@ -6,9 +6,9 @@
     </x-slot>
 
     <div class="space-y-4">
-        @livewire('pendaftar.biodata-component')
-        @livewire('pendaftar.ortu-component')
-        @livewire('pendaftar.periodik-component')
+        <livewire:pendaftar.biodata-component lazy="on-load" />
+        <livewire:pendaftar.ortu-component lazy="on-load">
+        <livewire:pendaftar.periodik-component lazy="on-load">
     </div>
 
 </x-layouts.pendaftar>

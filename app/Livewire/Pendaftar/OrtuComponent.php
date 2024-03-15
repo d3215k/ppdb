@@ -25,6 +25,30 @@ class OrtuComponent extends Component implements HasForms
     public ?array $data = [];
 
     #[Computed()]
+    public function pendidikan()
+    {
+        return Pendidikan::pluck('nama', 'id');
+    }
+
+    #[Computed()]
+    public function pekerjaan()
+    {
+        return Pekerjaan::pluck('nama', 'id');
+    }
+
+    #[Computed()]
+    public function penghasilan()
+    {
+        return Penghasilan::pluck('nama', 'id');
+    }
+
+    #[Computed()]
+    public function berkebutuhanKhusus()
+    {
+        return BerkebutuhanKhusus::pluck('nama', 'id');
+    }
+
+    #[Computed()]
     public function calonPesertaDidik()
     {
         return CalonPesertaDidik::find(auth()->user()->calon_peserta_didik_id);
@@ -64,19 +88,19 @@ class OrtuComponent extends Component implements HasForms
                         ->label('Tahun Lahir')
                         ->maxLength(4),
                     Forms\Components\Select::make('pendidikan_ayah')
-                        ->options(Pendidikan::pluck('nama', 'id'))
+                        ->options($this->pendidikan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('pekerjaan_ayah')
-                        ->options(Pekerjaan::pluck('nama', 'id'))
+                        ->options($this->pekerjaan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('penghasilan_ayah')
-                        ->options(Penghasilan::pluck('nama', 'id'))
+                        ->options($this->penghasilan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('berkebutuhan_khusus_ayah')
-                        ->options(BerkebutuhanKhusus::pluck('nama', 'id'))
+                        ->options($this->berkebutuhanKhusus)
                         ->preload()
                         ->searchable(),
                 ])->columns(2),
@@ -98,19 +122,19 @@ class OrtuComponent extends Component implements HasForms
                         ->label('Tahun Lahir')
                         ->maxLength(4),
                     Forms\Components\Select::make('pendidikan_ibu')
-                        ->options(Pendidikan::pluck('nama', 'id'))
+                        ->options($this->pendidikan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('pekerjaan_ibu')
-                        ->options(Pekerjaan::pluck('nama', 'id'))
+                        ->options($this->pekerjaan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('penghasilan_ibu')
-                        ->options(Penghasilan::pluck('nama', 'id'))
+                        ->options($this->penghasilan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('berkebutuhan_khusus_ibu')
-                        ->options(BerkebutuhanKhusus::pluck('nama', 'id'))
+                        ->options($this->berkebutuhanKhusus)
                         ->preload()
                         ->searchable(),
                 ])->columns(2),
@@ -134,19 +158,19 @@ class OrtuComponent extends Component implements HasForms
                         ->label('Tahun Lahir')
                         ->maxLength(4),
                     Forms\Components\Select::make('pendidikan_wali')
-                        ->options(Pendidikan::pluck('nama', 'id'))
+                        ->options($this->pendidikan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('pekerjaan_wali')
-                        ->options(Pekerjaan::pluck('nama', 'id'))
+                        ->options($this->pekerjaan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('penghasilan_wali')
-                        ->options(Penghasilan::pluck('nama', 'id'))
+                        ->options($this->penghasilan)
                         ->preload()
                         ->searchable(),
                     Forms\Components\Select::make('berkebutuhan_khusus_wali')
-                        ->options(BerkebutuhanKhusus::pluck('nama', 'id'))
+                        ->options($this->berkebutuhanKhusus)
                         ->preload()
                         ->searchable(),
                 ])->columns(2),

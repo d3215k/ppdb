@@ -5,6 +5,6 @@
         </div>
     </x-slot>
 
-    @livewire('pendaftar.berkas-component')
+    <livewire:pendaftar.berkas-component lazy="on-load">
 
 </x-layouts.pendaftar>

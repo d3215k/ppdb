@@ -9,6 +9,7 @@ use App\Models\BerkebutuhanKhusus;
 use App\Models\CalonPesertaDidik;
 use App\Models\ModaTransportasi;
 use App\Models\TempatTinggal;
+use App\Traits\WithPlaceholder;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -22,6 +23,7 @@ use Livewire\Component;
 class BiodataComponent extends Component implements HasForms
 {
     use InteractsWithForms;
+    use WithPlaceholder;
 
     public ?array $cpd = [];
 

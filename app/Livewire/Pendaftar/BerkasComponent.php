@@ -6,6 +6,7 @@ use App\Models\BuktiPersyaratanKhusus;
 use App\Models\Pendaftaran;
 use App\Models\PersyaratanKhusus;
 use App\Models\PersyaratanUmum;
+use App\Traits\WithPlaceholder;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -19,6 +20,7 @@ use Livewire\Component;
 class BerkasComponent extends Component implements HasForms
 {
     use InteractsWithForms;
+    use WithPlaceholder;
 
     public ?array $umum = [];
     public ?array $khusus = [];

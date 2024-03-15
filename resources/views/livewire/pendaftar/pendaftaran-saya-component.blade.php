@@ -18,20 +18,20 @@
     <!-- END Ribbon -->
 
     <div class="bg-gray-50 px-5 py-4 md:items-center flex flex-col md:flex-row gap-4">
-        <h3 class="text-xl font-semibold">Pendaftaran PPDB Tahun {{ session('tahun_pelajaran') }}</h3>
+        <h3 class="text-xl font-semibold">Pendataan PPDB Tahun {{ session('tahun_pelajaran') }}</h3>
         <x-filament::button
             icon="heroicon-m-printer"
             href="{{ route('pendaftar.cetak', $pendaftaran->nomor) }}"
             tag="a"
             target="_blank"
         >
-            Cetak Bukti Pendaftaran
+            Cetak Bukti Pendataan
         </x-filament::button>
     </div>
 
     <div class="px-5 py-2 text-sm">
         <dl class="divide-y divide-gray-100">
-            <x-item-list title="Nomor Pendaftaran" description="{{ $pendaftaran->nomor }}" />
+            <x-item-list title="Nomor Pendataan" description="{{ $pendaftaran->nomor }}" />
                 <x-item-list title="Waktu Pendataan" description="{{ $pendaftaran->created_at->isoFormat('dddd, D MMMM Y H:m') }}" />
                     <x-item-list title="Nama Calon Siswa" description="{{ $pendaftaran->calonPesertaDidik->nama }}" />
                     <x-item-list title="Jenis Kelamin" description="{{ $pendaftaran->calonPesertaDidik->lp->getLabel() }}" />
@@ -48,9 +48,9 @@
     </div>
 
     <div class="bg-gray-50 px-5 py-4">
-        <h3 class="mb-1 text-xl font-semibold">Alur Pendaftaran</h3>
+        <h3 class="mb-1 text-xl font-semibold">Alur Pendataan</h3>
         <h4 class="text-sm text-gray-500">
-            Periksa kelengkapan dan alur pendaftaran melalui langkah berikut ini.
+            Periksa kelengkapan dan alur pendataan melalui langkah berikut ini.
         </h4>
     </div>
     <div class="px-5">

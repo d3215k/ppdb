@@ -114,6 +114,10 @@ class CalonPesertaDidikResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('asalSekolah.nama')
+                    ->label('Asal Sekolah')
+                    ->searchable(),
+                Tables\Columns\ToggleColumn::make('locked'),
             ])
             ->filters([
                 //

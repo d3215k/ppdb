@@ -50,7 +50,7 @@ class BiodataComponent extends Component implements HasForms
     public function calonPesertaDidikForm(Form $form): Form
     {
         return $form
-            // ->disabled() // TODO : lockable
+            ->disabled(fn() => $this->calonPesertaDidik->locked)
             ->schema([
                 Forms\Components\FileUpload::make('foto')
                     ->label('Photo')

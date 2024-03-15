@@ -24,7 +24,9 @@ class RaporComponent extends Component implements HasForms
     #[Computed()]
     public function rapor()
     {
-        return Rapor::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first();
+        return Rapor::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)
+            ->with('calonPesertaDidik:id,locked')
+            ->first();
     }
 
     public function mount()
@@ -37,6 +39,7 @@ class RaporComponent extends Component implements HasForms
     public function form(Form $form): Form
     {
         return $form
+            ->disabled(fn() => $this->rapor->calonPesertaDidik->locked)
             ->schema([
                 Forms\Components\Fieldset::make('pai')
                     ->label('Pendidikan Agama Islam')

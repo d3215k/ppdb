@@ -39,6 +39,7 @@ class PeriodikComponent extends Component implements HasForms
     public function form(Form $form): Form
     {
         return $form
+            ->disabled(fn() => $this->calonPesertaDidik->locked)
             ->schema([
                 Forms\Components\TextInput::make('tinggi')
                     ->nullable()

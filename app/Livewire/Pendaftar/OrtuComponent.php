@@ -69,113 +69,115 @@ class OrtuComponent extends Component implements HasForms
 
     public function form(Form $form): Form
     {
-        return $form->schema([
-            Forms\Components\Section::make('Ayah')
-                ->schema([
-                    Forms\Components\TextInput::make('nama_ayah')
-                        ->label('Nama Lengkap')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('nik_ayah')
-                        ->label('NIK')
-                        ->unique(
-                            table: 'calon_peserta_didik',
-                            column: 'nik',
-                            ignorable: fn () => $this->calonPesertaDidik(),
-                        )
-                        ->maxLength(16),
-                    Forms\Components\TextInput::make('tahun_lahir_ayah')
-                        ->label('Tahun Lahir')
-                        ->maxLength(4),
-                    Forms\Components\Select::make('pendidikan_ayah')
-                        ->options($this->pendidikan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('pekerjaan_ayah')
-                        ->options($this->pekerjaan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('penghasilan_ayah')
-                        ->options($this->penghasilan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('berkebutuhan_khusus_ayah')
-                        ->options($this->berkebutuhanKhusus)
-                        ->preload()
-                        ->searchable(),
-                ])->columns(2),
-            Forms\Components\Section::make('Ibu')
-                ->schema([
-                    Forms\Components\TextInput::make('nama_ibu')
-                        ->label('Nama Lengkap')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('nik_ibu')
-                        ->label('NIK')
-                        ->unique(
-                            table: 'calon_peserta_didik',
-                            column: 'nik',
-                            ignorable: fn () => $this->calonPesertaDidik(),
-                        )
-                        ->maxLength(16),
-                    Forms\Components\TextInput::make('tahun_lahir_ibu')
-                        ->label('Tahun Lahir')
-                        ->maxLength(4),
-                    Forms\Components\Select::make('pendidikan_ibu')
-                        ->options($this->pendidikan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('pekerjaan_ibu')
-                        ->options($this->pekerjaan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('penghasilan_ibu')
-                        ->options($this->penghasilan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('berkebutuhan_khusus_ibu')
-                        ->options($this->berkebutuhanKhusus)
-                        ->preload()
-                        ->searchable(),
-                ])->columns(2),
+        return $form
+            ->disabled(fn() => $this->calonPesertaDidik->locked)
+            ->schema([
+                Forms\Components\Section::make('Ayah')
+                    ->schema([
+                        Forms\Components\TextInput::make('nama_ayah')
+                            ->label('Nama Lengkap')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('nik_ayah')
+                            ->label('NIK')
+                            ->unique(
+                                table: 'calon_peserta_didik',
+                                column: 'nik',
+                                ignorable: fn () => $this->calonPesertaDidik(),
+                            )
+                            ->maxLength(16),
+                        Forms\Components\TextInput::make('tahun_lahir_ayah')
+                            ->label('Tahun Lahir')
+                            ->maxLength(4),
+                        Forms\Components\Select::make('pendidikan_ayah')
+                            ->options($this->pendidikan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('pekerjaan_ayah')
+                            ->options($this->pekerjaan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('penghasilan_ayah')
+                            ->options($this->penghasilan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('berkebutuhan_khusus_ayah')
+                            ->options($this->berkebutuhanKhusus)
+                            ->preload()
+                            ->searchable(),
+                    ])->columns(2),
+                Forms\Components\Section::make('Ibu')
+                    ->schema([
+                        Forms\Components\TextInput::make('nama_ibu')
+                            ->label('Nama Lengkap')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('nik_ibu')
+                            ->label('NIK')
+                            ->unique(
+                                table: 'calon_peserta_didik',
+                                column: 'nik',
+                                ignorable: fn () => $this->calonPesertaDidik(),
+                            )
+                            ->maxLength(16),
+                        Forms\Components\TextInput::make('tahun_lahir_ibu')
+                            ->label('Tahun Lahir')
+                            ->maxLength(4),
+                        Forms\Components\Select::make('pendidikan_ibu')
+                            ->options($this->pendidikan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('pekerjaan_ibu')
+                            ->options($this->pekerjaan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('penghasilan_ibu')
+                            ->options($this->penghasilan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('berkebutuhan_khusus_ibu')
+                            ->options($this->berkebutuhanKhusus)
+                            ->preload()
+                            ->searchable(),
+                    ])->columns(2),
 
-            Forms\Components\Section::make('Wali')
-                ->collapsed()
-                ->collapsible()
-                ->schema([
-                    Forms\Components\TextInput::make('nama_wali')
-                        ->label('Nama Lengkap')
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('nik_wali')
-                        ->label('NIK')
-                        ->unique(
-                            table: 'calon_peserta_didik',
-                            column: 'nik',
-                            ignorable: fn () => $this->calonPesertaDidik(),
-                        )
-                        ->maxLength(16),
-                    Forms\Components\TextInput::make('tahun_lahir_wali')
-                        ->label('Tahun Lahir')
-                        ->maxLength(4),
-                    Forms\Components\Select::make('pendidikan_wali')
-                        ->options($this->pendidikan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('pekerjaan_wali')
-                        ->options($this->pekerjaan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('penghasilan_wali')
-                        ->options($this->penghasilan)
-                        ->preload()
-                        ->searchable(),
-                    Forms\Components\Select::make('berkebutuhan_khusus_wali')
-                        ->options($this->berkebutuhanKhusus)
-                        ->preload()
-                        ->searchable(),
-                ])->columns(2),
+                Forms\Components\Section::make('Wali')
+                    ->collapsed()
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\TextInput::make('nama_wali')
+                            ->label('Nama Lengkap')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('nik_wali')
+                            ->label('NIK')
+                            ->unique(
+                                table: 'calon_peserta_didik',
+                                column: 'nik',
+                                ignorable: fn () => $this->calonPesertaDidik(),
+                            )
+                            ->maxLength(16),
+                        Forms\Components\TextInput::make('tahun_lahir_wali')
+                            ->label('Tahun Lahir')
+                            ->maxLength(4),
+                        Forms\Components\Select::make('pendidikan_wali')
+                            ->options($this->pendidikan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('pekerjaan_wali')
+                            ->options($this->pekerjaan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('penghasilan_wali')
+                            ->options($this->penghasilan)
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('berkebutuhan_khusus_wali')
+                            ->options($this->berkebutuhanKhusus)
+                            ->preload()
+                            ->searchable(),
+                    ])->columns(2),
 
-        ])->statePath('data');
+            ])->statePath('data');
     }
 
     public function handleSubmit(): void

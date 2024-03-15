@@ -61,6 +61,7 @@ class BerkasComponent extends Component implements HasForms
     public function persyaratanUmumForm(Form $form): Form
     {
         return $form
+            ->disabled(fn() => $this->pendaftaran->calonPesertaDidik->locked)
             ->schema([
                 Forms\Components\FileUpload::make('dokumen_kelulusan')
                     // ->required()
@@ -102,6 +103,7 @@ class BerkasComponent extends Component implements HasForms
         }
 
         return $form
+            ->disabled(fn() => $this->pendaftaran->calonPesertaDidik->locked)
             ->schema($fields)
             ->columns(2)
             ->statePath('khusus');

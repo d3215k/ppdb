@@ -8,7 +8,7 @@
             </div>
 
             <div class="mt-4 flex justify-between">
-                <x-filament::button type="submit">
+                <x-filament::button type="submit" disabled="{{ $this->calonPesertaDidik->locked }}">
                     Simpan
                 </x-filament::button>
                 <x-filament::button

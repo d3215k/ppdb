@@ -10,6 +10,8 @@ class EditCalonPesertaDidik extends EditRecord
 {
     protected static string $resource = CalonPesertaDidikResource::class;
 
+    protected static ?string $title = 'Calon Peserta Didik';
+
     protected function getHeaderActions(): array
     {
         return [

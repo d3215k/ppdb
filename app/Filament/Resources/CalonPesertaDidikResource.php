@@ -9,6 +9,8 @@ use App\Models\CalonPesertaDidik;
 use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,10 +29,15 @@ class CalonPesertaDidikResource extends Resource
 
     protected static ?string $navigationGroup = 'Panitia';
 
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('foto')
+                    ->image()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('nama')
                     ->label('Nama Lengkap')
                     ->required()
@@ -139,12 +146,29 @@ class CalonPesertaDidikResource extends Resource
         ];
     }
 
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\EditCalonPesertaDidik::class,
+            Pages\OrtuCalonPesertaDidik::class,
+            Pages\DataPeriodikCalonPesertaDidik::class,
+            Pages\RaporCalonPesertaDidik::class,
+            Pages\PersyaratanUmumCalonPesertaDidik::class,
+            Pages\PendaftaranCalonPesertaDidik::class,
+        ]);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListCalonPesertaDidiks::route('/'),
             'create' => Pages\CreateCalonPesertaDidik::route('/create'),
             'edit' => Pages\EditCalonPesertaDidik::route('/{record}/edit'),
+            'periodik' => Pages\DataPeriodikCalonPesertaDidik::route('/{record}/periodik'),
+            'ortu' => Pages\OrtuCalonPesertaDidik::route('/{record}/ortu'),
+            'rapor' => Pages\RaporCalonPesertaDidik::route('/{record}/rapor'),
+            'persyaratanUmum' => Pages\PersyaratanUmumCalonPesertaDidik::route('/{record}/persyaratan-umum'),
+            'pendaftaran' => Pages\PendaftaranCalonPesertaDidik::route('/{record}/pendaftaran'),
         ];
     }
 }

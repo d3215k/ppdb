@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class BacaTulisQuranResource extends Resource
 {
@@ -37,15 +38,21 @@ class BacaTulisQuranResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Fieldset::make('Calon Peserta Didik')
-                    ->schema([
-                        Forms\Components\Placeholder::make('nama')
-                            ->content(fn (CalonPesertaDidik $record): string => $record->nama),
-                        Forms\Components\Placeholder::make('Asal Sekolah')
-                            ->content(fn (CalonPesertaDidik $record): string => $record->asalSekolah->nama ?? '-'),
-                        Forms\Components\Placeholder::make('Pilihan Kesatu')
-                            ->content(fn (CalonPesertaDidik $record): string => $record->pendaftaran->pilihanKesatu->nama ?? '-'),
-                    ]),
+                Forms\Components\Split::make([
+                    Forms\Components\Fieldset::make('Calon Peserta Didik')
+                        ->schema([
+                            Forms\Components\Placeholder::make('nama')
+                                ->content(fn (CalonPesertaDidik $record): string => $record->nama),
+                            Forms\Components\Placeholder::make('Asal Sekolah')
+                                ->content(fn (CalonPesertaDidik $record): string => $record->asalSekolah->nama ?? '-'),
+                            Forms\Components\Placeholder::make('Pilihan Kesatu')
+                                ->content(fn (CalonPesertaDidik $record): string => $record->pendaftaran->pilihanKesatu->nama ?? '-'),
+                        ]),
+                        Forms\Components\Placeholder::make('Foto')
+                            ->hiddenLabel()
+                            ->content(fn (CalonPesertaDidik $record) => $record->foto ? new HtmlString('<img width="200px" src="'.asset('storage/'. $record->foto).'"/>') : '-'),
+                    ])->columnSpanFull(),
+
                 Forms\Components\Fieldset::make('Hasil Tes BTQ')
                     ->relationship('btq')
                     ->schema([
@@ -55,7 +62,7 @@ class BacaTulisQuranResource extends Resource
                             ->numeric(),
                         Forms\Components\TextInput::make('tajwid')
                             ->numeric(),
-                        Forms\Components\TextInput::make('keterangan')
+                        Forms\Components\Textarea::make('keterangan')
                             ->maxLength(255)
                             ->columnSpanFull(),
                     ])
@@ -69,10 +76,8 @@ class BacaTulisQuranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
+                    ->description(fn (CalonPesertaDidik $record) => $record->asalSekolah->nama)
                     ->sortable(),
-                Tables\Columns\TextColumn::make('asalSekolah.nama')
-                    ->sortable()
-                    ->default('-'),
                 Tables\Columns\TextColumn::make('pendaftaran.pilihanKesatu.kode')
                     ->sortable()
                     ->default('-'),

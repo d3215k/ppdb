@@ -8,6 +8,7 @@ use App\Traits\WithTahunPelajaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CalonPesertaDidik extends Model
@@ -21,9 +22,9 @@ class CalonPesertaDidik extends Model
 
     protected $table = 'calon_peserta_didik';
 
-    public function pendaftaran(): HasOne
+    public function pendaftaran(): HasMany
     {
-        return $this->hasOne(Pendaftaran::class)
+        return $this->hasMany(Pendaftaran::class)
             ->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
     }
 

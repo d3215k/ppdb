@@ -429,7 +429,13 @@ class PendaftaranResource extends Resource
                     ->options(StatusPendaftaran::class),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
+                Tables\Actions\Action::make('Cetak')
+                    ->url(fn (Pendaftaran $record) => route('pendaftar.cetak', $record->nomor))
+                    ->icon('heroicon-m-printer')
+                    ->openUrlInNewTab()
+                    ->iconButton(),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

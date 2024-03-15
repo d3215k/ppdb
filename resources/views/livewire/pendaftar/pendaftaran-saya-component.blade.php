@@ -21,7 +21,7 @@
         <h3 class="text-xl font-semibold">Pendaftaran PPDB Tahun {{ session('tahun_pelajaran') }}</h3>
         <x-filament::button
             icon="heroicon-m-printer"
-            href="{{ route('pendaftar.cetak') }}"
+            href="{{ route('pendaftar.cetak', $pendaftaran->nomor) }}"
             tag="a"
             target="_blank"
         >

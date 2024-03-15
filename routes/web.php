@@ -13,7 +13,7 @@ Route::prefix('pendaftar')->name('pendaftar.')->middleware('auth')->group(functi
     Route::get('/biodata', BiodataController::class)->middleware(EnsurePendaftarHasCalonPesertaDidik::class)->name('biodata');
     Route::get('/rapor', RaporController::class)->middleware(EnsurePendaftarHasCalonPesertaDidik::class)->name('rapor');
     Route::get('/berkas', BerkasController::class)->middleware(EnsurePendaftarHasCalonPesertaDidik::class)->name('berkas');
-    Route::get('/cetak', CetakBuktiPendaftaranController::class)->name('cetak');
+    Route::get('/cetak/{nomor}', CetakBuktiPendaftaranController::class)->name('cetak');
 });
 
 Route::redirect('/laravel/login', '/login')->name('login');

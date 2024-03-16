@@ -28,7 +28,14 @@ class OrtuCalonPesertaDidik extends Page implements HasForms
 
     protected static ?string $title = 'Orang Tua';
 
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
     public ?array $data = [];
+
+    public function getHeading(): string
+    {
+        return $this->getRecord()->nama;
+    }
 
     public function mount(int | string $record): void
     {

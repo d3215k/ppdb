@@ -90,4 +90,10 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         return $this->hasManyThrough(Pendaftaran::class, CalonPesertaDidik::class);
     }
+
+    public function resetPassword($newPassword)
+    {
+        $this->password = bcrypt($newPassword);
+        $this->save();
+    }
 }

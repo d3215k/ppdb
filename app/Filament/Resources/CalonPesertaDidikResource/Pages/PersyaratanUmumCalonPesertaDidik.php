@@ -23,7 +23,14 @@ class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
 
     protected static ?string $title = 'Persyaratan Umum';
 
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     public ?array $data = [];
+
+    public function getHeading(): string
+    {
+        return $this->getRecord()->nama;
+    }
 
     public function mount(int | string $record): void
     {

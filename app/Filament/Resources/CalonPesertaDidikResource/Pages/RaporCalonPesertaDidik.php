@@ -23,7 +23,14 @@ class RaporCalonPesertaDidik extends Page implements HasForms
 
     protected static ?string $title = 'Rapor';
 
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     public ?array $data = [];
+
+    public function getHeading(): string
+    {
+        return $this->getRecord()->nama;
+    }
 
     public function mount(int | string $record): void
     {

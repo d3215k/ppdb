@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Settings\SettingSekolah;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
 {
@@ -74,6 +76,19 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
+                Impersonate::make(),
+                Tables\Actions\Action::make('reset')
+                    ->icon('heroicon-m-lock-open')
+                    ->color('danger')
+                    ->iconButton()
+                    ->requiresConfirmation()
+                    ->modalHeading(
+                        fn (User $record) => 'Reset Password ' . $record->name
+                    )
+                    ->modalDescription(fn (SettingSekolah $setting) => 'Setelah direset, password menjadi ' . $setting->nomor_hp_cs)
+                    ->action(fn (User $record, SettingSekolah $setting) => $record->resetPassword($setting->nomor_hp_cs)),
+                Tables\Actions\DeleteAction::make()
+                        ->iconButton()
                 // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

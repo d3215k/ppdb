@@ -27,7 +27,14 @@ class DataPeriodikCalonPesertaDidik extends Page implements HasForms
 
     protected static ?string $title = 'Data Periodik';
 
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     public ?array $periodik = [];
+
+    public function getHeading(): string
+    {
+        return $this->getRecord()->nama;
+    }
 
     public function mount(int | string $record): void
     {

@@ -26,6 +26,11 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public function getHeading(): string
+    {
+        return $this->getRecord()->nama;
+    }
+
     public static function getNavigationLabel(): string
     {
         return 'Pendaftaran';

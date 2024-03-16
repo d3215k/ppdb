@@ -17,7 +17,8 @@ class CalonPesertaDidik extends Model
     use WithTahunPelajaran;
 
     protected $casts = [
-        'lp' => JenisKelamin::class
+        'lp' => JenisKelamin::class,
+        'locked' => 'bool',
     ];
 
     protected $table = 'calon_peserta_didik';

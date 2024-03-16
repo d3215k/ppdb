@@ -259,6 +259,16 @@ class RaporComponent extends Component implements HasForms
 
             $data = $this->form->getState();
 
+            $subjects = Rapor::SUBJECTS;
+
+            foreach ($subjects as $subject) {
+                $data[$subject] = Rapor::calculateTotal($data, $subject);
+            }
+
+            $totalMarks = array_intersect_key($data, array_flip($subjects));
+            $data['sum'] = array_sum($totalMarks);
+            $data['avg'] = $data['sum'] / (count($subjects) * 5);
+
             $this->rapor->update($data);
 
             Notification::make()->title('Data Rapor berhasil disimpan!')->success()->send();

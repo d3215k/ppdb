@@ -50,10 +50,9 @@ class AsalSekolahResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alamat')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('calonPesertaDidik_count')
+                    ->label('Calon Peserta Didik')
+                    ->counts('calonPesertaDidik'),
             ])
             ->filters([
                 //

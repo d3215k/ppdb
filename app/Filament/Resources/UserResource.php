@@ -40,16 +40,11 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('name')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
+                    ->label('Nama')
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
-                    ->options(UserType::class),
-                Forms\Components\Toggle::make('aktif')
-                    ->default(true)
-                    ->required(),
+                    ->options(UserType::class)
+                    ->hiddenOn('create'),
             ]);
     }
 
@@ -62,9 +57,13 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type')
-                    ->badge(),
+                Tables\Columns\SelectColumn::make('type')
+                    ->options(UserType::class),
                 Tables\Columns\ToggleColumn::make('aktif'),
+                Tables\Columns\TextColumn::make('last_login')
+                    ->label('Login Terakhir')
+                    ->toggleable()
+                    ->sortable()
             ])
             ->filters([
                 //
@@ -79,8 +78,8 @@ class UserResource extends Resource
                     ->modalHeading(
                         fn (User $record) => 'Reset Password ' . $record->name
                     )
-                    ->modalDescription(fn (SettingSekolah $setting) => 'Setelah direset, password menjadi ' . $setting->nomor_hp_cs)
-                    ->action(fn (User $record, SettingSekolah $setting) => $record->resetPassword($setting->nomor_hp_cs)),
+                    ->modalDescription(fn (SettingSekolah $setting) => 'Setelah direset, password menjadi ' . $setting->default_password)
+                    ->action(fn (User $record, SettingSekolah $setting) => $record->resetPassword($setting->default_password)),
                 Tables\Actions\DeleteAction::make()
                         ->iconButton()
                 // Tables\Actions\EditAction::make(),
@@ -89,7 +88,8 @@ class UserResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])
+            ->defaultSort('last_login', 'desc');
     }
 
     public static function getRelations(): array

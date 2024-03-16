@@ -134,6 +134,7 @@ class CalonPesertaDidikResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('Whatsapp')
+                    ->label(fn (CalonPesertaDidik $record) => $record->nomor_hp)
                     ->url(fn (CalonPesertaDidik $record) => $record->getWhatsappLink())
                     ->icon('heroicon-m-chat-bubble-left')
                     ->openUrlInNewTab()

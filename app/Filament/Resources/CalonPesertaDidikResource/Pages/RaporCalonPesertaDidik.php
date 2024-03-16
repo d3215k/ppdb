@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CalonPesertaDidikResource\Pages;
 
 use App\Filament\Resources\CalonPesertaDidikResource;
+use App\Models\Rapor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -262,6 +263,16 @@ class RaporCalonPesertaDidik extends Page implements HasForms
             DB::beginTransaction();
 
             $data = $this->form->getState();
+
+            $subjects = Rapor::SUBJECTS;
+
+            foreach ($subjects as $subject) {
+                $data[$subject] = Rapor::calculateTotal($data, $subject);
+            }
+
+            $totalMarks = array_intersect_key($data, array_flip($subjects));
+            $data['sum'] = array_sum($totalMarks);
+            $data['avg'] = $data['sum'] / (count($subjects) * 5);
 
             $this->getRecord()->rapor->update($data);
 

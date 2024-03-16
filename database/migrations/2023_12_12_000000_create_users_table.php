@@ -22,7 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->unsignedTinyInteger('type')->default(UserType::PENDAFTAR);
             $table->boolean('aktif')->default(true);
-            $table->timestamp('last-login')->nullable();
+            $table->timestamp('last_login')->nullable();
             $table->timestamps();
         });
     }

@@ -36,7 +36,10 @@ class SettingSekolahPage extends SettingsPage
                 Forms\Components\FileUpload::make('kop_surat')
                     ->nullable(),
                 Forms\Components\TextInput::make('nomor_hp_cs')
+                    ->label('Nomor Kontak Panitia')
                     ->nullable(),
+                Forms\Components\TextInput::make('default_password')
+                    ->required(),
             ]);
     }
 

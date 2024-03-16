@@ -2,91 +2,36 @@
 
 namespace App\Models;
 
+use App\Observers\RaporObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 
+#[ObservedBy([RaporObserver::class])]
 class Rapor extends Model
 {
     use HasFactory;
 
     protected $table = 'rapor';
 
-    public function calonPesertaDidik(): BelongsTo
-    {
-        return $this->belongsTo(CalonPesertaDidik::class);
-    }
+    const SUBJECTS = ['pai', 'bindo', 'mtk', 'ipa', 'ips', 'bing'];
 
-    public function getTotalAttribute()
-    {
-        $subjects = ['pai', 'bindo', 'mtk', 'ipa', 'ips', 'bing'];
-        $total = 0;
-
-        foreach ($subjects as $subject) {
-            for ($i = 1; $i <= 5; $i++) {
-                $total += $this->{$subject . '_' . $i};
-            }
-        }
-
-        return $total;
-    }
-
-    public function getAverageAttribute()
-    {
-        $subjects = ['pai', 'bindo', 'mtk', 'ipa', 'ips', 'bing'];
-        $total = 0;
-        $count = 0;
-
-        foreach ($subjects as $subject) {
-            for ($i = 1; $i <= 5; $i++) {
-                $total += $this->{$subject . '_' . $i};
-                $count++;
-            }
-        }
-
-        return $total / $count;
-    }
-
-    private function calculateTotal($subject)
+    public static function calculateTotal($data, string $subject): int
     {
         $total = 0;
 
         for ($i = 1; $i <= 5; $i++) {
-            $total += $this->{$subject . '_' . $i};
+            $total += $data[$subject . '_' . $i];
         }
 
         return $total;
     }
 
-    public function getPaiAttribute()
+    public function calonPesertaDidik(): BelongsTo
     {
-        return $this->calculateTotal('pai');
-    }
-
-    public function getBindoAttribute()
-    {
-        return $this->calculateTotal('bindo');
-    }
-
-    public function getMtkAttribute()
-    {
-        return $this->calculateTotal('mtk');
-    }
-
-    public function getIpaAttribute()
-    {
-        return $this->calculateTotal('ipa');
-    }
-
-    public function getIpsAttribute()
-    {
-        return $this->calculateTotal('ips');
-    }
-
-    public function getBingAttribute()
-    {
-        return $this->calculateTotal('bing');
+        return $this->belongsTo(CalonPesertaDidik::class);
     }
 
     public function isComplete(): bool

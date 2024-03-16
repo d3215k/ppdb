@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\TahunPelajaranAktifChanged;
+use App\Listeners\LogLastLogin;
 use App\Listeners\StoreAktifTahunPelajaranToSession;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +23,8 @@ class EventServiceProvider extends ServiceProvider
             // SendEmailVerificationNotification::class,
         ],
         Login::class => [
-            StoreAktifTahunPelajaranToSession::class
+            StoreAktifTahunPelajaranToSession::class,
+            LogLastLogin::class,
         ],
         TahunPelajaranAktifChanged::class => [
             StoreAktifTahunPelajaranToSession::class

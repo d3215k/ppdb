@@ -51,29 +51,38 @@ class RaporResource extends Resource
                 Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.pilihanKesatu.kode')
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('total')
-                    ->numeric(locale: 'id'),
-                Tables\Columns\TextColumn::make('average')
+                Tables\Columns\TextColumn::make('sum')
+                    ->label('Total')
+                    ->numeric(locale: 'id')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('avg')
                     ->label('Rata-rata')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('pai')
                     ->label('PAI')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('bindo')
                     ->label('B.Indo')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('mtk')
                     ->label('MTK')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('ipa')
                     ->label('IPA')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('ips')
                     ->label('IPS')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('bing')
                     ->label('B.Ing')
-                    ->numeric(locale: 'id'),
+                    ->numeric(locale: 'id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('sakit')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('izin')

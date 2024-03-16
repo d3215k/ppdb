@@ -28,6 +28,16 @@ class CalonPesertaDidik extends Model
             ->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
     }
 
+    public function getWhatsappLink()
+    {
+        $nomor = $this->nomor_hp;
+        if (substr($nomor, 0, 2) == '08') {
+            $nomor = substr_replace($nomor, '62', 0, 1);
+        }
+
+        return "https://wa.me/" . $nomor;
+    }
+
     public function kompetensiKeahlian(): HasOne
     {
         return $this->pendaftaran()

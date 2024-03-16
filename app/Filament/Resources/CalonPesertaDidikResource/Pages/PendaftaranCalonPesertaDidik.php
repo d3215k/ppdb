@@ -6,6 +6,7 @@ use App\Enums\StatusPendaftaran;
 use App\Filament\Resources\CalonPesertaDidikResource;
 use App\Models\Gelombang;
 use App\Models\KompetensiKeahlian;
+use App\Models\Pendaftaran;
 use App\Models\TahunPelajaran;
 use App\Support\GenerateNumber;
 use Filament\Actions;
@@ -85,6 +86,10 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                     })
             ])
             ->actions([
+                Tables\Actions\Action::make('Cetak')
+                    ->url(fn (Pendaftaran $record) => route('pendaftar.cetak', $record->nomor))
+                    ->icon('heroicon-m-printer')
+                    ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

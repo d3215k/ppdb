@@ -30,7 +30,13 @@
                 <x-item-list title="Jalur" description="{{ $pendaftaran->jalur->nama }}" />
                 <x-item-list title="Pilihan Jurusan Pertama" description="{{ $pendaftaran->pilihanKesatu->nama }}" />
                 <x-item-list title="Pilihan Jurusan Kedua" description="{{ $pendaftaran->pilihanKedua->nama }}" />
+                <x-item-list title="Email" description="{{ $pendaftaran->calonPesertaDidik->user->email }}" />
             </dl>
+        </div>
+
+        <div class="mt-12 text-center p-4 rounded bg-gray-100">
+            <p>Nomor Kontak Panitia</p>
+            <p>{{ $setting->nomor_hp_cs }}</p>
         </div>
     </div>
 

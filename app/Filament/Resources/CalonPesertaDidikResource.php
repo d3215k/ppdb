@@ -124,13 +124,23 @@ class CalonPesertaDidikResource extends Resource
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->label('Asal Sekolah')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('pendaftaran_count')
+                    ->label('Pendaftaran')
+                    ->counts('pendaftaran'),
                 Tables\Columns\ToggleColumn::make('locked'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Whatsapp')
+                    ->url(fn (CalonPesertaDidik $record) => $record->getWhatsappLink())
+                    ->icon('heroicon-m-chat-bubble-left')
+                    ->openUrlInNewTab()
+                    ->hidden(fn (CalonPesertaDidik $record) => ! $record->nomor_hp),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                ])
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

@@ -30,29 +30,13 @@ class BacaTulisQuranResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->withPendaftaranAktif();
+        return parent::getEloquentQuery();
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Split::make([
-                    Forms\Components\Fieldset::make('Calon Peserta Didik')
-                        ->schema([
-                            Forms\Components\Placeholder::make('nama')
-                                ->content(fn (BacaTulisQuran $record): string => $record->calonPesertaDidik->nama),
-                            Forms\Components\Placeholder::make('Asal Sekolah')
-                                ->content(fn (BacaTulisQuran $record): string => $record->calonPesertaDidik->asalSekolah->nama ?? '-'),
-                            Forms\Components\Placeholder::make('Pilihan Kesatu')
-                                ->content(fn (BacaTulisQuran $record): string => $record->calonPesertaDidik->pendaftaranAktif ?? '-'),
-                        ]),
-                        Forms\Components\Placeholder::make('Foto')
-                            ->hiddenLabel()
-                            ->content(fn (BacaTulisQuran $record) => $record->calonPesertaDidik->foto ? new HtmlString('<img width="200px" src="'.asset('storage/'. $record->calonPesertaDidik->foto).'"/>') : '-'),
-                    ])
-                    ->columnSpanFull(),
-
                 Forms\Components\Fieldset::make('Hasil Tes BTQ')
                     ->schema([
                         Forms\Components\TextInput::make('kelancaran')
@@ -73,11 +57,14 @@ class BacaTulisQuranResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            // ->modifyQueryUsing(
+            //     fn($query) => $query->withPilihanPertama()
+            // )
             ->columns([
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->description(fn (BacaTulisQuran $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pendaftaranAktif')
+                Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.pilihanKesatu.kode')
                     ->sortable()
                     ->default('-'),
                 Tables\Columns\TextColumn::make('penguji.name')

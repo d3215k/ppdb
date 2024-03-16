@@ -10,7 +10,7 @@ class EditCalonPesertaDidik extends EditRecord
 {
     protected static string $resource = CalonPesertaDidikResource::class;
 
-    protected static ?string $title = 'Calon Peserta Didik';
+    protected static ?string $title = 'Biodata';
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\UserType;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
@@ -34,27 +35,20 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('calon_peserta_didik_id')
-                    ->relationship('calonPesertaDidik', 'id'),
-                Forms\Components\TextInput::make('username')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('name')
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('type')
-                    ->required()
-                    ->numeric()
-                    ->default(1),
+                Forms\Components\Select::make('type')
+                    ->options(UserType::class),
                 Forms\Components\Toggle::make('aktif')
+                    ->default(true)
                     ->required(),
             ]);
     }

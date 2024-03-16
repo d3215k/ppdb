@@ -23,14 +23,14 @@ class BacaTulisQuran extends Model
         return $this->belongsTo(CalonPesertaDidik::class, 'calon_peserta_didik_id');
     }
 
-    public function scopeWithPendaftaranAktif($query)
-    {
-        $query
-            ->join('calon_peserta_didik', 'baca_tulis_quran.calon_peserta_didik_id', '=', 'calon_peserta_didik.id')
-            ->addSelect([
-                'pendaftaranAktif' => Pendaftaran::select('nomor')->whereColumn('calon_peserta_didik_id', 'calon_peserta_didik.id')
-                    ->whereNotIn('status', [StatusPendaftaran::MENGUNDURKAN_DIRI, StatusPendaftaran::TIDAK_LULUS])
-                    ->take(1)
-            ]);
-    }
+    // public function scopeWithPilihanPertama($query)
+    // {
+    //     $query
+    //         ->join('calon_peserta_didik', 'baca_tulis_quran.calon_peserta_didik_id', '=', 'calon_peserta_didik.id')
+    //         ->addSelect([
+    //             'pendaftaranAktif' => Pendaftaran::select('pilihan_kesatu')->whereColumn('calon_peserta_didik_id', 'calon_peserta_didik.id')
+    //                 ->whereNotIn('status', [StatusPendaftaran::MENGUNDURKAN_DIRI, StatusPendaftaran::TIDAK_LULUS])
+    //                 ->take(1)
+    //         ]);
+    // }
 }

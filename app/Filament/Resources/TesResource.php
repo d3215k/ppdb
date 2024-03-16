@@ -19,7 +19,7 @@ class TesResource extends Resource
 {
     use EnsureOnlyPanitiaCanAccess;
 
-    protected static ?string $model = CalonPesertaDidik::class;
+    protected static ?string $model = Tes::class;
 
     protected static ?string $modelLabel = 'Minat dan Bakat';
 
@@ -29,8 +29,7 @@ class TesResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-                        ->whereHas('pendaftaran');
+        return parent::getEloquentQuery();
     }
 
     public static function form(Form $form): Form
@@ -38,7 +37,6 @@ class TesResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Fieldset::make('Hasil Tes')
-                    ->relationship('tes')
                     ->schema([
                         Forms\Components\TextInput::make('minat_bakat')
                             ->required()
@@ -53,19 +51,19 @@ class TesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
+                Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('asalSekolah.nama')
+                Tables\Columns\TextColumn::make('calonPesertaDidik.asalSekolah.nama')
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('pendaftaran.pilihanKesatu.kode')
+                Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.pilihanKesatu.kode')
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('tes.minat_bakat')
+                Tables\Columns\TextInputColumn::make('minat_bakat')
                     ->label('Minat dan Bakat')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('tes.khusus')
+                Tables\Columns\TextInputColumn::make('khusus')
                     ->label('Tes Khusus')
                     ->sortable(),
             ])

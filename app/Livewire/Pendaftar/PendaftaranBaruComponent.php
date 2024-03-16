@@ -165,11 +165,13 @@ class PendaftaranBaruComponent extends Component implements HasForms
                             Forms\Components\TextInput::make('nomor_hp')
                                 ->label('Nomor HP (Aktif WA)')
                                 ->required()
-                                ->length(16),
+                                ->minLength(6)
+                                ->maxLength(16),
                             Forms\Components\TextInput::make('nomor_hp_ortu')
                                 ->label('Nomor HP Orang Tua (Aktif WA)')
                                 ->required()
-                                ->length(16),
+                                ->minLength(6)
+                                ->maxLength(16),
                             Forms\Components\TextInput::make('email')
                                 ->email()
                                 ->required()
@@ -305,18 +307,6 @@ class PendaftaranBaruComponent extends Component implements HasForms
                     'nama_ibu' => $data['ibu'],
                 ]
             );
-
-            $cpd->rapor()->updateOrCreate([
-                'calon_peserta_didik_id' => $cpd->id
-            ]);
-
-            $cpd->periodik()->updateOrCreate([
-                'calon_peserta_didik_id' => $cpd->id
-            ]);
-
-            $cpd->persyaratanUmum()->updateOrCreate([
-                'calon_peserta_didik_id' => $cpd->id
-            ]);
 
             $tahun = TahunPelajaran::whereAktif(true)->first();
             $gelombang = Gelombang::find($data['gelombang_id']);

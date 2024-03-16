@@ -12,7 +12,7 @@
             @endif
 
             <div class="mt-4 flex justify-between">
-                <x-filament::button type="submit" disabled="{{ $this->pendaftaran->calonPesertaDidik->locked }}">
+                <x-filament::button type="submit" :disabled="$this->pendaftaran->calonPesertaDidik->locked">
                     Simpan
                 </x-filament::button>
                 <x-filament::button

@@ -100,7 +100,8 @@ class RaporResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])
+            ->defaultSort('sum', 'desc');
     }
 
     public static function getRelations(): array

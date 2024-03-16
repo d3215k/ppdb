@@ -50,7 +50,7 @@ class AsalSekolahResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alamat')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('calonPesertaDidik_count')
+                Tables\Columns\TextColumn::make('calon_peserta_didik_count')
                     ->label('Calon Peserta Didik')
                     ->counts('calonPesertaDidik'),
             ])

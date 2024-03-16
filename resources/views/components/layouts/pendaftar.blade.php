@@ -22,7 +22,7 @@
         <div class="dark flex items-center space-x-2 lg:space-x-6">
             <!-- Logo -->
             <a
-            href="javascript:void(0)"
+            href="{{ route('pendaftar.dashboard') }}"
             class="group inline-flex items-center space-x-2 text-lg font-bold tracking-wide text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300"
             >
                 <span>{{ config('app.name') }}</span>

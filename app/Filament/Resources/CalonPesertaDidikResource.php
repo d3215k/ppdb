@@ -37,7 +37,8 @@ class CalonPesertaDidikResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('foto')
                     ->image()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('nama')
                     ->label('Nama Lengkap')
                     ->required()
@@ -51,13 +52,15 @@ class CalonPesertaDidikResource extends Resource
                     ->label('NISN')
                     ->maxLength(10),
                 Forms\Components\TextInput::make('kewarganegaraan')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('nik')
                     ->label('NIK')
                     ->maxLength(16),
                 Forms\Components\TextInput::make('kk')
                     ->label('Nomor KK')
-                    ->maxLength(16),
+                    ->maxLength(16)
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('tempat_lahir')
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('tanggal_lahir'),
@@ -66,11 +69,13 @@ class CalonPesertaDidikResource extends Resource
                 Forms\Components\Select::make('agama_id')
                     ->relationship('agama', 'nama')
                     ->preload()
-                    ->searchable(),
+                    ->searchable()
+                    ->hiddenOn('create'),
                 Forms\Components\Select::make('berkebutuhan_khusus_id')
                     ->relationship('berkebutuhanKhusus', 'nama')
                     ->preload()
-                    ->searchable(),
+                    ->searchable()
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('alamat')
                     ->columnSpanFull()
                     ->maxLength(255),
@@ -87,14 +92,19 @@ class CalonPesertaDidikResource extends Resource
                 Forms\Components\TextInput::make('kode_pos')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('lintang')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('bujur')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->hiddenOn('create'),
                 Forms\Components\Select::make('tempat_tinggal_id')
-                    ->relationship('tempatTinggal', 'nama'),
+                    ->relationship('tempatTinggal', 'nama')
+                    ->hiddenOn('create'),
                 Forms\Components\Select::make('moda_transportasi_id')
-                    ->relationship('modaTransportasi', 'nama'),
+                    ->relationship('modaTransportasi', 'nama')
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('anak_ke')
+                    ->hiddenOn('create')
                     ->numeric(),
                 Forms\Components\TextInput::make('nomor_hp')
                     ->maxLength(16),
@@ -111,7 +121,7 @@ class CalonPesertaDidikResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('password')
                             ->maxLength(255),
-                    ])
+                    ])->hiddenOn('create')
             ]);
     }
 

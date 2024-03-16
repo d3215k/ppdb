@@ -4,13 +4,16 @@ namespace App\Models;
 
 use App\Enums\JenisKelamin;
 use App\Enums\StatusPendaftaran;
+use App\Observers\CalonPesertaDidikObserver;
 use App\Traits\WithTahunPelajaran;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+#[ObservedBy([CalonPesertaDidikObserver::class])]
 class CalonPesertaDidik extends Model
 {
     use HasFactory;

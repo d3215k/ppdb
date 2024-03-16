@@ -38,7 +38,7 @@ class RekapitulasiResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('foo')
             ])
             ->filters([
                 //

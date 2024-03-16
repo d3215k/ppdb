@@ -26,7 +26,7 @@ class PendaftaranResource extends Resource
 
     protected static ?string $model = Pendaftaran::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'Data';
 
@@ -73,6 +73,11 @@ class PendaftaranResource extends Resource
                     ->searchable()
                     ->required()
                     ->preload(),
+                Forms\Components\Select::make('kompetensi_keahlian')
+                    ->options(KompetensiKeahlian::pluck('nama', 'id'))
+                    ->searchable()
+                    ->required()
+                    ->preload(),
                 Forms\Components\ToggleButtons::make('status')
                     ->options(StatusPendaftaran::class)
                     ->inline()
@@ -99,6 +104,9 @@ class PendaftaranResource extends Resource
                     ->label('Pilihan Kesatu dan Kedua')
                     ->description(fn (Pendaftaran $record) => $record->pilihanKedua->kode)
                     ->sortable(),
+                Tables\Columns\TextColumn::make('diterima.kode')
+                    ->label('Diterima')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->sortable(),
@@ -117,6 +125,9 @@ class PendaftaranResource extends Resource
                 Tables\Filters\SelectFilter::make('pilihan_kesatu')
                     ->options(KompetensiKeahlian::pluck('nama', 'id')),
                 Tables\Filters\SelectFilter::make('pilihan_kedua')
+                    ->options(KompetensiKeahlian::pluck('nama', 'id')),
+                Tables\Filters\SelectFilter::make('kompetensi_keahlian')
+                    ->label('Diterima')
                     ->options(KompetensiKeahlian::pluck('nama', 'id')),
                 Tables\Filters\SelectFilter::make('status')
                     ->options(StatusPendaftaran::class),

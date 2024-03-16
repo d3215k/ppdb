@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Page;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\DB;
 
 class DataPeriodikCalonPesertaDidik extends Page implements HasForms
@@ -34,6 +35,11 @@ class DataPeriodikCalonPesertaDidik extends Page implements HasForms
     public function getHeading(): string
     {
         return $this->getRecord()->nama;
+    }
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return $this->getRecord()->asalSekolah->nama ?? '-';
     }
 
     public function mount(int | string $record): void

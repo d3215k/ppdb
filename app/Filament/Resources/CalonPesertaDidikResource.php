@@ -35,6 +35,27 @@ class CalonPesertaDidikResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Fieldset::make('Asal Sekolah')
+                    ->schema([
+                        Forms\Components\Select::make('asal_sekolah_id')
+                            ->label('Pilih Asal Sekolah')
+                            ->relationship('asalSekolah', 'nama')
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('nama')
+                                    ->label('Nama Sekolah')
+                                    ->required(),
+                                Forms\Components\TextInput::make('npsn')
+                                    ->nullable(),
+                                Forms\Components\TextInput::make('alamat')
+                                    ->nullable(),
+                            ])
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\TextInput::make('asal_sekolah_temp')
+                            ->label('Asal Sekolah')
+                            ->placeholder('Kosongkan jika sudah ada di daftar!')
+                            ->hiddenOn('create'),
+                    ]),
                 Forms\Components\FileUpload::make('foto')
                     ->image()
                     ->columnSpanFull()
@@ -111,17 +132,6 @@ class CalonPesertaDidikResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->maxLength(255),
-                Forms\Components\Select::make('asal_sekolah_id')
-                    ->relationship('asalSekolah', 'nama')
-                    ->preload()
-                    ->searchable(),
-                Forms\Components\Fieldset::make('Akun PPDB Dinas')
-                    ->schema([
-                        Forms\Components\TextInput::make('username')
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('password')
-                            ->maxLength(255),
-                    ])->hiddenOn('create')
             ]);
     }
 
@@ -176,6 +186,7 @@ class CalonPesertaDidikResource extends Resource
             Pages\RaporCalonPesertaDidik::class,
             Pages\PersyaratanUmumCalonPesertaDidik::class,
             Pages\PendaftaranCalonPesertaDidik::class,
+            Pages\UserCalonPesertaDidik::class,
         ]);
     }
 
@@ -190,6 +201,7 @@ class CalonPesertaDidikResource extends Resource
             'rapor' => Pages\RaporCalonPesertaDidik::route('/{record}/rapor'),
             'persyaratanUmum' => Pages\PersyaratanUmumCalonPesertaDidik::route('/{record}/persyaratan-umum'),
             'pendaftaran' => Pages\PendaftaranCalonPesertaDidik::route('/{record}/pendaftaran'),
+            'user' => Pages\UserCalonPesertaDidik::route('/{record}/user'),
         ];
     }
 }

@@ -10,6 +10,7 @@ use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,7 +50,7 @@ class GelombangResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('mulai')
                     ->date()
                     ->sortable(),
@@ -59,6 +60,16 @@ class GelombangResource extends Resource
                 Tables\Columns\TextColumn::make('jalur_count')
                     ->counts('jalur')
                     ->label('Jalur Dibuka'),
+                Tables\Columns\ColumnGroup::make('Pendaftar', [
+                    Tables\Columns\TextColumn::make('pendaftaran_count')
+                        ->counts('pendaftaran')
+                        ->label('Jumlah Pendaftar')
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('diterima_count')
+                        ->counts('diterima')
+                        ->label('Diterima')
+                        ->sortable(),
+                ])->alignment(Alignment::Center),
                 Tables\Columns\ToggleColumn::make('aktif')
                     ->afterStateUpdated(function ($record, $state) {
                         if ($state) {

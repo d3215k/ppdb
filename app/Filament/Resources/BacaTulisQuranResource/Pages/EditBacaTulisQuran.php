@@ -5,6 +5,7 @@ namespace App\Filament\Resources\BacaTulisQuranResource\Pages;
 use App\Filament\Resources\BacaTulisQuranResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Contracts\Support\Htmlable;
 
 class EditBacaTulisQuran extends EditRecord
 {
@@ -17,6 +18,16 @@ class EditBacaTulisQuran extends EditRecord
                 'user_id' => auth()->id(),
             ]);
         }
+    }
+
+    public function getHeading(): string
+    {
+        return $this->getRecord()->calonPesertaDidik->nama;
+    }
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return $this->getRecord()->calonPesertaDidik->asalSekolah->nama ?? '-';
     }
 
     protected function getHeaderActions(): array

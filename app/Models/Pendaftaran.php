@@ -64,6 +64,11 @@ class Pendaftaran extends Model
         return $this->belongsTo(KompetensiKeahlian::class, 'pilihan_kedua');
     }
 
+    public function diterima(): BelongsTo
+    {
+        return $this->belongsTo(KompetensiKeahlian::class, 'kompetensi_keahlian');
+    }
+
     public function buktiPersyaratanKhusus(): HasMany
     {
         return $this->hasMany(BuktiPersyaratanKhusus::class);

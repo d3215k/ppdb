@@ -5,6 +5,7 @@ namespace App\Filament\Resources\CalonPesertaDidikResource\Pages;
 use App\Filament\Resources\CalonPesertaDidikResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Contracts\Support\Htmlable;
 
 class EditCalonPesertaDidik extends EditRecord
 {
@@ -17,6 +18,11 @@ class EditCalonPesertaDidik extends EditRecord
     public function getHeading(): string
     {
         return $this->getRecord()->nama;
+    }
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return $this->getRecord()->asalSekolah->nama ?? '-';
     }
 
     protected function getHeaderActions(): array

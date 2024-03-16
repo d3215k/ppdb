@@ -15,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -29,6 +30,11 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
     public function getHeading(): string
     {
         return $this->getRecord()->nama;
+    }
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return $this->getRecord()->asalSekolah->nama ?? '-';
     }
 
     public static function getNavigationLabel(): string

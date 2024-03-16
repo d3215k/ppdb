@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusPendaftaran;
 use App\Traits\WithTahunPelajaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,11 @@ class Gelombang extends Model
     public function pendaftaran(): HasMany
     {
         return $this->hasMany(Pendaftaran::class);
+    }
+
+    public function diterima()
+    {
+        return $this->pendaftaran()->where('status', StatusPendaftaran::LULUS);
     }
 
     public function jalur(): BelongsToMany

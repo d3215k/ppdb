@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\Page;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\DB;
 
 class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
@@ -30,6 +31,11 @@ class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
     public function getHeading(): string
     {
         return $this->getRecord()->nama;
+    }
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return $this->getRecord()->asalSekolah->nama ?? '-';
     }
 
     public function mount(int | string $record): void

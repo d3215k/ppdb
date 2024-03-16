@@ -9,6 +9,7 @@ use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -53,10 +54,25 @@ class KompetensiKeahlianResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('kode'),
                 Tables\Columns\TextColumn::make('nama')
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('kuota_sum_kuotakuota')
                     ->sum('kuota', 'kuota.kuota')
-                    ->label('Kuota'),
+                    ->label('Kuota')
+                    ->sortable(),
+                Tables\Columns\ColumnGroup::make('Pendaftar', [
+                    Tables\Columns\TextColumn::make('pilihan_pendaftaran_kesatu_count')
+                        ->counts('pilihanPendaftaranKesatu')
+                        ->label('Pilihan Pertama')
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('pilihan_pendaftaran_kedua_count')
+                        ->counts('pilihanPendaftaranKedua')
+                        ->label('Pilihan Kedua')
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('diterima_count')
+                        ->counts('diterima')
+                        ->label('Diterima')
+                        ->sortable(),
+                ])->alignment(Alignment::Center),
                 Tables\Columns\ToggleColumn::make('dipilih_kesatu'),
                 Tables\Columns\ToggleColumn::make('dipilih_kedua'),
             ])

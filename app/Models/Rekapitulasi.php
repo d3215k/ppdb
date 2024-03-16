@@ -14,7 +14,9 @@ class Rekapitulasi extends Model
     public function getRows()
     {
         return [
-            //
+            [
+                'foo' => 'bar'
+            ],
         ];
     }
 }

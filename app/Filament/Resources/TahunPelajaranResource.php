@@ -51,6 +51,14 @@ class TahunPelajaranResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('pendaftaran_count')
+                    ->counts('pendaftaran')
+                    ->label('Jumlah Pendaftar')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('diterima_count')
+                    ->counts('diterima')
+                    ->label('Diterima')
+                    ->sortable(),
                 Tables\Columns\ToggleColumn::make('aktif')
                     ->afterStateUpdated(function ($record, $state) {
                         if ($state) {
@@ -78,9 +86,9 @@ class TahunPelajaranResource extends Resource
                 // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 

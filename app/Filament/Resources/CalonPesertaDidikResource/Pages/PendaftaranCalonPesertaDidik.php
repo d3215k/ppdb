@@ -78,8 +78,11 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                 Tables\Columns\TextColumn::make('nomor'),
                 Tables\Columns\TextColumn::make('jalur.nama'),
                 Tables\Columns\TextColumn::make('gelombang.nama'),
-                Tables\Columns\TextColumn::make('pilihanKesatu.nama'),
-                Tables\Columns\TextColumn::make('pilihanKedua.nama'),
+                Tables\Columns\TextColumn::make('pilihanKesatu.kode'),
+                Tables\Columns\TextColumn::make('pilihanKedua.kode'),
+                Tables\Columns\TextColumn::make('diterima.kode')
+                    ->label('Diterima')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('status'),
             ])
             ->filters([

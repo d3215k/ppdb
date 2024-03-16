@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             // ])
             ->navigationGroups([
                 'Tes',
+                'Data',
                 'Panitia',
                 'Sistem',
                 'Referensi',

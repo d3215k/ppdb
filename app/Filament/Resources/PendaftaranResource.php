@@ -28,7 +28,7 @@ class PendaftaranResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Panitia';
+    protected static ?string $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 1;
 

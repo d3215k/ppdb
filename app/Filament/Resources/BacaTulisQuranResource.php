@@ -20,7 +20,7 @@ class BacaTulisQuranResource extends Resource
 {
     use EnsureOnlyPengujiCanAccess;
 
-    protected static ?string $model = CalonPesertaDidik::class;
+    protected static ?string $model = BacaTulisQuran::class;
 
     protected static ?string $modelLabel = 'Baca Tulis Qur\'an';
 
@@ -30,8 +30,7 @@ class BacaTulisQuranResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-                        ->whereHas('pendaftaran');
+        return parent::getEloquentQuery()->withPendaftaranAktif();
     }
 
     public static function form(Form $form): Form
@@ -42,19 +41,19 @@ class BacaTulisQuranResource extends Resource
                     Forms\Components\Fieldset::make('Calon Peserta Didik')
                         ->schema([
                             Forms\Components\Placeholder::make('nama')
-                                ->content(fn (CalonPesertaDidik $record): string => $record->nama),
+                                ->content(fn (BacaTulisQuran $record): string => $record->calonPesertaDidik->nama),
                             Forms\Components\Placeholder::make('Asal Sekolah')
-                                ->content(fn (CalonPesertaDidik $record): string => $record->asalSekolah->nama ?? '-'),
+                                ->content(fn (BacaTulisQuran $record): string => $record->calonPesertaDidik->asalSekolah->nama ?? '-'),
                             Forms\Components\Placeholder::make('Pilihan Kesatu')
-                                ->content(fn (CalonPesertaDidik $record): string => $record->pendaftaran->pilihanKesatu->nama ?? '-'),
+                                ->content(fn (BacaTulisQuran $record): string => $record->calonPesertaDidik->pendaftaranAktif ?? '-'),
                         ]),
                         Forms\Components\Placeholder::make('Foto')
                             ->hiddenLabel()
-                            ->content(fn (CalonPesertaDidik $record) => $record->foto ? new HtmlString('<img width="200px" src="'.asset('storage/'. $record->foto).'"/>') : '-'),
-                    ])->columnSpanFull(),
+                            ->content(fn (BacaTulisQuran $record) => $record->calonPesertaDidik->foto ? new HtmlString('<img width="200px" src="'.asset('storage/'. $record->calonPesertaDidik->foto).'"/>') : '-'),
+                    ])
+                    ->columnSpanFull(),
 
                 Forms\Components\Fieldset::make('Hasil Tes BTQ')
-                    ->relationship('btq')
                     ->schema([
                         Forms\Components\TextInput::make('kelancaran')
                             ->numeric(),
@@ -75,31 +74,31 @@ class BacaTulisQuranResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
-                    ->description(fn (CalonPesertaDidik $record) => $record->asalSekolah->nama)
+                Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
+                    ->description(fn (BacaTulisQuran $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pendaftaran.pilihanKesatu.kode')
+                Tables\Columns\TextColumn::make('pendaftaranAktif')
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('btq.penguji.name')
+                Tables\Columns\TextColumn::make('penguji.name')
                     ->label('Penguji')
                     ->default('-'),
-                Tables\Columns\TextColumn::make('btq.kelancaran')
+                Tables\Columns\TextColumn::make('kelancaran')
                     ->label('Kelancaran')
                     ->numeric()
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('btq.kefasihan')
+                Tables\Columns\TextColumn::make('kefasihan')
                     ->label('Kefasihan')
                     ->numeric()
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('btq.tajwid')
+                Tables\Columns\TextColumn::make('tajwid')
                     ->label('Tajwid')
                     ->numeric()
                     ->sortable()
                     ->default('-'),
-                Tables\Columns\TextColumn::make('btq.keterangan')
+                Tables\Columns\TextColumn::make('keterangan')
                     ->label('Keterangan')
                     ->searchable()
                     ->default('-'),

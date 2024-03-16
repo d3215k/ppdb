@@ -35,6 +35,16 @@ class CalonPesertaDidik extends Model
             ->first();
     }
 
+    public function scopeWithPendaftaranAktif($query)
+    {
+        $query
+            ->addSelect([
+            'pendaftaranAktif' => Pendaftaran::whereColumn('calon_peserta_didik_id', 'calon_peserta_didik.id')
+                ->whereNotIn('status', [StatusPendaftaran::MENGUNDURKAN_DIRI, StatusPendaftaran::TIDAK_LULUS])
+                ->take(1)
+            ]);
+    }
+
     public function getAlamatLengkapAttribute()
     {
         return $this->alamat . ' RT ' . $this->rt . ' RW ' . $this->rw . ' Desa/Kelurahan ' . $this->desa_kelurahan . ' Kecamatan ' . $this->kecamatan;

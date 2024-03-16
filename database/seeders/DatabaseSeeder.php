@@ -168,6 +168,14 @@ class DatabaseSeeder extends Seeder
                 'calon_peserta_didik_id' => $cpd->id
             ]);
 
+            $cpd->btq()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
+            $cpd->tes()->updateOrCreate([
+                'calon_peserta_didik_id' => $cpd->id
+            ]);
+
             $cpd->persyaratanUmum()->updateOrCreate([
                 'calon_peserta_didik_id' => $cpd->id
             ]);

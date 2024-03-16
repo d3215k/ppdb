@@ -13,7 +13,7 @@ class EditBacaTulisQuran extends EditRecord
     protected function afterSave(): void
     {
         if (auth()->user()->isPenguji) {
-            $this->getRecord()->btq()->update([
+            $this->getRecord()->update([
                 'user_id' => auth()->id(),
             ]);
         }

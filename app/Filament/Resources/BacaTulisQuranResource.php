@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BacaTulisQuranResource\Pages;
 use App\Filament\Resources\BacaTulisQuranResource\RelationManagers;
 use App\Models\BacaTulisQuran;
-use App\Models\CalonPesertaDidik;
 use App\Traits\EnsureOnlyPengujiCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -27,11 +26,6 @@ class BacaTulisQuranResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     protected static ?string $navigationGroup = 'Tes';
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery();
-    }
 
     public static function form(Form $form): Form
     {
@@ -57,9 +51,6 @@ class BacaTulisQuranResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            // ->modifyQueryUsing(
-            //     fn($query) => $query->withPilihanPertama()
-            // )
             ->columns([
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->description(fn (BacaTulisQuran $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')

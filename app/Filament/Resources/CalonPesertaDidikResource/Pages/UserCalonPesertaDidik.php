@@ -8,8 +8,6 @@ use App\Models\CalonPesertaDidik;
 use App\Models\User;
 use App\Settings\SettingSekolah;
 use Filament\Actions\Action;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -23,7 +21,6 @@ use Illuminate\Support\Facades\DB;
 class UserCalonPesertaDidik extends Page implements HasForms
 {
     use InteractsWithRecord;
-    // use InteractsWithActions;
     use InteractsWithForms;
 
     protected static string $resource = CalonPesertaDidikResource::class;

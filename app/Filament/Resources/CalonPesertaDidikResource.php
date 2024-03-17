@@ -119,6 +119,13 @@ class CalonPesertaDidikResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('desa_kelurahan')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('kecamatan')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('kabupaten_kota')
+                    ->label('Kabupaten/Kota')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('provinsi')
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('kode_pos')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('lintang')
@@ -137,6 +144,10 @@ class CalonPesertaDidikResource extends Resource
                     ->hiddenOn('create')
                     ->numeric(),
                 Forms\Components\TextInput::make('nomor_hp')
+                    ->label('Nomor HP (Aktif Whatsapp)')
+                    ->maxLength(16),
+                Forms\Components\TextInput::make('nomor_hp_ortu')
+                    ->label('Nomor HP Orang Tua (Aktif Whatsapp)')
                     ->maxLength(16),
                 Forms\Components\TextInput::make('email')
                     ->email()

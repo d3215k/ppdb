@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\PendaftaranResource\Pages;
 
+use App\Filament\Exports\PendaftaranExporter;
 use App\Filament\Resources\PendaftaranResource;
 use Filament\Actions;
+use Filament\Actions\ExportAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPendaftarans extends ListRecords
@@ -13,8 +15,10 @@ class ListPendaftarans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            // Actions\CreateAction::make()
-            //     ->label('Daftarkan'),
+            ExportAction::make()
+                ->label('Export Data')
+                ->exporter(PendaftaranExporter::class)
         ];
     }
+
 }

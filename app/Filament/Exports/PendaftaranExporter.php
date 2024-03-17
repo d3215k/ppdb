@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Filament\Exports;
+
+use App\Models\Pendaftaran;
+use Filament\Actions\Exports\ExportColumn;
+use Filament\Actions\Exports\Exporter;
+use Filament\Actions\Exports\Models\Export;
+
+class PendaftaranExporter extends Exporter
+{
+    protected static ?string $model = Pendaftaran::class;
+
+    public static function getColumns(): array
+    {
+        return [
+            ExportColumn::make('calonPesertaDidik.nama'),
+            ExportColumn::make('nomor'),
+            ExportColumn::make('jalur.nama'),
+            ExportColumn::make('gelombang.nama'),
+            ExportColumn::make('pilihanKesatu.kode'),
+            ExportColumn::make('pilihanKedua.kode'),
+            ExportColumn::make('status')
+                ->label('Status')
+                ->state(fn (Pendaftaran $record) => isset($record->status) ? $record->status->getLabel() : '-' ),
+            ExportColumn::make('calonPesertaDidik.asalSekolah.nama')
+                ->label('Asal Sekolah'),
+            ExportColumn::make('calonPesertaDidik.lp')
+                ->label('Jenis Kelamin')
+                ->state(fn (Pendaftaran $record) => isset($record->lp) ? $record->lp->getLabel() : '-' ),
+            ExportColumn::make('calonPesertaDidik.nisn')
+                ->label('NISN'),
+            ExportColumn::make('calonPesertaDidik.kewarganegaraan')
+                ->label('Kewarganegaraan'),
+            ExportColumn::make('calonPesertaDidik.nik')
+                ->label('NIK'),
+            ExportColumn::make('calonPesertaDidik.kk')
+                ->label('No. Kartu Keluarga'),
+            ExportColumn::make('calonPesertaDidik.tempat_lahir')
+                ->label('Tempat Lahir'),
+            ExportColumn::make('calonPesertaDidik.tanggal_lahir')
+                ->label('Tanggal Lahir'),
+            ExportColumn::make('calonPesertaDidik.no_reg_akta')
+                ->label('No. Reg Akta'),
+            ExportColumn::make('calonPesertaDidik.agama.nama')
+                ->label('Agama'),
+            ExportColumn::make('calonPesertaDidik.berkebutuhanKhusus.nama')
+                ->label('Berkebutuhan Khusus'),
+            ExportColumn::make('calonPesertaDidik.alamat')
+                ->label('Alamat'),
+            ExportColumn::make('calonPesertaDidik.rt')
+                ->label('RT'),
+            ExportColumn::make('calonPesertaDidik.rw')
+                ->label('RW'),
+            ExportColumn::make('calonPesertaDidik.dusun')
+                ->label('Dusun'),
+            ExportColumn::make('calonPesertaDidik.desa_kelurahan')
+                ->label('Desa/Kelurahan'),
+            ExportColumn::make('calonPesertaDidik.kecamatan')
+                ->label('Kecamatan'),
+            ExportColumn::make('calonPesertaDidik.kabupaten_kota')
+                ->label('kabupaten_kota'),
+            ExportColumn::make('calonPesertaDidik.provinsi')
+                ->label('provinsi'),
+            ExportColumn::make('calonPesertaDidik.provinsi')
+                ->label('provinsi'),
+            ExportColumn::make('calonPesertaDidik.kode_pos')
+                ->label('kode_pos'),
+            ExportColumn::make('calonPesertaDidik.lintang')
+                ->label('lintang'),
+            ExportColumn::make('calonPesertaDidik.bujur')
+                ->label('bujur'),
+            ExportColumn::make('calonPesertaDidik.tempatTinggal.nama')
+                ->label('Tempat Tinggal'),
+            ExportColumn::make('calonPesertaDidik.modaTransportasi.nama')
+                ->label('Moda Transportasi'),
+            ExportColumn::make('calonPesertaDidik.anak_ke')
+                ->label('Anak Ke'),
+            ExportColumn::make('calonPesertaDidik.nomor_hp')
+                ->label('No. HP'),
+            ExportColumn::make('calonPesertaDidik.nomor_hp_ortu')
+                ->label('No. HP Ortu'),
+            ExportColumn::make('calonPesertaDidik.email')
+                ->label('Email'),
+            ExportColumn::make('calonPesertaDidik.username')
+                ->label('Username'),
+            ExportColumn::make('calonPesertaDidik.password')
+                ->label('Password'),
+            // ExportColumn::make('diterima.kode'),
+            // ExportColumn::make('status'),
+            // ExportColumn::make('created_at'),
+            // ExportColumn::make('updated_at'),
+        ];
+    }
+
+    public static function getCompletedNotificationBody(Export $export): string
+    {
+        $body = 'Your pendaftaran export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
+
+        if ($failedRowsCount = $export->getFailedRowsCount()) {
+            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to export.';
+        }
+
+        return $body;
+    }
+}

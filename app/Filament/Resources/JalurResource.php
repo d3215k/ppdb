@@ -46,6 +46,9 @@ class JalurResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('gelombang_count')
+                    ->counts('gelombang')
+                    ->label('Gelombang Dibuka'),
                 Tables\Columns\TextColumn::make('kuota_sum_kuotakuota')
                     ->sum('kuota', 'kuota.kuota')
                     ->label('Daya Tampung')
@@ -60,9 +63,6 @@ class JalurResource extends Resource
                         ->label('Diterima')
                         ->sortable(),
                 ])->alignment(Alignment::Center),
-                Tables\Columns\TextColumn::make('gelombang_count')
-                    ->counts('gelombang')
-                    ->label('Gelombang Dibuka'),
             ])
             ->filters([
                 //

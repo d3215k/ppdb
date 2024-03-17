@@ -47,12 +47,23 @@ class AsalSekolahResource extends Resource
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('npsn')
+                    ->label('NPSN')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alamat')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('calon_peserta_didik_count')
-                    ->label('Calon Peserta Didik')
+                    ->label('Data Calon Peserta Didik')
                     ->counts('calonPesertaDidik'),
+                Tables\Columns\ColumnGroup::make('Pendaftaran', [
+                    Tables\Columns\TextColumn::make('pendaftaran_count')
+                        ->counts('pendaftaran')
+                        ->label('Pendaftar')
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('diterima_count')
+                        ->counts('diterima')
+                        ->label('Diterima')
+                        ->sortable(),
+                ])->alignCenter()
             ])
             ->filters([
                 //

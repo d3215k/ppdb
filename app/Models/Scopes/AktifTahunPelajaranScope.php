@@ -13,6 +13,6 @@ class AktifTahunPelajaranScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('tahun_pelajaran_id', session('tahun_pelajaran_id'));
+        $builder->where($model->getTable().'.tahun_pelajaran_id', session('tahun_pelajaran_id'));
     }
 }

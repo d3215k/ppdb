@@ -16,6 +16,8 @@ class AsalSekolah extends Model
 
     protected $table = 'asal_sekolah';
 
+    public $timestamps = false;
+
     public function calonPesertaDidik(): HasMany
     {
         return $this->hasMany(CalonPesertaDidik::class);

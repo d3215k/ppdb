@@ -13,4 +13,6 @@ class Pendidikan extends Model
 
     protected $table = 'ref_pendidikan';
 
+    public $timestamps = false;
+
 }

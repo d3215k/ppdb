@@ -13,4 +13,6 @@ class Pekerjaan extends Model
 
     protected $table = 'ref_pekerjaan';
 
+    public $timestamps = false;
+
 }

@@ -61,7 +61,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('bing_5')->default(0);
 
             $table->unsignedInteger('sum')->default(0);
-            $table->unsignedFloat('avg')->default(0);
+            $table->float('avg')->default(0);
 
             $table->string('halaman_kehadiran')->nullable();
             $table->string('sakit')->nullable();

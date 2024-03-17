@@ -139,7 +139,10 @@ class TesResource extends Resource
                     }),
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Calon Peserta Didik')
+                    ->url(fn (Tes $record) => route('filament.app.resources.calon-peserta-didiks.edit', $record->calonPesertaDidik))
+                    ->icon('heroicon-m-user')
+                    ->iconButton(),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

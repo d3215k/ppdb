@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\UserType;
 use App\Filament\Resources\BacaTulisQuranResource\Pages;
 use App\Filament\Resources\BacaTulisQuranResource\RelationManagers;
 use App\Models\AsalSekolah;
@@ -9,6 +10,7 @@ use App\Models\BacaTulisQuran;
 use App\Models\Gelombang;
 use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
+use App\Models\User;
 use App\Traits\EnsureOnlyPengujiCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -151,9 +153,27 @@ class BacaTulisQuranResource extends Resource
                             );
                         }
                     }),
+                SelectFilter::make('Penguji')
+                    ->options(
+                        fn() => User::where('type', UserType::PENGUJI)->pluck('name', 'id')->toArray(),
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['value']))
+                        {
+                            $query->where('user_id', '=', (int) $data['value']);
+                        }
+                    }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
+                Tables\Actions\Action::make('Calon Peserta Didik')
+                    ->url(fn (BacaTulisQuran $record) => route('filament.app.resources.calon-peserta-didiks.edit', $record->calonPesertaDidik))
+                    ->icon('heroicon-m-user')
+                    ->iconButton()
+                    ->hidden(fn (User $user) => $user->isPenguji ),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

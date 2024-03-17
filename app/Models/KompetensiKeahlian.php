@@ -16,6 +16,8 @@ class KompetensiKeahlian extends Model
 
     protected $table = 'kompetensi_keahlian';
 
+    public $timestamps = false;
+
     public function kuota(): BelongsToMany
     {
         return $this->belongsToMany(Jalur::class, 'kuota', 'kompetensi_keahlian_id', 'jalur_id')->withPivot('kuota');

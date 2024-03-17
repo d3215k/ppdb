@@ -13,4 +13,6 @@ class Penghasilan extends Model
 
     protected $table = 'ref_penghasilan';
 
+    public $timestamps = false;
+
 }

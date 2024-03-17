@@ -14,6 +14,8 @@ class TempatTinggal extends Model
 
     protected $table = 'ref_tempat_tinggal';
 
+    public $timestamps = false;
+
     public function calonPesertaDidik(): HasOne
     {
         return $this->hasOne(CalonPesertaDidik::class);

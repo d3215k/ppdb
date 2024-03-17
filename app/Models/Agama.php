@@ -14,6 +14,8 @@ class Agama extends Model
 
     protected $table = 'ref_agama';
 
+    public $timestamps = false;
+
     public function calonPesertaDidik(): HasMany
     {
         return $this->hasMany(CalonPesertaDidik::class);

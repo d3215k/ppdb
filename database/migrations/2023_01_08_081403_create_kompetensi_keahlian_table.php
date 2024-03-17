@@ -19,7 +19,6 @@ return new class extends Migration
             $table->boolean('dipilih_kesatu')->default(true);
             $table->boolean('dipilih_kedua')->default(true);
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

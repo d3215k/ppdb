@@ -54,6 +54,7 @@ class CalonPesertaDidikResource extends Resource
                                     ->label('Nama Sekolah')
                                     ->required(),
                                 Forms\Components\TextInput::make('npsn')
+                                    ->label('NPSN')
                                     ->nullable(),
                                 Forms\Components\TextInput::make('alamat')
                                     ->nullable(),

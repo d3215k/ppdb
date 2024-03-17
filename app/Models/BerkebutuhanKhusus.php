@@ -12,6 +12,8 @@ class BerkebutuhanKhusus extends Model
 
     protected $table = 'ref_berkebutuhan_khusus';
 
+    public $timestamps = false;
+
     public function calonPesertaDidik(): HasMany
     {
         return $this->hasMany(CalonPesertaDidik::class);

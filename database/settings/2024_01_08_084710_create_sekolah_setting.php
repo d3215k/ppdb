@@ -12,5 +12,6 @@ return new class extends SettingsMigration
         $this->migrator->add('sekolah.tahun_pelajaran_aktif', '');
         $this->migrator->add('sekolah.nomor_hp_cs', '');
         $this->migrator->add('sekolah.default_password', 'password');
+        $this->migrator->add('sekolah.pelulusan', false);
     }
 };

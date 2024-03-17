@@ -12,6 +12,7 @@ class SettingSekolah extends Settings
     public ?string $tahun_pelajaran_aktif;
     public ?string $nomor_hp_cs;
     public ?string $default_password;
+    public bool $pelulusan;
 
     public static function group(): string
     {

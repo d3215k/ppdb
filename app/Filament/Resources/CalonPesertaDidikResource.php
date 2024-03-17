@@ -10,9 +10,11 @@ use App\Models\CalonPesertaDidik;
 use App\Models\Gelombang;
 use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
+use App\Settings\SettingSekolah;
 use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
@@ -21,6 +23,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CalonPesertaDidikResource extends Resource
@@ -153,7 +156,8 @@ class CalonPesertaDidikResource extends Resource
                 Tables\Columns\TextColumn::make('pendaftaran_count')
                     ->label('Pendaftaran')
                     ->counts('pendaftaran'),
-                Tables\Columns\ToggleColumn::make('locked'),
+                Tables\Columns\ToggleColumn::make('locked')
+                    ->tooltip('Kunci edit data oleh pendaftar?'),
             ])
             ->filters([
                 SelectFilter::make('Gelombang')
@@ -220,9 +224,28 @@ class CalonPesertaDidikResource extends Resource
                 ])
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkAction::make('Locked')
+                    // ->icon('heroicon-m-user')
+                    ->action(function (Collection $records, array $data): void {
+                        try {
+                            foreach ($records as $record) {
+                                $record->locked = $data['locked'];
+                                $record->save();
+                            }
+                            Notification::make()->title('Data Locked berhasil diatur!')->success()->send();
+                        } catch (\Throwable $th) {
+                            Notification::make()->title('Whoops!')->body('Ada yang salah')->danger()->send();
+                            report($th->getMessage());
+                        }
+
+                    })
+                    ->form([
+                        Forms\Components\ToggleButtons::make('locked')
+                            ->label('Kunci edit data oleh Pendaftar?')
+                            ->boolean()
+                            ->grouped()
+                    ])
+                    ->deselectRecordsAfterCompletion(),
             ])
             ->defaultSort('nama')
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)

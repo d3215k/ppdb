@@ -8,6 +8,7 @@ use App\Models\Gelombang;
 use App\Models\KompetensiKeahlian;
 use App\Models\Pendaftaran;
 use App\Models\TahunPelajaran;
+use App\Settings\SettingSekolah;
 use App\Support\GenerateNumber;
 use Filament\Actions;
 use Filament\Forms;
@@ -66,6 +67,7 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                     ->options(StatusPendaftaran::class)
                     ->inline()
                     ->hiddenOn('create')
+                    ->disabled(fn (SettingSekolah $setting) => ! $setting->pelulusan)
                     ->columnSpanFull(),
             ]);
     }

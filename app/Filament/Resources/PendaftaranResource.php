@@ -10,14 +10,17 @@ use App\Models\Gelombang;
 use App\Models\Jalur;
 use App\Models\KompetensiKeahlian;
 use App\Models\Pendaftaran;
+use App\Settings\SettingSekolah;
 use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PendaftaranResource extends Resource
@@ -82,7 +85,8 @@ class PendaftaranResource extends Resource
                     ->options(StatusPendaftaran::class)
                     ->inline()
                     ->hiddenOn('create')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->disabled(fn (SettingSekolah $setting) => ! $setting->pelulusan),
             ]);
     }
 
@@ -142,9 +146,33 @@ class PendaftaranResource extends Resource
                     ->iconButton(),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkAction::make('Kelulusan')
+                    // ->icon('heroicon-m-user')
+                    ->action(function (Collection $records, array $data): void {
+                        try {
+                            foreach ($records as $record) {
+                                $record->kompetensi_keahlian = $data['kompetensi_keahlian_id'];
+                                $record->save();
+                            }
+                            Notification::make()->title('Kelulusan di set!')->success()->send();
+                        } catch (\Throwable $th) {
+                            Notification::make()->title('Whoops!')->body('Ada yang salah')->danger()->send();
+                            report($th->getMessage());
+                        }
+
+                    })
+                    ->form([
+                        Forms\Components\Select::make('kompetensi_keahlian_id')
+                            ->label('Lulus Pada Kompetensi Keahlian')
+                            ->options(KompetensiKeahlian::pluck('nama', 'id'))
+                            ->searchable()
+                            ->preload()
+                        // Forms\Components\ToggleButtons::make('status')
+                        //     ->options(StatusPendaftaran::class)
+                        //     ->inline(),
+                    ])
+                    ->hidden(fn (SettingSekolah $setting) => ! $setting->pelulusan)
+                    ->deselectRecordsAfterCompletion(),
             ])
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)
             ->filtersFormColumns(3);

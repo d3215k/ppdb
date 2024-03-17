@@ -37,9 +37,14 @@ class SettingSekolahPage extends SettingsPage
                     ->nullable(),
                 Forms\Components\TextInput::make('nomor_hp_cs')
                     ->label('Nomor Kontak Panitia')
-                    ->nullable(),
+                    ->required(),
                 Forms\Components\TextInput::make('default_password')
                     ->required(),
+                Forms\Components\ToggleButtons::make('pelulusan')
+                    ->label('Aktifkan Pelulusan')
+                    ->boolean()
+                    ->inline()
+                    ->grouped(),
             ]);
     }
 

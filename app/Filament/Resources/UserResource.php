@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\UserType;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Scopes\AktifScope;
 use App\Models\User;
 use App\Settings\SettingSekolah;
 use App\Traits\EnsureOnlyAdminCanAccess;
@@ -100,6 +101,14 @@ class UserResource extends Resource
                 // ]),
             ])
             ->defaultSort('last_login', 'desc');
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                AktifScope::class,
+            ]);
     }
 
     public static function getRelations(): array

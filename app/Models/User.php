@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\UserType;
+use App\Models\Scopes\AktifScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Filament\Models\Contracts\FilamentUser;
@@ -50,6 +51,16 @@ class User extends Authenticatable implements FilamentUser, HasName
         'password' => 'hashed',
         'type' => UserType::class,
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new AktifScope);
+    }
 
     public function getFilamentName(): string
     {

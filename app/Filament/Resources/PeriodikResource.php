@@ -211,7 +211,7 @@ class PeriodikResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->iconButton(),
                 Tables\Actions\Action::make('Calon Peserta Didik')
-                    ->url(fn (Periodik $record) => route('filament.app.resources.calon-peserta-didiks.edit', $record->calonPesertaDidik))
+                    ->url(fn (Periodik $record) => route('filament.app.resources.calon-peserta-didiks.periodik', $record->calonPesertaDidik))
                     ->icon('heroicon-m-user')
                     ->iconButton(),
             ])

@@ -42,11 +42,17 @@ class BacaTulisQuranResource extends Resource
                 Forms\Components\Fieldset::make('Hasil Tes BTQ')
                     ->schema([
                         Forms\Components\TextInput::make('kelancaran')
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(10)
+                            ->maxValue(100),
                         Forms\Components\TextInput::make('kefasihan')
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(10)
+                            ->maxValue(100),
                         Forms\Components\TextInput::make('tajwid')
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(10)
+                            ->maxValue(100),
                         Forms\Components\Textarea::make('keterangan')
                             ->maxLength(255)
                             ->columnSpanFull(),
@@ -170,7 +176,7 @@ class BacaTulisQuranResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->iconButton(),
                 Tables\Actions\Action::make('Calon Peserta Didik')
-                    ->url(fn (BacaTulisQuran $record) => route('filament.app.resources.calon-peserta-didiks.edit', $record->calonPesertaDidik))
+                    ->url(fn (BacaTulisQuran $record) => route('filament.app.resources.calon-peserta-didiks.tes', $record->calonPesertaDidik))
                     ->icon('heroicon-m-user')
                     ->iconButton()
                     ->hidden(fn (User $user) => $user->isPenguji ),

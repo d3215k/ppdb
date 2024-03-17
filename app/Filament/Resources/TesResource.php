@@ -46,9 +46,13 @@ class TesResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('minat_bakat')
                             ->required()
+                            ->minValue(10)
+                            ->maxValue(100)
                             ->numeric(),
                         Forms\Components\TextInput::make('khusus')
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(10)
+                            ->maxValue(100),
                     ])
             ]);
     }
@@ -68,9 +72,11 @@ class TesResource extends Resource
                     ->default('-'),
                 Tables\Columns\TextInputColumn::make('minat_bakat')
                     ->label('Minat dan Bakat')
+                    ->rules(['nullable', 'numeric', 'max:100', 'min:10'])
                     ->sortable(),
                 Tables\Columns\TextInputColumn::make('khusus')
                     ->label('Tes Khusus')
+                    ->rules(['nullable', 'numeric', 'max:100', 'min:10'])
                     ->sortable(),
             ])
             ->filters([
@@ -140,7 +146,7 @@ class TesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('Calon Peserta Didik')
-                    ->url(fn (Tes $record) => route('filament.app.resources.calon-peserta-didiks.edit', $record->calonPesertaDidik))
+                    ->url(fn (Tes $record) => route('filament.app.resources.calon-peserta-didiks.tes', $record->calonPesertaDidik))
                     ->icon('heroicon-m-user')
                     ->iconButton(),
             ])

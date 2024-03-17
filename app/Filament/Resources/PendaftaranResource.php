@@ -144,6 +144,10 @@ class PendaftaranResource extends Resource
                     ->icon('heroicon-m-printer')
                     ->openUrlInNewTab()
                     ->iconButton(),
+                Tables\Actions\Action::make('Calon Peserta Didik')
+                    ->url(fn (Pendaftaran $record) => route('filament.app.resources.calon-peserta-didiks.edit', $record))
+                    ->icon('heroicon-m-user')
+                    ->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkAction::make('Kelulusan')

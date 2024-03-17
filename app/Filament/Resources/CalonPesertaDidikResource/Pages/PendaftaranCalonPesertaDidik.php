@@ -92,6 +92,7 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->label('Daftarkan')
                     ->mutateFormDataUsing(function (array $data): array {
                         $tahun = TahunPelajaran::whereAktif(true)->first();
                         $gelombang = Gelombang::find($data['gelombang_id']);

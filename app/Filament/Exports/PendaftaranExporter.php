@@ -14,15 +14,23 @@ class PendaftaranExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('calonPesertaDidik.nama'),
+            ExportColumn::make('calonPesertaDidik.nama')
+                ->label('Nama Lengkap Calon Peserta Didik'),
             ExportColumn::make('nomor'),
-            ExportColumn::make('jalur.nama'),
-            ExportColumn::make('gelombang.nama'),
-            ExportColumn::make('pilihanKesatu.kode'),
-            ExportColumn::make('pilihanKedua.kode'),
+            ExportColumn::make('jalur.nama')
+                ->label('Jalur'),
+            ExportColumn::make('gelombang.nama')
+                ->label('Gelombang'),
+            ExportColumn::make('pilihanKesatu.kode')
+                ->label('Pilihan Pertama'),
+            ExportColumn::make('pilihanKedua.kode')
+                ->label('Pilihan Kedua'),
+            ExportColumn::make('diterima.kode')
+                ->label('Diterima pada Jurusan'),
             ExportColumn::make('status')
                 ->label('Status')
                 ->state(fn (Pendaftaran $record) => isset($record->status) ? $record->status->getLabel() : '-' ),
+
             ExportColumn::make('calonPesertaDidik.asalSekolah.nama')
                 ->label('Asal Sekolah'),
             ExportColumn::make('calonPesertaDidik.lp')
@@ -86,10 +94,6 @@ class PendaftaranExporter extends Exporter
                 ->label('Username'),
             ExportColumn::make('calonPesertaDidik.password')
                 ->label('Password'),
-            // ExportColumn::make('diterima.kode'),
-            // ExportColumn::make('status'),
-            // ExportColumn::make('created_at'),
-            // ExportColumn::make('updated_at'),
         ];
     }
 

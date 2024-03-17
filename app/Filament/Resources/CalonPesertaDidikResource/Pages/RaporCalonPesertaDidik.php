@@ -59,27 +59,27 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                             ->label('Sem. I')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('pai_2')
                             ->label('Sem. II')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('pai_3')
                             ->label('Sem. III')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('pai_4')
                             ->label('Sem. IV')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('pai_5')
                             ->label('Sem. V')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                     ])
                     ->columns(5),
                 Forms\Components\Fieldset::make('bindo')
@@ -89,27 +89,27 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                             ->label('Sem. I')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bindo_2')
                             ->label('Sem. II')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bindo_3')
                             ->label('Sem. III')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bindo_4')
                             ->label('Sem. IV')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bindo_5')
                             ->label('Sem. V')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                     ])
                     ->columns(5),
                 Forms\Components\Fieldset::make('mtk')
@@ -119,27 +119,27 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                             ->label('Sem. I')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('mtk_2')
                             ->label('Sem. II')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('mtk_3')
                             ->label('Sem. III')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('mtk_4')
                             ->label('Sem. IV')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('mtk_5')
                             ->label('Sem. V')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                     ])
                     ->columns(5),
                 Forms\Components\Fieldset::make('ipa')
@@ -149,27 +149,27 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                             ->label('Sem. I')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ipa_2')
                             ->label('Sem. II')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ipa_3')
                             ->label('Sem. III')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ipa_4')
                             ->label('Sem. IV')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ipa_5')
                             ->label('Sem. V')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                     ])
                     ->columns(5),
                 Forms\Components\Fieldset::make('ips')
@@ -179,27 +179,27 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                             ->label('Sem. I')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ips_2')
                             ->label('Sem. II')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ips_3')
                             ->label('Sem. III')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ips_4')
                             ->label('Sem. IV')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('ips_5')
                             ->label('Sem. V')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                     ])
                     ->columns(5),
                 Forms\Components\Fieldset::make('bing')
@@ -209,27 +209,27 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                             ->label('Sem. I')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bing_2')
                             ->label('Sem. II')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bing_3')
                             ->label('Sem. III')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bing_4')
                             ->label('Sem. IV')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                         Forms\Components\TextInput::make('bing_5')
                             ->label('Sem. V')
                             ->numeric()
                             ->maxValue(100)
-                            ->minValue(0),
+                            ->minValue(10),
                     ])
                     ->columns(5),
                 Forms\Components\FileUpload::make('halaman_identitas')
@@ -241,15 +241,15 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                     ->schema([
                         Forms\Components\TextInput::make('sakit')
                             ->numeric()
-                            ->maxValue(100)
+                            ->maxValue(99)
                             ->minValue(0),
                         Forms\Components\TextInput::make('izin')
                             ->numeric()
-                            ->maxValue(100)
+                            ->maxValue(99)
                             ->minValue(0),
                         Forms\Components\TextInput::make('alpa')
                             ->numeric()
-                            ->maxValue(100)
+                            ->maxValue(99)
                             ->minValue(0),
                     ])
                     ->columns(3),

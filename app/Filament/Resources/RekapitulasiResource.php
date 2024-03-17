@@ -48,7 +48,8 @@ class RekapitulasiResource extends Resource
             ])
             ->bulkActions([
                 //
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public static function getRelations(): array

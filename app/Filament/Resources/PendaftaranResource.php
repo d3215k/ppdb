@@ -146,14 +146,14 @@ class PendaftaranResource extends Resource
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
             ])
-            ->filtersLayout(FiltersLayout::AboveContent)
+            ->filtersLayout(FiltersLayout::AboveContentCollapsible)
             ->filtersFormColumns(3);
     }
 
     public static function getRelations(): array
     {
         return [
-            // RelationManagers\BuktiPersyaratanKhususRelationManager::class,
+            RelationManagers\BuktiPersyaratanKhususRelationManager::class,
         ];
     }
 

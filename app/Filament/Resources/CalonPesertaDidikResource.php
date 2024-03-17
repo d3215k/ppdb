@@ -5,7 +5,11 @@ namespace App\Filament\Resources;
 use App\Enums\JenisKelamin;
 use App\Filament\Resources\CalonPesertaDidikResource\Pages;
 use App\Filament\Resources\CalonPesertaDidikResource\RelationManagers;
+use App\Models\AsalSekolah;
 use App\Models\CalonPesertaDidik;
+use App\Models\Gelombang;
+use App\Models\Jalur;
+use App\Models\KompetensiKeahlian;
 use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,6 +17,8 @@ use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -150,7 +156,57 @@ class CalonPesertaDidikResource extends Resource
                 Tables\Columns\ToggleColumn::make('locked'),
             ])
             ->filters([
-                //
+                SelectFilter::make('Gelombang')
+                    ->options(
+                        fn() => Gelombang::query()->pluck('nama', 'id')->toArray(),
+                    )
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['value']))
+                        {
+                            $query->whereHas(
+                                'pendaftaran',
+                                fn (Builder $query) => $query->where('gelombang_id', '=', (int) $data['value'])
+                            );
+                        }
+                    }),
+                SelectFilter::make('Jalur')
+                    ->options(
+                        fn() => Jalur::query()->pluck('nama', 'id')->toArray(),
+                    )
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['value']))
+                        {
+                            $query->whereHas(
+                                'pendaftaran',
+                                fn (Builder $query) => $query->where('jalur_id', '=', (int) $data['value'])
+                            );
+                        }
+                    }),
+                SelectFilter::make('Asal Sekolah')
+                    ->options(
+                        fn() => AsalSekolah::query()->pluck('nama', 'id')->toArray(),
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['value']))
+                        {
+                            $query->where('asal_sekolah_id', '=', (int) $data['value']);
+                        }
+                    }),
+                SelectFilter::make('Pilihan Kesatu')
+                    ->options(
+                        fn() => KompetensiKeahlian::query()->pluck('nama', 'id')->toArray(),
+                    )
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['value']))
+                        {
+                            $query->whereHas(
+                                'pendaftaran',
+                                fn (Builder $query) => $query->where('pilihan_kesatu', '=', (int) $data['value'])
+                            );
+                        }
+                    }),
             ])
             ->actions([
                 Tables\Actions\Action::make('Whatsapp')
@@ -167,7 +223,10 @@ class CalonPesertaDidikResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])
+            ->defaultSort('nama')
+            ->filtersLayout(FiltersLayout::AboveContentCollapsible)
+            ->filtersFormColumns(2);
     }
 
     public static function getRelations(): array

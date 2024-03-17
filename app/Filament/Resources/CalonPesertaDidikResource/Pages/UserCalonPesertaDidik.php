@@ -4,7 +4,12 @@ namespace App\Filament\Resources\CalonPesertaDidikResource\Pages;
 
 use App\Enums\UserType;
 use App\Filament\Resources\CalonPesertaDidikResource;
+use App\Models\CalonPesertaDidik;
 use App\Models\User;
+use App\Settings\SettingSekolah;
+use Filament\Actions\Action;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
@@ -18,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 class UserCalonPesertaDidik extends Page implements HasForms
 {
     use InteractsWithRecord;
+    // use InteractsWithActions;
     use InteractsWithForms;
 
     protected static string $resource = CalonPesertaDidikResource::class;
@@ -40,15 +46,62 @@ class UserCalonPesertaDidik extends Page implements HasForms
         return $this->getRecord()->asalSekolah->nama ?? '-';
     }
 
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('Reset Password')
+                ->icon('heroicon-m-lock-open')
+                ->color('danger')
+                ->requiresConfirmation()
+                ->modalHeading(
+                    fn (CalonPesertaDidik $record) => 'Reset Password ' . $record->name
+                )
+                ->modalDescription(fn (SettingSekolah $setting) => 'Setelah direset, password menjadi ' . $setting->default_password)
+                ->action(fn (CalonPesertaDidik $record, SettingSekolah $setting) => $record->user->resetPassword($setting->default_password))
+                ->hidden(fn () => ! $this->getRecord()->user),
+            Action::make('Generate Akun Login')
+                ->fillForm(fn (CalonPesertaDidik $record): array => [
+                    'email' => $record->email,
+                    'name' => $record->nama,
+                ])
+                ->form([
+                    Forms\Components\TextInput::make('email')
+                        ->label('Email')
+                        ->required(),
+                    Forms\Components\TextInput::make('name')
+                        ->label('Nama')
+                        ->required(),
+                ])
+                ->action(function (array $data, CalonPesertaDidik $record) {
+                    $setting = new SettingSekolah();
+
+                    $record->user()->create([
+                        'email' => $data['email'],
+                        'name' => $data['name'],
+                        'password' => bcrypt($setting->default_password),
+                    ]);
+
+                    return to_route('filament.app.resources.calon-peserta-didiks.user', $record);
+                })
+                ->hidden(fn () => $this->getRecord()->user),
+        ];
+    }
+
+    private function fillForm()
+    {
+        $this->form->fill([
+            'username' => $this->getRecord()->username,
+            'password' => $this->getRecord()->password,
+            'email' => $this->getRecord()->user->email ?? null,
+            'name' => $this->getRecord()->user->name ?? null,
+        ]);
+    }
+
     public function mount(int | string $record): void
     {
         $this->record = $this->resolveRecord($record);
 
-        $this->form->fill([
-            ...$this->getRecord()->toArray(),
-            'email' => $this->getRecord()->user->email ?? null,
-            'name' => $this->getRecord()->user->name ?? null,
-        ]);
+        $this->fillForm();
     }
 
     public function form(Form $form): Form
@@ -58,11 +111,11 @@ class UserCalonPesertaDidik extends Page implements HasForms
                 Forms\Components\Fieldset::make('Akses Pengguna')
                     ->schema([
                         Forms\Components\TextInput::make('email')
-                            ->default($this->getRecord()->email)
                             ->maxLength(255),
                         Forms\Components\TextInput::make('name')
                             ->maxLength(255),
-                    ]),
+                    ])
+                ->hidden(! $this->getRecord()->user),
                 Forms\Components\Fieldset::make('Akun PPDB Dinas')
                     ->schema([
                         Forms\Components\TextInput::make('username')
@@ -84,16 +137,18 @@ class UserCalonPesertaDidik extends Page implements HasForms
 
             $data = $this->form->getState();
 
-            User::updateOrCreate(
-                [
-                    'calon_peserta_didik_id' => $this->getRecord()->id,
-                ],
-                [
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'type' => UserType::PENDAFTAR,
-                ]
-            );
+            if ($this->getRecord()->user) {
+                User::updateOrCreate(
+                    [
+                        'calon_peserta_didik_id' => $this->getRecord()->id,
+                    ],
+                    [
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'type' => UserType::PENDAFTAR,
+                    ]
+                );
+            }
 
             $this->getRecord()->update([
                'username' =>  $data['username'],

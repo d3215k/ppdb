@@ -69,7 +69,17 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Impersonate::make(),
+                Impersonate::make()
+                    ->after(function (User $user) {
+                        if ($user->calon_peserta_didik_id) {
+                            session([
+                                'hasCalonPesertaDidik' => true,
+                            ]);
+                        } else {
+                            session()->forget('hasCalonPesertaDidik');
+                        }
+                    })
+                    ,
                 Tables\Actions\Action::make('reset')
                     ->icon('heroicon-m-lock-open')
                     ->color('danger')

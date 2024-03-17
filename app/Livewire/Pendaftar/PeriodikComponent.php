@@ -79,19 +79,31 @@ class PeriodikComponent extends Component implements HasForms
                     ->nullable()
                     ->options(UkuranBaju::class),
                 Forms\Components\ToggleButtons::make('tato')
-                    // ->required()
+                    ->required()
                     ->boolean()
                     ->grouped()
+                    ->colors([
+                        true => 'danger',
+                        false => 'success',
+                    ])
                     ->inline(),
                 Forms\Components\ToggleButtons::make('tindik')
-                    // ->required()
+                    ->required()
                     ->boolean()
                     ->grouped()
+                    ->colors([
+                        true => 'danger',
+                        false => 'success',
+                    ])
                     ->inline(),
                 Forms\Components\ToggleButtons::make('cat_rambut')
-                    // ->required()
+                    ->required()
                     ->boolean()
                     ->grouped()
+                    ->colors([
+                        true => 'danger',
+                        false => 'success',
+                    ])
                     ->inline(),
             ])
             ->columns(2)

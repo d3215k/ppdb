@@ -58,17 +58,29 @@ class PeriodikResource extends Resource
                 Forms\Components\ToggleButtons::make('tato')
                     ->required()
                     ->boolean()
+                    ->colors([
+                        true => 'danger',
+                        false => 'success',
+                    ])
                     ->grouped()
                     ->inline(),
                 Forms\Components\ToggleButtons::make('tindik')
                     ->required()
                     ->boolean()
                     ->grouped()
+                    ->colors([
+                        true => 'danger',
+                        false => 'success',
+                    ])
                     ->inline(),
                 Forms\Components\ToggleButtons::make('cat_rambut')
                     ->required()
                     ->boolean()
                     ->grouped()
+                    ->colors([
+                        true => 'danger',
+                        false => 'success',
+                    ])
                     ->inline(),
             ]);
     }

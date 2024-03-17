@@ -5,14 +5,14 @@
                 {{ $this->persyaratanUmumForm }}
             </x-filament::section>
 
-            @if ($this->pendaftaran())
+            @if ($this->pendaftaran)
                 <x-filament::section heading="Persyaratan Khusus">
                     {{ $this->persyaratanKhususForm }}
                 </x-filament::section>
             @endif
 
             <div class="mt-4 flex justify-between">
-                <x-filament::button type="submit" :disabled="$this->pendaftaran->calonPesertaDidik->locked">
+                <x-filament::button type="submit" :disabled="$this->persyaratanUmum->calonPesertaDidik->locked">
                     Simpan
                 </x-filament::button>
                 <x-filament::button

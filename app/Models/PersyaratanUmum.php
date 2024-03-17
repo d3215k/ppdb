@@ -14,9 +14,9 @@ class PersyaratanUmum extends Model
 
     public $timestamps = false;
 
-    public function pendaftaran(): BelongsTo
+    public function calonPesertaDidik(): BelongsTo
     {
-        return $this->belongsTo(Pendaftaran::class);
+        return $this->belongsTo(CalonPesertaDidik::class);
     }
 
     public function isComplete(): bool

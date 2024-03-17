@@ -37,8 +37,8 @@ class Rapor extends Model
     public function isComplete(): bool
     {
         $requiredProperties = [
-            'halaman_identitas',
-            'halaman_nilai_semester',
+            // 'halaman_identitas',
+            // 'halaman_nilai_semester',
             'pai_1',
             'pai_2',
             'pai_3',
@@ -69,7 +69,7 @@ class Rapor extends Model
             'bing_3',
             'bing_4',
             'bing_5',
-            'halaman_kehadiran',
+            // 'halaman_kehadiran',
             'sakit',
             'izin',
             'alpa',

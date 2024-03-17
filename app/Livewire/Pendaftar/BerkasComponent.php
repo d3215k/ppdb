@@ -37,10 +37,16 @@ class BerkasComponent extends Component implements HasForms
         return PersyaratanKhusus::where('jalur_id', $this->pendaftaran->jalur_id)->get();
     }
 
+    #[Computed()]
+    public function persyaratanUmum()
+    {
+        return PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first();
+    }
+
     public function mount()
     {
         $this->persyaratanUmumForm->fill(
-            PersyaratanUmum::where('calon_peserta_didik_id', auth()->user()->calon_peserta_didik_id)->first()?->toArray()
+            $this->persyaratanUmum->toArray()
         );
 
         if ($this->pendaftaran) {
@@ -61,23 +67,31 @@ class BerkasComponent extends Component implements HasForms
     public function persyaratanUmumForm(Form $form): Form
     {
         return $form
-            ->disabled(fn() => $this->pendaftaran->calonPesertaDidik->locked)
+            ->disabled(fn() => $this->persyaratanUmum->calonPesertaDidik->locked)
             ->schema([
                 Forms\Components\FileUpload::make('dokumen_kelulusan')
                     // ->required()
                     ->nullable()
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('dokumen_kelahiran')
                     // ->required()
                     ->nullable()
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('kartu_keluarga')
                     // ->required()
                     ->nullable()
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('ktp_ortu')
                     // ->required()
                     ->nullable()
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
 
             ])
@@ -96,6 +110,8 @@ class BerkasComponent extends Component implements HasForms
             foreach ($persyaratanKhusus as $syarat) {
                 $fields[] = Forms\Components\FileUpload::make($syarat->id)
                     ->label($syarat->nama)
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable()
                     // ->required()
                     ;
@@ -103,7 +119,7 @@ class BerkasComponent extends Component implements HasForms
         }
 
         return $form
-            ->disabled(fn() => $this->pendaftaran->calonPesertaDidik->locked)
+            ->disabled(fn() => $this->persyaratanUmum->calonPesertaDidik->locked)
             ->schema($fields)
             ->columns(2)
             ->statePath('khusus');

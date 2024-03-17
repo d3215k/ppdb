@@ -32,8 +32,12 @@ class SettingSekolahPage extends SettingsPage
                 Forms\Components\Select::make('tahun_pelajaran_aktif')
                     ->options(TahunPelajaran::pluck('nama', 'id')),
                 Forms\Components\FileUpload::make('logo')
+                    ->image()
+                    ->maxSize(512)
                     ->nullable(),
                 Forms\Components\FileUpload::make('kop_surat')
+                    ->image()
+                    ->maxSize(512)
                     ->nullable(),
                 Forms\Components\TextInput::make('nomor_hp_cs')
                     ->label('Nomor Kontak Panitia')

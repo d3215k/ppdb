@@ -233,8 +233,12 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                     ])
                     ->columns(5),
                 Forms\Components\FileUpload::make('halaman_identitas')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('halaman_nilai_semester')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
 
                 Forms\Components\Fieldset::make('Jumlah Ketidakhadiran')
@@ -254,6 +258,8 @@ class RaporCalonPesertaDidik extends Page implements HasForms
                     ])
                     ->columns(3),
                 Forms\Components\FileUpload::make('halaman_kehadiran')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(1024)
                     ->downloadable(),
 
             ])

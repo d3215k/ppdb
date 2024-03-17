@@ -68,6 +68,7 @@ class CalonPesertaDidikResource extends Resource
                     ]),
                 Forms\Components\FileUpload::make('foto')
                     ->image()
+                    ->maxSize(512)
                     ->columnSpanFull()
                     ->hiddenOn('create'),
                 Forms\Components\TextInput::make('nama')

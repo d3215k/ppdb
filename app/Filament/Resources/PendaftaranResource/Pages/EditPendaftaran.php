@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PendaftaranResource\Pages;
 
+use App\Enums\StatusPendaftaran;
 use App\Filament\Resources\PendaftaranResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -26,5 +27,14 @@ class EditPendaftaran extends EditRecord
     public function getSubheading(): string|Htmlable|null
     {
         return $this->getRecord()->calonPesertaDidik->asalSekolah->nama ?? '-';
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        if ((int) $data['status'] !== StatusPendaftaran::LULUS->value) {
+            $data['kompetensi_keahlian'] = null;
+        }
+
+        return $data;
     }
 }

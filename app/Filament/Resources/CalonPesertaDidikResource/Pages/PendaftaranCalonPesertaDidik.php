@@ -13,11 +13,13 @@ use App\Support\GenerateNumber;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
@@ -68,7 +70,18 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                     ->inline()
                     ->hiddenOn('create')
                     ->disabled(fn (SettingSekolah $setting) => ! $setting->pelulusan)
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->reactive()
+                    ,
+                Forms\Components\Select::make('kompetensi_keahlian')
+                    ->options(KompetensiKeahlian::pluck('nama', 'id'))
+                    ->label('Diterima pada Kompetensi Keahlian')
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->hidden(function (Get $get): bool {
+                        return $get('status') != StatusPendaftaran::LULUS->value;
+                    }),
             ]);
     }
 
@@ -107,7 +120,14 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                     ->url(fn (Pendaftaran $record) => route('pendaftar.cetak', $record->nomor))
                     ->icon('heroicon-m-printer')
                     ->openUrlInNewTab(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        if ((int) $data['status'] !== StatusPendaftaran::LULUS->value) {
+                            $data['kompetensi_keahlian'] = null;
+                        }
+
+                        return $data;
+                    }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

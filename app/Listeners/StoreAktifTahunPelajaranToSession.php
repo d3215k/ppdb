@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Models\CalonPesertaDidik;
 use App\Models\TahunPelajaran;
+use App\Settings\SettingSekolah;
 
 class StoreAktifTahunPelajaranToSession
 {
@@ -42,8 +43,15 @@ class StoreAktifTahunPelajaranToSession
                     'hasCalonPesertaDidik' => true,
                 ]);
             }
+        } else {
+            $setting = new SettingSekolah();
 
+            session([
+                'pelulusan' => $setting->pelulusan
+            ]);
         }
+
+
 
     }
 }

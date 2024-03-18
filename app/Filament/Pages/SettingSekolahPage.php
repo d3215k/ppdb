@@ -58,6 +58,10 @@ class SettingSekolahPage extends SettingsPage
 
         $data = $this->form->getState();
 
+        session([
+            'pelulusan' => $data['pelulusan']
+        ]);
+
         $id = $data['tahun_pelajaran_aktif'];
 
         TahunPelajaran::query()
@@ -73,5 +77,12 @@ class SettingSekolahPage extends SettingsPage
             ]);
 
         TahunPelajaranAktifChanged::dispatch($id);
+
+        $this->afterSave();
+    }
+
+    public function afterSave()
+    {
+        return to_route('filament.app.pages.setting-sekolah-page');
     }
 }

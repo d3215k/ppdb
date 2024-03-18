@@ -262,7 +262,8 @@ class CalonPesertaDidikResource extends Resource
             ])
             ->defaultSort('nama')
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)
-            ->filtersFormColumns(2);
+            ->filtersFormColumns(2)
+            ->striped();
     }
 
     public static function getRelations(): array

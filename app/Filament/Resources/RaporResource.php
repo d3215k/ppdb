@@ -170,7 +170,8 @@ class RaporResource extends Resource
             ])
             ->defaultSort('sum', 'desc')
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)
-            ->filtersFormColumns(2);
+            ->filtersFormColumns(2)
+            ->striped();
     }
 
     public static function getRelations(): array

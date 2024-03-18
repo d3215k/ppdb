@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\JenisKelamin;
+use App\Enums\StatusPendaftaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,38 +17,31 @@ class Rekapitulasi extends Model
     {
         $data = [];
 
-        $pilihanKesatu = KompetensiKeahlian::where('dipilih_kesatu', true)->get();
-        $pilihanKedua = KompetensiKeahlian::where('dipilih_kedua', true)->get();
-
+        $jurusan = KompetensiKeahlian::all();
         $jalur = Jalur::all();
 
-        foreach ($pilihanKesatu as $i => $s) {
-            foreach ($jalur as $z => $j) {
-                $data[$i] = [
-                    'nama' => $s->nama,
-                ];
+        $pendaftar = Pendaftaran::with('calonPesertaDidik')->get();
 
-                $data[$i]['data'][$z] = [
-                    'jalur' => $j->nama,
-                    'kuota' => 50,
-                    'pendaftar' => [
-                        'l' => 20,
-                        'p' => 10,
-                    ],
-                    'diterima' => [
-                        'l' => 20,
-                        'p' => 10,
-                    ],
-                ];
+        foreach ($jurusan as $i => $s) {
+            $data[$i] = [
+                'nama' => $s->nama,
+                'kuota' => $s->kuota()->sum('kuota'),
+                'pendaftar_1' => $pendaftar->where('pilihan_kesatu', $s->id)->count(),
+                'pendaftar_2' => $pendaftar->where('pilihan_kedua', $s->id)->count(),
+                'diterima' => $pendaftar->where('kompetensi_keahlian', $s->id)->where('status', StatusPendaftaran::LULUS)->count(),
+            ];
+
+            foreach ($jalur as $j) {
+                $data[$i][$j->id.'_nama'] = $j->nama;
+                $data[$i][$j->id.'_pendaftar_1_l'] = Pendaftaran::where('pilihan_kesatu', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::LAKI_LAKI))->where('jalur_id', $j->id)->count();
+                $data[$i][$j->id.'_pendaftar_1_p'] = Pendaftaran::where('pilihan_kesatu', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::PEREMPUAN))->where('jalur_id', $j->id)->count();
+                $data[$i][$j->id.'_pendaftar_2_l'] = Pendaftaran::where('pilihan_kedua', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::LAKI_LAKI))->where('jalur_id', $j->id)->count();
+                $data[$i][$j->id.'_pendaftar_2_p'] = Pendaftaran::where('pilihan_kedua', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::PEREMPUAN))->where('jalur_id', $j->id)->count();
+                $data[$i][$j->id.'_diterima_l'] = Pendaftaran::where('kompetensi_keahlian', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::LAKI_LAKI))->where('status', StatusPendaftaran::LULUS)->where('jalur_id', $j->id)->count();
+                $data[$i][$j->id.'_diterima_p'] = Pendaftaran::where('kompetensi_keahlian', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::PEREMPUAN))->where('status', StatusPendaftaran::LULUS)->where('jalur_id', $j->id)->count();
             }
         }
 
-        // dd($data);
-
-        return [
-            [
-                'foo' => 'bar'
-            ],
-        ];
+        return $data;
     }
 }

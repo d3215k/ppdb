@@ -14,6 +14,7 @@ use App\Settings\SettingSekolah;
 use App\Traits\EnsureOnlyPanitiaCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -76,17 +77,24 @@ class PendaftaranResource extends Resource
                     ->searchable()
                     ->required()
                     ->preload(),
-                Forms\Components\Select::make('kompetensi_keahlian')
-                    ->options(KompetensiKeahlian::pluck('nama', 'id'))
-                    ->searchable()
-                    ->required()
-                    ->preload(),
                 Forms\Components\ToggleButtons::make('status')
                     ->options(StatusPendaftaran::class)
                     ->inline()
                     ->hiddenOn('create')
                     ->columnSpanFull()
+                    ->reactive()
                     ->disabled(fn (SettingSekolah $setting) => ! $setting->pelulusan),
+                Forms\Components\Select::make('kompetensi_keahlian')
+                    ->options(KompetensiKeahlian::pluck('nama', 'id'))
+                    ->label('Diterima pada Kompetensi Keahlian')
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->reactive()
+                    ->hidden(function (Get $get): bool {
+                        return $get('status') != StatusPendaftaran::LULUS->value;
+                    })
+                    ,
             ]);
     }
 
@@ -179,7 +187,8 @@ class PendaftaranResource extends Resource
                     ->deselectRecordsAfterCompletion(),
             ])
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)
-            ->filtersFormColumns(3);
+            ->filtersFormColumns(3)
+            ->striped();
     }
 
     public static function getRelations(): array

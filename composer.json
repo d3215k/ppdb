@@ -12,6 +12,7 @@
         "calebporzio/sushi": "^2.5",
         "filament/filament": "^3.0-stable",
         "filament/spatie-laravel-settings-plugin": "^3.2",
+        "flowframe/laravel-trend": "^0.2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",

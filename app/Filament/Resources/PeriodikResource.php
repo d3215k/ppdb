@@ -120,6 +120,8 @@ class PeriodikResource extends Resource
                 Tables\Columns\IconColumn::make('tato')
                     ->label('Tato')
                     ->boolean()
+                    ->trueColor('danger')
+                    ->falseColor('success')
                     ->default(false)
                     ->toggleable(
                         condition:true,
@@ -128,6 +130,8 @@ class PeriodikResource extends Resource
                 Tables\Columns\IconColumn::make('tindik')
                     ->label('Tindik')
                     ->boolean()
+                    ->trueColor('danger')
+                    ->falseColor('success')
                     ->default(false)
                     ->toggleable(
                         condition:true,
@@ -136,6 +140,8 @@ class PeriodikResource extends Resource
                 Tables\Columns\IconColumn::make('cat_rambut')
                     ->label('Cat Rambut')
                     ->boolean()
+                    ->trueColor('danger')
+                    ->falseColor('success')
                     ->default(false)
                     ->toggleable(
                         condition:true,

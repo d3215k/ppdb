@@ -33,6 +33,7 @@ class Rekapitulasi extends Model
 
             foreach ($jalur as $j) {
                 $data[$i][$j->id.'_nama'] = $j->nama;
+                $data[$i][$j->id.'_kuota'] = $j->kuota()->where('kompetensi_keahlian_id', $s->id)->sum('kuota');
                 $data[$i][$j->id.'_pendaftar_1_l'] = Pendaftaran::where('pilihan_kesatu', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::LAKI_LAKI))->where('jalur_id', $j->id)->count();
                 $data[$i][$j->id.'_pendaftar_1_p'] = Pendaftaran::where('pilihan_kesatu', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::PEREMPUAN))->where('jalur_id', $j->id)->count();
                 $data[$i][$j->id.'_pendaftar_2_l'] = Pendaftaran::where('pilihan_kedua', $s->id)->whereHas('calonPesertaDidik', fn ($query) => $query->where('lp', JenisKelamin::LAKI_LAKI))->where('jalur_id', $j->id)->count();

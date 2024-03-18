@@ -51,6 +51,8 @@ class RekapitulasiResource extends Resource
 
         foreach ($jalur as $i => $item) {
             $columns[] = Tables\Columns\ColumnGroup::make($nama[$item->id - 1] , [
+                Tables\Columns\TextColumn::make($item->id.'_kuota')
+                    ->label('Kuota'),
                 Tables\Columns\TextColumn::make($item->id.'_pendaftar_1_l')
                     ->label('1 (L)'),
                 Tables\Columns\TextColumn::make($item->id.'_pendaftar_1_p')

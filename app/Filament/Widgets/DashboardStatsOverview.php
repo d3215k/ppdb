@@ -19,7 +19,7 @@ class DashboardStatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Pendaftaran', CalonPesertaDidik::count()),
+            Stat::make('Pendaftar', CalonPesertaDidik::count()),
             Stat::make('Jumlah Yang Sudah Diterima', Pendaftaran::where('status', StatusPendaftaran::LULUS)->count()),
             Stat::make('Pilihan Kompetensi Keahlian', KompetensiKeahlian::count()),
             Stat::make('Jalur Pendaftaran', Jalur::count()),

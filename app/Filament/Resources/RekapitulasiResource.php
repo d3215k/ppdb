@@ -30,17 +30,17 @@ class RekapitulasiResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return session('pelulusan', false);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
             ]);
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return session('pelulusan', false);
     }
 
     private static function getColumns()

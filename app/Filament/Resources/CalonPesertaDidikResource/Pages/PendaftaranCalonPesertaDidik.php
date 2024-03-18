@@ -21,6 +21,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
 {
@@ -55,24 +56,35 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                 Forms\Components\Select::make('gelombang_id')
                     ->relationship('gelombang', 'nama')
                     ->required(),
-                Forms\Components\Select::make('pilihan_kesatu')
-                    ->options(KompetensiKeahlian::where('dipilih_kesatu', true)->pluck('nama', 'id'))
-                    ->searchable()
+                    Forms\Components\Select::make('pilihan_kesatu')
+                    ->label('Pilihan Kompetensi Keahlian Pertama')
+                    ->options(fn (): Collection => KompetensiKeahlian::query()
+                        ->where('dipilih_kesatu', true)
+                        ->pluck('nama', 'id')
+                    )
                     ->required()
-                    ->preload(),
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                        if ($state === $get('pilihan_kedua')) {
+                            $set('pilihan_kedua', null);
+                        }
+                    }),
                 Forms\Components\Select::make('pilihan_kedua')
-                    ->options(KompetensiKeahlian::where('dipilih_kedua', true)->pluck('nama', 'id'))
-                    ->searchable()
-                    ->required()
-                    ->preload(),
+                    ->label('Pilihan Kompetensi Keahlian Kedua')
+                    ->options(fn (Get $get): Collection => KompetensiKeahlian::query()
+                        ->where('dipilih_kedua', true)
+                        ->whereNot('id', $get('pilihan_kesatu'))
+                        ->pluck('nama', 'id')
+                    )
+                    ->reactive()
+                    ->required(),
                 Forms\Components\ToggleButtons::make('status')
                     ->options(StatusPendaftaran::class)
                     ->inline()
                     ->hiddenOn('create')
                     ->disabled(fn (SettingSekolah $setting) => ! $setting->pelulusan)
                     ->columnSpanFull()
-                    ->reactive()
-                    ,
+                    ->reactive(),
                 Forms\Components\Select::make('kompetensi_keahlian')
                     ->options(KompetensiKeahlian::pluck('nama', 'id'))
                     ->label('Diterima pada Kompetensi Keahlian')

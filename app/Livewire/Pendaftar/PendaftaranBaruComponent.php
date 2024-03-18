@@ -202,7 +202,10 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 )
                                 ->inline()
                                 ->required()
-                                ->reactive(),
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                    $set('jalur_id', null);
+                                }),
                             ToggleButtons::make('jalur_id')
                                 ->label('Jalur Pendaftaran')
                                 ->inline()
@@ -224,7 +227,12 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 )
                                 ->inline()
                                 ->required()
-                                ->reactive(),
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                    if ($state === $get('pilihan_kedua')) {
+                                        $set('pilihan_kedua', null);
+                                    }
+                                }),
                             ToggleButtons::make('pilihan_kedua')
                                 ->label('Pilihan Kompetensi Keahlian Kedua')
                                 ->options(fn (Get $get): Collection => KompetensiKeahlian::query()

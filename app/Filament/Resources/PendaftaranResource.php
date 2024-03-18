@@ -21,8 +21,8 @@ use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class PendaftaranResource extends Resource
 {
@@ -68,15 +68,27 @@ class PendaftaranResource extends Resource
                     ->relationship('gelombang', 'nama')
                     ->required(),
                 Forms\Components\Select::make('pilihan_kesatu')
-                    ->options(KompetensiKeahlian::where('dipilih_kesatu', true)->pluck('nama', 'id'))
-                    ->searchable()
+                    ->label('Pilihan Kompetensi Keahlian Pertama')
+                    ->options(fn (): Collection => KompetensiKeahlian::query()
+                        ->where('dipilih_kesatu', true)
+                        ->pluck('nama', 'id')
+                    )
                     ->required()
-                    ->preload(),
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                        if ($state === $get('pilihan_kedua')) {
+                            $set('pilihan_kedua', null);
+                        }
+                    }),
                 Forms\Components\Select::make('pilihan_kedua')
-                    ->options(KompetensiKeahlian::where('dipilih_kedua', true)->pluck('nama', 'id'))
-                    ->searchable()
-                    ->required()
-                    ->preload(),
+                    ->label('Pilihan Kompetensi Keahlian Kedua')
+                    ->options(fn (Get $get): Collection => KompetensiKeahlian::query()
+                        ->where('dipilih_kedua', true)
+                        ->whereNot('id', $get('pilihan_kesatu'))
+                        ->pluck('nama', 'id')
+                    )
+                    ->reactive()
+                    ->required(),
                 Forms\Components\ToggleButtons::make('status')
                     ->options(StatusPendaftaran::class)
                     ->inline()

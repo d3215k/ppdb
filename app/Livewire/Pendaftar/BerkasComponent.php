@@ -73,25 +73,25 @@ class BerkasComponent extends Component implements HasForms
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('dokumen_kelahiran')
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('kartu_keluarga')
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('ktp_ortu')
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
 
             ])
@@ -111,7 +111,7 @@ class BerkasComponent extends Component implements HasForms
                 $fields[] = Forms\Components\FileUpload::make($syarat->id)
                     ->label($syarat->nama)
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable()
                     // ->required()
                     ;

@@ -222,14 +222,14 @@ class RaporComponent extends Component implements HasForms
                     ])
                     ->columns(5),
 
-                Forms\Components\FileUpload::make('halaman_identitas')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
-                    ->downloadable(),
-                Forms\Components\FileUpload::make('halaman_nilai_semester')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
-                    ->downloadable(),
+                // Forms\Components\FileUpload::make('halaman_identitas')
+                //     ->acceptedFileTypes(['application/pdf'])
+                //     ->maxSize(512)
+                //     ->downloadable(),
+                // Forms\Components\FileUpload::make('halaman_nilai_semester')
+                //     ->acceptedFileTypes(['application/pdf'])
+                //     ->maxSize(512)
+                //     ->downloadable(),
 
                 Forms\Components\Fieldset::make('Jumlah Ketidakhadiran')
                     ->schema([
@@ -247,10 +247,11 @@ class RaporComponent extends Component implements HasForms
                             ->minValue(0),
                     ])
                     ->columns(3),
-                Forms\Components\FileUpload::make('halaman_kehadiran')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
-                    ->downloadable(),
+
+                // Forms\Components\FileUpload::make('halaman_kehadiran')
+                //     ->acceptedFileTypes(['application/pdf'])
+                //     ->maxSize(512)
+                //     ->downloadable(),
 
             ])
             ->columns(2)

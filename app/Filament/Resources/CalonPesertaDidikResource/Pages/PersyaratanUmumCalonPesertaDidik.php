@@ -55,25 +55,25 @@ class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('dokumen_kelahiran')
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('kartu_keluarga')
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('ktp_ortu')
                     // ->required()
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->downloadable(),
 
             ])

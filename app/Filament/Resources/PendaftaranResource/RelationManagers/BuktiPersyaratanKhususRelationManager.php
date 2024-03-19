@@ -31,7 +31,7 @@ class BuktiPersyaratanKhususRelationManager extends RelationManager
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('file')
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(1024)
+                    ->maxSize(512)
                     ->columnSpanFull()
                     ->required(),
             ]);

@@ -200,7 +200,8 @@ class PendaftaranResource extends Resource
             ])
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)
             ->filtersFormColumns(3)
-            ->striped();
+            ->striped()
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

@@ -21,10 +21,10 @@ class CalonPesertaDidikSeeder extends Seeder
             $cpd = CalonPesertaDidik::create([
                 'nama' => 'Peserta Didik '. $item,
                 'lp' => $item % 2 === 0 ? 'L' : 'P',
-                'nisn' => rand(1111111111,9999999999),
+                'nisn' => '1234567890',
                 'kewarganegaraan' => 'Indonesia',
-                'nik' => rand(3202301111111111,9999999999999999),
-                'kk' => rand(3202301111111111,9999999999999999),
+                'nik' => '3202301234567899',
+                'kk' => '3202301234567899',
                 'tempat_lahir' => 'Sukabumi',
                 'tanggal_lahir' => today()->subYear(rand(15,20)),
                 'agama_id' => 1,

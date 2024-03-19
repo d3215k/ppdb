@@ -129,9 +129,9 @@ class BerkasComponent extends Component implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             if ($this->pendaftaran) {
                 $khusus = $this->persyaratanKhususForm->getState();
 

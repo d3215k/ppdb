@@ -99,9 +99,9 @@ class HasilTesCalonPesertaDidik extends Page implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $data = $this->form->getState();
 
             BacaTulisQuran::updateOrCreate(

@@ -16,7 +16,7 @@ class ListPendaftarans extends ListRecords
     {
         return [
             ExportAction::make()
-                ->label('Export Data')
+                ->label('Ekspor')
                 ->exporter(PendaftaranExporter::class)
         ];
     }

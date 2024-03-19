@@ -66,6 +66,8 @@ class BacaTulisQuranResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('No.')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->description(fn (BacaTulisQuran $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')
                     ->sortable(),

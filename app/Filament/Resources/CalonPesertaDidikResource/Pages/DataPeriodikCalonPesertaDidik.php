@@ -128,9 +128,9 @@ class DataPeriodikCalonPesertaDidik extends Page implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $periodik = $this->form->getState();
 
             Periodik::updateOrCreate(

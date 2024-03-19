@@ -61,6 +61,8 @@ class TesResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('No.')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->searchable()
                     ->sortable(),

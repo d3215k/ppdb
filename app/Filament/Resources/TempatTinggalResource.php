@@ -42,6 +42,9 @@ class TempatTinggalResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('calon_peserta_didik_count')
+                    ->label('Data Calon Peserta Didik')
+                    ->counts('calonPesertaDidik'),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()

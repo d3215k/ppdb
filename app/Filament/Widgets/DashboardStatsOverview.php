@@ -23,7 +23,7 @@ class DashboardStatsOverview extends BaseWidget
             Stat::make('Jumlah Yang Sudah Diterima', Pendaftaran::where('status', StatusPendaftaran::LULUS)->count()),
             Stat::make('Pilihan Kompetensi Keahlian', KompetensiKeahlian::count()),
             Stat::make('Jalur Pendaftaran', Jalur::count()),
-            Stat::make('Gelombang Pendaftaran', Jalur::count()),
+            Stat::make('Gelombang Pendaftaran', Gelombang::count()),
             Stat::make('Asal Sekolah', AsalSekolah::whereHas('calonPesertaDidik')->count()),
         ];
     }

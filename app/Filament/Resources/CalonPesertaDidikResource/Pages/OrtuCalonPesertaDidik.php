@@ -190,9 +190,11 @@ class OrtuCalonPesertaDidik extends Page implements HasForms
 
     public function handleSubmit(): void
     {
-        try {
-            DB::beginTransaction();
+        $this->validate();
 
+        DB::beginTransaction();
+
+        try {
             $data = $this->form->getState();
 
             $this->getRecord()->ortu->update($data);

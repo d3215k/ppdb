@@ -87,6 +87,7 @@ class UserCalonPesertaDidik extends Page implements HasForms
     private function fillForm()
     {
         $this->form->fill([
+            'nomor_pendaftaran' => $this->getRecord()->nomor_pendaftaran,
             'username' => $this->getRecord()->username,
             'password' => $this->getRecord()->password,
             'email' => $this->getRecord()->user->email ?? null,
@@ -115,10 +116,12 @@ class UserCalonPesertaDidik extends Page implements HasForms
                 ->hidden(! $this->getRecord()->user),
                 Forms\Components\Fieldset::make('Akun PPDB Dinas')
                     ->schema([
+                        Forms\Components\TextInput::make('nomor_pendaftaran')
+                            ->maxLength(64),
                         Forms\Components\TextInput::make('username')
-                            ->maxLength(255),
+                            ->maxLength(64),
                         Forms\Components\TextInput::make('password')
-                            ->maxLength(255),
+                            ->maxLength(64),
                     ]),
             ])
             ->columns(2)
@@ -129,9 +132,9 @@ class UserCalonPesertaDidik extends Page implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $data = $this->form->getState();
 
             if ($this->getRecord()->user) {
@@ -148,11 +151,12 @@ class UserCalonPesertaDidik extends Page implements HasForms
             }
 
             $this->getRecord()->update([
+               'nomor_pendaftaran' =>  $data['nomor_pendaftaran'],
                'username' =>  $data['username'],
                'password' =>  $data['password'],
             ]);
 
-            Notification::make()->title('Data Rapor berhasil disimpan!')->success()->send();
+            Notification::make()->title('Data User Pengguna berhasil disimpan!')->success()->send();
 
             DB::commit();
         } catch (\Throwable $th) {

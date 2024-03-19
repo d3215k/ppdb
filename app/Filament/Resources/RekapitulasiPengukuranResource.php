@@ -27,7 +27,7 @@ class RekapitulasiPengukuranResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return session('pelulusan', false);
+        return ! auth()->user()->isPenguji && session('pelulusan', false);
     }
 
     public static function form(Form $form): Form
@@ -42,9 +42,12 @@ class RekapitulasiPengukuranResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama'),
-                Tables\Columns\TextColumn::make('l'),
-                Tables\Columns\TextColumn::make('p'),
+                Tables\Columns\TextColumn::make('nama')
+                    ->label('Ukuran'),
+                Tables\Columns\TextColumn::make('l')
+                    ->label('Laki-laki'),
+                Tables\Columns\TextColumn::make('p')
+                    ->label('Perempuan'),
             ])
             ->filters([
                 //

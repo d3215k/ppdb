@@ -47,6 +47,7 @@ return new class extends Migration
             $table->foreignId('asal_sekolah_id')->nullable()->constrained('asal_sekolah')->nullOnDelete();
             $table->string('asal_sekolah_temp')->nullable();
 
+            $table->string('nomor_pendaftaran')->nullable(); // akun dinas
             $table->string('username')->nullable(); // akun dinas
             $table->string('password')->nullable();
 

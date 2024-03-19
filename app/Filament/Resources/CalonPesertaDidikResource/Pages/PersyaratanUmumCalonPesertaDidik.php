@@ -85,9 +85,9 @@ class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $data = $this->form->getState();
 
             $this->getRecord()->persyaratanUmum->update($data);

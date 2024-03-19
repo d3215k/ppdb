@@ -173,7 +173,17 @@ class BiodataComponent extends Component implements HasForms
                     ->searchable(),
                 Forms\Components\TextInput::make('asal_sekolah_temp')
                     ->label('Asal Sekolah')
-                    ->placeholder('Ketik nama sekolah disini jika tidak ditemukan pada daftar. Kosongkan jika sudah ditemukan!')
+                    ->placeholder('Ketik nama sekolah disini jika tidak ditemukan pada daftar. Kosongkan jika sudah ditemukan!'),
+
+                Forms\Components\Fieldset::make('Akun PPDB Dinas')
+                    ->schema([
+                        Forms\Components\TextInput::make('nomor_pendaftaran')
+                            ->maxLength(64),
+                        Forms\Components\TextInput::make('username')
+                            ->maxLength(64),
+                        Forms\Components\TextInput::make('password')
+                            ->maxLength(64),
+                    ]),
             ])
             ->columns(2)
             ->statePath('cpd');
@@ -183,9 +193,9 @@ class BiodataComponent extends Component implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $cpd = $this->calonPesertaDidikForm->getState();
 
             $this->calonPesertaDidik->update($cpd);

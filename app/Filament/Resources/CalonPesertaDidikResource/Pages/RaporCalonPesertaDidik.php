@@ -271,9 +271,9 @@ class RaporCalonPesertaDidik extends Page implements HasForms
     {
         $this->validate();
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $data = $this->form->getState();
 
             $subjects = Rapor::SUBJECTS;

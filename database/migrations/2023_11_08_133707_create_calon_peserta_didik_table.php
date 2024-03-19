@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tahun_pelajaran_id')->constrained('tahun_pelajaran')->cascadeOnDelete();
             $table->string('nama');
             $table->char('lp', 1);
-            $table->char('nisn', 10)->nullable();
+            $table->char('nisn', 16)->nullable();
             $table->string('kewarganegaraan')->nullable();
             $table->char('nik', 16)->nullable();
             $table->char('kk', 16)->nullable();

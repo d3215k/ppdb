@@ -77,6 +77,7 @@ class CalonPesertaDidikSeeder extends Seeder
                 'jalur_id' => rand(1,5),
                 'pilihan_kesatu' => rand(1,3),
                 'pilihan_kedua' => rand(4,5),
+                'created_at' => today()->subDays(rand(1,30))
             ]);
 
             $cpd->user()->create([

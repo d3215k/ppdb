@@ -4,6 +4,7 @@ namespace App\Livewire\Pendaftar;
 
 use App\Enums\JarakRumah;
 use App\Enums\UkuranBaju;
+use App\Enums\UkuranSepatu;
 use App\Models\CalonPesertaDidik;
 use App\Models\Periodik;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -71,9 +72,10 @@ class PeriodikComponent extends Component implements HasForms
                     ->default(0)
                     ->suffix('menit')
                     ->numeric(),
-                Forms\Components\TextInput::make('no_sepatu')
+                Forms\Components\ToggleButtons::make('no_sepatu')
+                    ->inline()
                     ->nullable()
-                    ->numeric(),
+                    ->options(UkuranSepatu::class),
                 Forms\Components\ToggleButtons::make('ukuran_baju')
                     ->inline()
                     ->nullable()

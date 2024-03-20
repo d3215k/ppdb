@@ -4,6 +4,7 @@ namespace App\Filament\Resources\CalonPesertaDidikResource\Pages;
 
 use App\Enums\JarakRumah;
 use App\Enums\UkuranBaju;
+use App\Enums\UkuranSepatu;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use App\Filament\Resources\CalonPesertaDidikResource;
 use App\Models\Periodik;
@@ -85,9 +86,10 @@ class DataPeriodikCalonPesertaDidik extends Page implements HasForms
                     ->default(0)
                     ->suffix('menit')
                     ->numeric(),
-                Forms\Components\TextInput::make('no_sepatu')
+                Forms\Components\ToggleButtons::make('no_sepatu')
+                    ->inline()
                     ->nullable()
-                    ->numeric(),
+                    ->options(UkuranSepatu::class),
                 Forms\Components\ToggleButtons::make('ukuran_baju')
                     ->inline()
                     ->nullable()

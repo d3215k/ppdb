@@ -16,6 +16,11 @@ class DashboardStatsOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    public static function canView(): bool
+    {
+        return ! auth()->user()->isPenguji;
+    }
+
     protected function getStats(): array
     {
         return [

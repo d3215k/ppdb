@@ -17,6 +17,11 @@ class DashboardPendaftaranChart extends ChartWidget
 
     protected int | string | array $columnSpan = 'full';
 
+    public static function canView(): bool
+    {
+        return ! auth()->user()->isPenguji;
+    }
+
     protected function getData(): array
     {
         $data = Trend::model(Pendaftaran::class)

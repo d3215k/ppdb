@@ -165,7 +165,8 @@ class CalonPesertaDidikResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->label('Asal Sekolah')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('pendaftaran_count')
                     ->label('Pendaftaran')
                     ->counts('pendaftaran'),

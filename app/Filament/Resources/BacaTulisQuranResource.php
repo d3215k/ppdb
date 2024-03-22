@@ -181,7 +181,7 @@ class BacaTulisQuranResource extends Resource
                     ->url(fn (BacaTulisQuran $record) => route('filament.app.resources.calon-peserta-didiks.tes', $record->calonPesertaDidik))
                     ->icon('heroicon-m-user')
                     ->iconButton()
-                    ->hidden(fn (User $user) => $user->isPenguji ),
+                    ->hidden(fn () => auth()->user()->isPenguji ),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

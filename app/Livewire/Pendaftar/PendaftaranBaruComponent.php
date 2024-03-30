@@ -16,6 +16,9 @@ use Filament\Forms\Components\Wizard;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -245,14 +248,137 @@ class PendaftaranBaruComponent extends Component implements HasForms
                                 ->reactive()
                                 ->hidden(fn (Get $get): bool => ! $get('pilihan_kesatu')),
                         ]),
-                        // TODO : Halaman Konfirmasi
-                        // Demikian data di atas adalah data sebenarnya dan dapat dipertanggungjawabkan, jika data tersebut tidak sesuai dengan sebenarnya, kami siap menerima sanksi sesuai dengan ketentuan yang berlaku.
+                    Wizard\Step::make('Konfirmasi Data')
+                        ->schema([
+                            Fieldset::make('confirm_biodata')
+                                ->label('Biodata')
+                                ->schema([
+                                    Placeholder::make('confirm_nama')
+                                        ->label('Nama')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('nama');
+                                        }),
+                                    Placeholder::make('confirm_lp')
+                                        ->label('Jenis Kelamin')
+                                        ->content(function (Get $get): ?string {
+                                            return JenisKelamin::tryFrom($get('lp'))->getLabel();
+                                        }),
+                                    Placeholder::make('confirm_nisn')
+                                        ->label('NISN')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('nisn');
+                                        }),
+                                    Placeholder::make('confirm_nik')
+                                        ->label('NIK')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('nik');
+                                        }),
+                                    Placeholder::make('confirm_tempat_lahir')
+                                        ->label('Tempat Lahir')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('tempat_lahir');
+                                        }),
+                                    Placeholder::make('confirm_tanggal_lahir')
+                                        ->label('Tanggal Lahir')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('tanggal_lahir');
+                                        }),
+                                    Placeholder::make('confirm_alamat')
+                                        ->label('Alamat')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('alamat').' RT '.$get('rt').' RW '.$get('rw').' Desa/Kelurahan '.$get('desa_kelurahan').' Kec. '.$get('kecamatan').' Kab/Kota '.$get('kabupaten_kota').' '.$get('privinsi').' '.$get('kode_pos');
+                                        }),
+                                    Placeholder::make('confirm_ibu')
+                                        ->label('Nama Ibu')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('ibu');
+                                        }),
+                                    Placeholder::make('confirm_ayah')
+                                        ->label('Nama Ayah')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('ayah');
+                                        }),
+                                    Placeholder::make('confirm_nomor_hp')
+                                        ->label('Nomor Hp (Aktif WA)')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('nomor_hp');
+                                        }),
+                                    Placeholder::make('confirm_nomor_hp_ortu')
+                                        ->label('Nomor HP Orang Tua (Aktif WA)')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('nomor_hp_ortu');
+                                        }),
+                                    Placeholder::make('confirm_email')
+                                        ->label('Email')
+                                        ->content(function (Get $get): ?string {
+                                            return $get('email');
+                                        }),
+                                    ])
+                                    ->reactive()
+                                    ->hidden(fn (Get $get): bool => ! $get('pilihan_kedua')),
+
+                            Fieldset::make('confirm_asal_sekolah')
+                                ->label('Asal Sekolah')
+                                ->schema([
+                                    Placeholder::make('confirm_asal_sekolah_id')
+                                        ->label('Nama Sekolah')
+                                        ->content(function (Get $get): ?string {
+                                            if ($get('asal_sekolah_id')) {
+                                                return AsalSekolah::where('id', $get('asal_sekolah_id'))->select('nama')->first()?->nama;
+                                            } else {
+                                                return $get('asal_sekolah_temp');
+                                            }
+                                        })
+                                ])
+                                ->reactive()
+                                ->hidden(fn (Get $get): bool => ! $get('pilihan_kedua')),
+
+                            Fieldset::make('confirm_gelombang')
+                                ->label('Gelombang dan Jalur')
+                                ->schema([
+                                    Placeholder::make('confirm_gelombang_id')
+                                        ->label('Gelombang')
+                                        ->content(function (Get $get): ?string {
+                                            return Gelombang::where('id', $get('gelombang_id'))->select('nama')->first()?->nama;
+                                        }),
+                                    Placeholder::make('confirm_jalur_id')
+                                        ->label('Jalur')
+                                        ->content(function (Get $get): ?string {
+                                            return Jalur::where('id', $get('jalur_id'))->select('nama')->first()?->nama;
+                                        }),
+                                ])
+                                ->reactive()
+                                ->hidden(fn (Get $get): bool => ! $get('pilihan_kedua')),
+
+                            Fieldset::make('confirm_pilihan_kompetensi_keahlian')
+                                ->label('Pilihan Kompetensi Keahlian')
+                                ->schema([
+                                    Placeholder::make('confirm_pilihan_kesatu')
+                                        ->label('Pilihan Pertama')
+                                        ->content(function (Get $get): ?string {
+                                            return KompetensiKeahlian::where('id', $get('pilihan_kesatu'))->select('nama')->first()?->nama;
+                                        }),
+                                    Placeholder::make('confirm_pilihan_kedua')
+                                        ->label('Pilihan Kedua')
+                                        ->content(function (Get $get): ?string {
+                                            return KompetensiKeahlian::where('id', $get('pilihan_kedua'))->select('nama')->first()?->nama;
+                                        }),
+                                ])
+                                ->reactive()
+                                ->hidden(fn (Get $get): bool => ! $get('pilihan_kedua')),
+
+                            Checkbox::make('confirm')
+                                ->accepted()
+                                ->validationAttribute('Konfirmasi')
+                                ->columnSpanFull()
+                                ->label('Demikian data di atas adalah data sebenarnya dan dapat dipertanggungjawabkan, jika data tersebut tidak sesuai dengan sebenarnya, kami siap menerima sanksi sesuai dengan ketentuan yang berlaku.')
+                        ])->columns(2)
                     ])->submitAction(new HtmlString(Blade::render(<<<BLADE
                         <x-filament::button
                             wire:click="handleSubmit"
                             size="sm"
                         >
-                            Submit
+                            Submit Formulir
                         </x-filament::button>
                     BLADE))),
             ])

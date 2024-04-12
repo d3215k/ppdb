@@ -27,7 +27,12 @@ class RekapitulasiNomorSepatuResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return ! auth()->user()->isPenguji && session('pelulusan', false);
+        return (auth()->user()->isAdmin || auth()->user()->isPanitia) && session('pelulusan', false);
+    }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isAdmin || auth()->user()->isPanitia;
     }
 
     public static function form(Form $form): Form

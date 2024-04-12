@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RekapitulasiResource extends Resource
 {
-    use EnsureOnlyAdminCanAccess;
+    // use EnsureOnlyAdminCanAccess;
 
     protected static ?string $model = Rekapitulasi::class;
 
@@ -32,7 +32,12 @@ class RekapitulasiResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return session('pelulusan', false);
+        return (auth()->user()->isAdmin || auth()->user()->isPanitia) && session('pelulusan', false);
+    }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isAdmin || auth()->user()->isPanitia;
     }
 
     public static function form(Form $form): Form

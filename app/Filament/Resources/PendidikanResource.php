@@ -28,6 +28,8 @@ class PendidikanResource extends Resource
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
+    protected static ?string $navigationGroup = 'Orang Tua';
+
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form

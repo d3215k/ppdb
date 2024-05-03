@@ -30,6 +30,8 @@ class TahunPelajaranResource extends Resource
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
+    protected static ?string $navigationGroup = 'Periode';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form

@@ -28,6 +28,8 @@ class ModaTransportasiResource extends Resource
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
+    protected static ?string $navigationGroup = 'Peserta Didik';
+
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form

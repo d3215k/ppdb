@@ -29,6 +29,8 @@ class JalurResource extends Resource
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
+    protected static ?string $navigationGroup = 'Periode';
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form

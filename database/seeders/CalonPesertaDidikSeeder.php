@@ -16,7 +16,7 @@ class CalonPesertaDidikSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (range(1, 1000) as $item) {
+        foreach (range(1, 100) as $item) {
 
             $cpd = CalonPesertaDidik::create([
                 'nama' => 'Peserta Didik '. $item,
@@ -80,11 +80,11 @@ class CalonPesertaDidikSeeder extends Seeder
                 'created_at' => today()->subDays(rand(1,30))
             ]);
 
-            $cpd->user()->create([
-                'name' => 'nama CPD',
-                'email' => "cpd{$item}@example.com",
-                'password' => bcrypt('password'),
-            ]);
+            // $cpd->user()->create([
+            //     'name' => 'nama CPD',
+            //     'email' => "cpd{$item}@example.com",
+            //     'password' => bcrypt('password'),
+            // ]);
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Events\TahunPelajaranAktifChanged;
+use App\Filament\Clusters\ReferensiData;
 use App\Filament\Resources\TahunPelajaranResource\Pages;
 use App\Filament\Resources\TahunPelajaranResource\RelationManagers;
 use App\Models\TahunPelajaran;
@@ -10,6 +11,7 @@ use App\Settings\SettingSekolah;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -24,9 +26,11 @@ class TahunPelajaranResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Sistem';
+    protected static ?string $cluster = ReferensiData::class;
 
-    protected static ?string $navigationParentItem = 'Setting';
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

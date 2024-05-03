@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\ReferensiData;
 use App\Filament\Resources\KompetensiKeahlianResource\Pages;
 use App\Filament\Resources\KompetensiKeahlianResource\RelationManagers;
 use App\Models\KompetensiKeahlian;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -23,9 +25,11 @@ class KompetensiKeahlianResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
 
-    protected static ?string $navigationGroup = 'Sistem';
+    protected static ?string $cluster = ReferensiData::class;
 
-    protected static ?int $navigationSort = 3;
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

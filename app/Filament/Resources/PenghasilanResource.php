@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\ReferensiData;
 use App\Filament\Resources\PenghasilanResource\Pages;
 use App\Filament\Resources\PenghasilanResource\RelationManagers;
 use App\Models\Penghasilan;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,7 +24,9 @@ class PenghasilanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Referensi';
+    protected static ?string $cluster = ReferensiData::class;
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     protected static ?int $navigationSort = 3;
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\ReferensiData;
 use App\Filament\Resources\GelombangResource\Pages;
 use App\Filament\Resources\GelombangResource\RelationManagers;
 use App\Models\Gelombang;
@@ -9,6 +10,7 @@ use App\Models\TahunPelajaran;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -24,9 +26,11 @@ class GelombangResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
-    protected static ?string $navigationGroup = 'Sistem';
+    protected static ?string $cluster = ReferensiData::class;
 
-    protected static ?int $navigationSort = 5;
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

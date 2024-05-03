@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\ReferensiData;
 use App\Filament\Resources\JalurResource\Pages;
 use App\Filament\Resources\JalurResource\RelationManagers;
 use App\Models\Jalur;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -23,9 +25,11 @@ class JalurResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
-    protected static ?string $navigationGroup = 'Sistem';
+    protected static ?string $cluster = ReferensiData::class;
 
-    protected static ?int $navigationSort = 4;
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

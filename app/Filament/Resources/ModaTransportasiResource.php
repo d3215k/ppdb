@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\ReferensiData;
 use App\Filament\Resources\ModaTransportasiResource\Pages;
 use App\Filament\Resources\ModaTransportasiResource\RelationManagers;
 use App\Models\ModaTransportasi;
 use App\Traits\EnsureOnlyAdminCanAccess;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,7 +24,9 @@ class ModaTransportasiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
-    protected static ?string $navigationGroup = 'Referensi';
+    protected static ?string $cluster = ReferensiData::class;
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     protected static ?int $navigationSort = 3;
 

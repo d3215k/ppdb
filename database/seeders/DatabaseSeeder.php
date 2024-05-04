@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RefDapodik::class,
-            AsalSekolahSeeder::class,
+            // AsalSekolahSeeder::class,
             TahunPelajaranSeeder::class,
             KompetensiKeahlianSeeder::class,
             JalurSeeder::class,
             GelombangSeeder::class,
             UserSeeder::class,
-            CalonPesertaDidikSeeder::class,
+            // CalonPesertaDidikSeeder::class,
         ]);
 
     }

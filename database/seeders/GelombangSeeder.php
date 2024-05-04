@@ -24,7 +24,7 @@ class GelombangSeeder extends Seeder
         Gelombang::create([
             'kode' => '2',
             'nama' => 'Gelombang 2',
-            'mulai' => today()->addMonth(3),
+            'mulai' => today(),
             'sampai' => today()->addMonth(5),
             'aktif' => false,
         ]);

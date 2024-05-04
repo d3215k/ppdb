@@ -175,6 +175,19 @@ class BiodataComponent extends Component implements HasForms
                     ->label('Asal Sekolah')
                     ->placeholder('Ketik nama sekolah disini jika tidak ditemukan pada daftar. Kosongkan jika sudah ditemukan!'),
 
+                Forms\Components\Fieldset::make('Sosial Media')
+                    ->schema([
+                        Forms\Components\TextInput::make('facebook')
+                            ->maxLength(64)
+                            ->prefix('https://www.facebook.com/'),
+                        Forms\Components\TextInput::make('instagram')
+                            ->maxLength(64)
+                            ->prefix('https://www.instagram.com/'),
+                        Forms\Components\TextInput::make('tiktok')
+                            ->maxLength(64)
+                            ->prefix('https://www.tiktok.com/'),
+                    ]),
+
                 Forms\Components\Fieldset::make('Akun PPDB Dinas')
                     ->schema([
                         Forms\Components\TextInput::make('nomor_pendaftaran')

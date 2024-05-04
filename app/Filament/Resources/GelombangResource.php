@@ -77,16 +77,17 @@ class GelombangResource extends Resource
                         ->sortable(),
                 ])->alignment(Alignment::Center),
                 Tables\Columns\ToggleColumn::make('aktif')
-                    ->afterStateUpdated(function ($record, $state) {
-                        if ($state) {
-                            Gelombang::query()
-                                ->whereNot('id', $record->id)
-                                ->where('tahun_pelajaran_id', $record->tahun_pelajaran_id)
-                                ->update([
-                                    'aktif' => false
-                                ]);
-                        }
-                    }),
+                    // ->afterStateUpdated(function ($record, $state) {
+                    //     if ($state) {
+                    //         Gelombang::query()
+                    //             ->whereNot('id', $record->id)
+                    //             ->where('tahun_pelajaran_id', $record->tahun_pelajaran_id)
+                    //             ->update([
+                    //                 'aktif' => false
+                    //             ]);
+                    //     }
+                    // })
+                    ,
             ])
             ->filters([
                 //

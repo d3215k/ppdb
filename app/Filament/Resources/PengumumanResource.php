@@ -40,7 +40,7 @@ class PengumumanResource extends Resource
                 Forms\Components\DateTimePicker::make('terbit')
                     ->default(today())
                     ->required(),
-                Forms\Components\Toggle::make('Pin')
+                Forms\Components\Toggle::make('pin')
                     ->default(false)
                     ->inline(false)
                     ->required(),

@@ -17,7 +17,7 @@ class AsalSekolahImporter extends Importer
             ImportColumn::make('nama')
                 ->rules(['required', 'max:255']),
             ImportColumn::make('npsn')
-                ->rules(['length:8']),
+                ->rules(['max:8']),
             ImportColumn::make('alamat')
                 ->rules(['max:255']),
         ];
@@ -25,11 +25,11 @@ class AsalSekolahImporter extends Importer
 
     public function resolveRecord(): ?AsalSekolah
     {
-        return AsalSekolah::firstOrNew([
-            'npsn' => $this->data['npsn'],
-        ]);
+        // return AsalSekolah::firstOrNew([
+        //     'npsn' => $this->data['npsn'],
+        // ]);
 
-        // return new AsalSekolah();
+        return new AsalSekolah();
     }
 
     public static function getCompletedNotificationBody(Import $import): string

@@ -27,7 +27,7 @@ class RekapitulasiPengukuranResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return (auth()->user()->isAdmin || auth()->user()->isPanitia) && session('pelulusan', false);
+        return (auth()->user()->isAdmin || auth()->user()->isPanitia) && session('pelulusan', true);
     }
 
     public static function canAccess(): bool

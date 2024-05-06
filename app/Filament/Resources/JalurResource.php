@@ -40,9 +40,6 @@ class JalurResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Toggle::make('aktif')
-                    ->inline(false)
-                    ->required(),
             ]);
     }
 

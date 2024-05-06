@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rapor', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('calon_peserta_didik_id')->nullable()->constrained('calon_peserta_didik')->nullOnDelete();
+            $table->foreignId('calon_peserta_didik_id')->constrained('calon_peserta_didik')->cascadeOnDelete();
             $table->string('halaman_identitas')->nullable();
 
             $table->string('halaman_nilai_semester')->nullable();

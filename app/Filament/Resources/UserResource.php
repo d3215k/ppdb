@@ -60,6 +60,9 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\SelectColumn::make('type')
                     ->options(UserType::class),
+                Tables\Columns\TextColumn::make('calon_peserta_didik_exists')
+                    ->exists('calonPesertaDidik')
+                    ->label('Data'),
                 Tables\Columns\ToggleColumn::make('aktif'),
                 Tables\Columns\TextColumn::make('last_login')
                     ->label('Login Terakhir')

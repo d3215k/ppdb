@@ -119,7 +119,8 @@ class PendaftaranResource extends Resource
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
                     ->label('Nama / Asal Sekolah')
                     ->description(fn (Pendaftaran $record) => $record->calonPesertaDidik->asalSekolah?->nama)
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('gelombang.nama')
                     ->label('Gelombang / Jalur')
                     ->description(fn (Pendaftaran $record) => $record->jalur->nama)

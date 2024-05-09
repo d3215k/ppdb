@@ -176,6 +176,10 @@ class CalonPesertaDidikResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('nisn')
+                    ->label('NISN / NIK')
+                    ->description(fn (CalonPesertaDidik $record) => $record->nik)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->label('Asal Sekolah')
                     ->searchable()

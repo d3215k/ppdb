@@ -154,6 +154,8 @@ class BiodataComponent extends Component implements HasForms
                     ->label('Moda Transportasi')
                     ->options(ModaTransportasi::pluck('nama', 'id')),
                 Forms\Components\TextInput::make('anak_ke')
+                    ->minValue(1)
+                    ->maxValue(99)
                     ->numeric(),
                 Forms\Components\TextInput::make('nomor_hp')
                     ->required()

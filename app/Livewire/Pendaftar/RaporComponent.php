@@ -42,31 +42,36 @@ class RaporComponent extends Component implements HasForms
             ->disabled(fn() => $this->rapor->calonPesertaDidik->locked)
             ->schema([
                 Forms\Components\Fieldset::make('pai')
-                    ->label('Pendidikan Agama Islam')
+                    ->label('Pendidikan Agama dan Budi Pekerti')
                     ->schema([
                         Forms\Components\TextInput::make('pai_1')
                             ->label('Sem. I')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('pai_2')
                             ->label('Sem. II')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('pai_3')
                             ->label('Sem. III')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('pai_4')
                             ->label('Sem. IV')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('pai_5')
                             ->label('Sem. V')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                     ])
@@ -77,26 +82,31 @@ class RaporComponent extends Component implements HasForms
                         Forms\Components\TextInput::make('bindo_1')
                             ->label('Sem. I')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bindo_2')
                             ->label('Sem. II')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bindo_3')
                             ->label('Sem. III')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bindo_4')
                             ->label('Sem. IV')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bindo_5')
                             ->label('Sem. V')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                     ])
@@ -107,26 +117,31 @@ class RaporComponent extends Component implements HasForms
                         Forms\Components\TextInput::make('mtk_1')
                             ->label('Sem. I')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('mtk_2')
                             ->label('Sem. II')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('mtk_3')
                             ->label('Sem. III')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('mtk_4')
                             ->label('Sem. IV')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('mtk_5')
                             ->label('Sem. V')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                     ])
@@ -137,26 +152,31 @@ class RaporComponent extends Component implements HasForms
                         Forms\Components\TextInput::make('ipa_1')
                             ->label('Sem. I')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ipa_2')
                             ->label('Sem. II')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ipa_3')
                             ->label('Sem. III')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ipa_4')
                             ->label('Sem. IV')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ipa_5')
                             ->label('Sem. V')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                     ])
@@ -167,26 +187,31 @@ class RaporComponent extends Component implements HasForms
                         Forms\Components\TextInput::make('ips_1')
                             ->label('Sem. I')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ips_2')
                             ->label('Sem. II')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ips_3')
                             ->label('Sem. III')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ips_4')
                             ->label('Sem. IV')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('ips_5')
                             ->label('Sem. V')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                     ])
@@ -197,26 +222,31 @@ class RaporComponent extends Component implements HasForms
                         Forms\Components\TextInput::make('bing_1')
                             ->label('Sem. I')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bing_2')
                             ->label('Sem. II')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bing_3')
                             ->label('Sem. III')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bing_4')
                             ->label('Sem. IV')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                         Forms\Components\TextInput::make('bing_5')
                             ->label('Sem. V')
                             ->numeric()
+                            ->required()
                             ->maxValue(100)
                             ->minValue(10),
                     ])
@@ -235,14 +265,17 @@ class RaporComponent extends Component implements HasForms
                     ->schema([
                         Forms\Components\TextInput::make('sakit')
                             ->numeric()
+                            ->required()
                             ->maxValue(99)
                             ->minValue(0),
                         Forms\Components\TextInput::make('izin')
                             ->numeric()
+                            ->required()
                             ->maxValue(99)
                             ->minValue(0),
                         Forms\Components\TextInput::make('alpa')
                             ->numeric()
+                            ->required()
                             ->maxValue(99)
                             ->minValue(0),
                     ])

@@ -51,7 +51,7 @@ class BerkasComponent extends Component implements HasForms
 
         if ($this->pendaftaran) {
             $this->persyaratanKhususForm->fill(
-                BuktiPersyaratanKhusus::where('pendaftaran_id', $this->pendaftaran->id)->pluck('file', 'id')->toArray()
+                BuktiPersyaratanKhusus::where('pendaftaran_id', $this->pendaftaran->id)->pluck('file', 'persyaratan_khusus_id')->toArray()
             );
         }
     }
@@ -136,15 +136,17 @@ class BerkasComponent extends Component implements HasForms
                 $khusus = $this->persyaratanKhususForm->getState();
 
                 foreach ($this->persyaratanKhusus() as $syarat) {
-                    BuktiPersyaratanKhusus::updateOrCreate(
-                        [
-                            'pendaftaran_id' => $this->pendaftaran->id,
-                            'persyaratan_khusus_id' => $syarat->id,
-                        ],
-                        [
-                            'file' => $khusus[$syarat->id],
-                        ]
-                    );
+                    if (isset($khusus[$syarat->id])) {
+                        BuktiPersyaratanKhusus::updateOrCreate(
+                            [
+                                'pendaftaran_id' => $this->pendaftaran->id,
+                                'persyaratan_khusus_id' => $syarat->id,
+                            ],
+                            [
+                                'file' => $khusus[$syarat->id],
+                            ]
+                        );
+                    }
                 }
             }
 

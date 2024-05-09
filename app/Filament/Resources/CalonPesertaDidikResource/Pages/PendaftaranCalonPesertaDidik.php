@@ -134,7 +134,7 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                     ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
-                        if ((int) $data['status'] !== StatusPendaftaran::LULUS->value) {
+                        if (isset($data['status']) && (int) $data['status'] !== StatusPendaftaran::LULUS->value) {
                             $data['kompetensi_keahlian'] = null;
                         }
 

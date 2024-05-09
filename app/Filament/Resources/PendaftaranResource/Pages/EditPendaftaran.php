@@ -31,7 +31,7 @@ class EditPendaftaran extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if ((int) $data['status'] !== StatusPendaftaran::LULUS->value) {
+        if (isset($data['status']) && (int) $data['status'] !== StatusPendaftaran::LULUS->value) {
             $data['kompetensi_keahlian'] = null;
         }
 

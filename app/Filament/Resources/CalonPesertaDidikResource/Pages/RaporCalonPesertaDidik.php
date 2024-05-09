@@ -53,7 +53,7 @@ class RaporCalonPesertaDidik extends Page implements HasForms
         return $form
             ->schema([
                 Forms\Components\Fieldset::make('pai')
-                    ->label('Pendidikan Agama Islam')
+                    ->label('Pendidikan Agama dan Budi Pekerti')
                     ->schema([
                         Forms\Components\TextInput::make('pai_1')
                             ->label('Sem. I')

@@ -67,7 +67,10 @@ class UserResource extends Resource
                     ->sortable()
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('type')
+                    ->label('Type')
+                    ->options(UserType::class)
+                    ->multiple(),
             ])
             ->actions([
                 Impersonate::make()

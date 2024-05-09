@@ -37,10 +37,14 @@ class KompetensiKeahlianResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('kode')
+                    ->required()
+                    ->maxLength(5)
+                    ->columnSpan(1),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpanFull(),
+                    ->columnSpan(2),
                 Forms\Components\Toggle::make('dipilih_kesatu')
                     ->label('Dapat dipilih kesatu')
                     ->inline(false)
@@ -51,7 +55,7 @@ class KompetensiKeahlianResource extends Resource
                     ->inline(false)
                     ->default(true)
                     ->required(),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table

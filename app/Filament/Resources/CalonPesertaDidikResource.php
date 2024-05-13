@@ -174,19 +174,26 @@ class CalonPesertaDidikResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
+                Tables\Columns\TextColumn::make('pendaftaran.nomor')
+                    ->label('No. Pendaftaran')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nisn')
                     ->label('NISN / NIK')
                     ->description(fn (CalonPesertaDidik $record) => $record->nik)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('asalSekolah.nama')
-                    ->label('Asal Sekolah')
+                Tables\Columns\TextColumn::make('nama')
+                    ->label('Nama / Asal Sekolah')
                     ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('pendaftaran_count')
-                    ->label('Pendaftaran')
-                    ->counts('pendaftaran'),
+                    ->description(fn (CalonPesertaDidik $record) => $record->asalSekolah->nama),
+                Tables\Columns\ColumnGroup::make('Akun PPDB Dinas', [
+                    Tables\Columns\TextColumn::make('username')
+                        ->label('Username')
+                        ->copyable()
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('password')
+                        ->label('Password')
+                        ->copyable(),
+                    ]),
                 Tables\Columns\ToggleColumn::make('locked')
                     ->tooltip('Kunci edit data oleh pendaftar?'),
             ])

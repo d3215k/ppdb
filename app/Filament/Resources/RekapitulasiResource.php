@@ -52,25 +52,26 @@ class RekapitulasiResource extends Resource
     {
         $columns = [];
         $jalur = Jalur::all();
-        $nama = $jalur->pluck('nama')->toArray();
 
-        foreach ($jalur as $i => $item) {
-            $columns[] = Tables\Columns\ColumnGroup::make($nama[$item->id - 1] , [
-                Tables\Columns\TextColumn::make($item->id.'_kuota')
-                    ->label('Kuota'),
-                Tables\Columns\TextColumn::make($item->id.'_pendaftar_1_l')
-                    ->label('1 (L)'),
-                Tables\Columns\TextColumn::make($item->id.'_pendaftar_1_p')
-                    ->label('1 (P)'),
-                Tables\Columns\TextColumn::make($item->id.'_pendaftar_2_l')
-                    ->label('2 (L)'),
-                Tables\Columns\TextColumn::make($item->id.'_pendaftar_2_p')
-                    ->label('2 (P)'),
-                Tables\Columns\TextColumn::make($item->id.'_diterima_l')
-                    ->label('Diterima (L)'),
-                Tables\Columns\TextColumn::make($item->id.'_diterima_p')
-                    ->label('Diterima (P)'),
-            ])->alignCenter();
+        foreach ($jalur as $item) {
+            $columns[] = Tables\Columns\ColumnGroup::make($item->nama,
+                [
+                    Tables\Columns\TextColumn::make($item->id.'_kuota')
+                        ->label('Kuota'),
+                    Tables\Columns\TextColumn::make($item->id.'_pendaftar_1_l')
+                        ->label('1 (L)'),
+                    Tables\Columns\TextColumn::make($item->id.'_pendaftar_1_p')
+                        ->label('1 (P)'),
+                    Tables\Columns\TextColumn::make($item->id.'_pendaftar_2_l')
+                        ->label('2 (L)'),
+                    Tables\Columns\TextColumn::make($item->id.'_pendaftar_2_p')
+                        ->label('2 (P)'),
+                    Tables\Columns\TextColumn::make($item->id.'_diterima_l')
+                        ->label('Diterima (L)'),
+                    Tables\Columns\TextColumn::make($item->id.'_diterima_p')
+                        ->label('Diterima (P)'),
+                ]
+            )->alignCenter();
         }
 
         return $columns;

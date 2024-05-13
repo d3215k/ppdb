@@ -182,9 +182,12 @@ class CalonPesertaDidikResource extends Resource
                     ->description(fn (CalonPesertaDidik $record) => $record->nik)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama / Asal Sekolah')
+                    ->label('Nama')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('asalSekolah.nama')
+                    ->label('Asal Sekolah')
                     ->searchable()
-                    ->description(fn (CalonPesertaDidik $record) => $record->asalSekolah->nama),
+                    ->sortable(),
                 Tables\Columns\ColumnGroup::make('Akun PPDB Dinas', [
                     Tables\Columns\TextColumn::make('username')
                         ->label('Username')

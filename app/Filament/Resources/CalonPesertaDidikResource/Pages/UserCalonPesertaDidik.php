@@ -17,6 +17,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Unique;
 
 class UserCalonPesertaDidik extends Page implements HasForms
 {
@@ -109,11 +110,21 @@ class UserCalonPesertaDidik extends Page implements HasForms
                 Forms\Components\Fieldset::make('Akses Pengguna')
                     ->schema([
                         Forms\Components\TextInput::make('email')
+                            ->required()
+                            ->unique(
+                                table: 'users',
+                                column: 'email',
+                                ignorable: fn () => $this->getRecord()->user,
+                            )
+                            ->validationMessages([
+                                'unique' => 'Email sudah ada digunakan.',
+                                'required' => 'Email wajib diisi.'
+                            ])
                             ->maxLength(255),
                         Forms\Components\TextInput::make('name')
+                            ->required()
                             ->maxLength(255),
-                    ])
-                ->hidden(! $this->getRecord()->user),
+                    ])->hidden(! $this->getRecord()->user),
                 Forms\Components\Fieldset::make('Akun PPDB Dinas')
                     ->schema([
                         Forms\Components\TextInput::make('nomor_pendaftaran')

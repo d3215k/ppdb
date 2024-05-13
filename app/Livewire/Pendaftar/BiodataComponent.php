@@ -181,13 +181,13 @@ class BiodataComponent extends Component implements HasForms
                     ->schema([
                         Forms\Components\TextInput::make('instagram')
                             ->maxLength(64)
-                            ->prefix('https://www.instagram.com/'),
+                            ->prefix('instagram.com/'),
                         Forms\Components\TextInput::make('facebook')
                             ->maxLength(64)
-                            ->prefix('https://www.facebook.com/'),
+                            ->prefix('facebook.com/'),
                         Forms\Components\TextInput::make('tiktok')
                             ->maxLength(64)
-                            ->prefix('https://www.tiktok.com/'),
+                            ->prefix('tiktok.com/'),
                     ]),
 
                 Forms\Components\Fieldset::make('Akun PPDB Dinas')

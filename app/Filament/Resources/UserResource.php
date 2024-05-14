@@ -54,15 +54,18 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\SelectColumn::make('type')
                     ->options(UserType::class),
                 Tables\Columns\TextColumn::make('calon_peserta_didik_exists')
                     ->exists('calonPesertaDidik')
-                    ->label('Data'),
+                    ->label('Data')
+                    ->sortable(),
                 Tables\Columns\ToggleColumn::make('aktif'),
                 Tables\Columns\TextColumn::make('last_login')
                     ->label('Login Terakhir')

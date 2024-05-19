@@ -19,6 +19,11 @@ class PersyaratanUmum extends Model
         return $this->belongsTo(CalonPesertaDidik::class);
     }
 
+    public function getIsPersyaratanUmumCompleteAttribute()
+    {
+        return $this->isComplete();
+    }
+
     public function isComplete(): bool
     {
         $requiredProperties = [

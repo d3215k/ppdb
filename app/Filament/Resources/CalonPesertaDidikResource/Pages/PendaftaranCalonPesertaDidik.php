@@ -78,6 +78,14 @@ class PendaftaranCalonPesertaDidik extends ManageRelatedRecords
                     )
                     ->reactive()
                     ->required(),
+                Forms\Components\TextInput::make('nomor')
+                    ->unique(
+                        table: 'pendaftaran',
+                        column: 'nomor',
+                        ignoreRecord: true,
+                    )
+                    ->columnSpanFull()
+                    ->hidden(fn () => ! auth()->user()->isAdmin),
                 Forms\Components\ToggleButtons::make('status')
                     ->options(StatusPendaftaran::class)
                     ->inline()

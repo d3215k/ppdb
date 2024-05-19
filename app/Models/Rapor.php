@@ -34,6 +34,11 @@ class Rapor extends Model
         return $this->belongsTo(CalonPesertaDidik::class);
     }
 
+    public function getIsRaporCompleteAttribute()
+    {
+        return $this->isComplete();
+    }
+
     public function isComplete(): bool
     {
         $requiredProperties = [

@@ -124,6 +124,11 @@ class CalonPesertaDidik extends Model
         return $this->hasOne(PersyaratanUmum::class);
     }
 
+    public function getIsBiodataCompleteAttribute()
+    {
+        return $this->isComplete();
+    }
+
     public function isComplete(): bool
     {
         $requiredProperties = [

@@ -196,7 +196,21 @@ class CalonPesertaDidikResource extends Resource
                     Tables\Columns\TextColumn::make('password')
                         ->label('Password')
                         ->copyable(),
-                    ]),
+                    ])->alignCenter(),
+                Tables\Columns\ColumnGroup::make('Kelengkapan Data', [
+                        Tables\Columns\IconColumn::make('isBiodataComplete')
+                            ->boolean()
+                            ->label('Biodata'),
+                        Tables\Columns\IconColumn::make('rapor.isRaporComplete')
+                            ->boolean()
+                            ->label('Rapor'),
+                        Tables\Columns\IconColumn::make('persyaratanUmum.isPersyaratanUmumComplete')
+                            ->boolean()
+                            ->label('Persyaratan Umum'),
+                        Tables\Columns\ToggleColumn::make('locked')
+                            ->tooltip('Kunci edit data oleh pendaftar?'),
+                    ])
+                    ->alignCenter(),
                 Tables\Columns\ToggleColumn::make('locked')
                     ->tooltip('Kunci edit data oleh pendaftar?'),
             ])

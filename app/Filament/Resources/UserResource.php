@@ -47,6 +47,7 @@ class UserResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('name')
                     ->label('Nama')
+                    ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
                     ->options(UserType::class)

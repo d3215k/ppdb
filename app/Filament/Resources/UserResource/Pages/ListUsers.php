@@ -56,7 +56,7 @@ class ListUsers extends ListRecords
                 })
                 ->requiresConfirmation(),
             Actions\CreateAction::make()
-                ->label('Buat Akun Panitia/Penguji'),
+                ->label('Buat Akun Pengguna'),
         ];
     }
 }

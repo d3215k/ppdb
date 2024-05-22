@@ -39,13 +39,20 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
+                    ->unique(
+                        table: 'users',
+                        column: 'email',
+                        ignoreRecord: true,
+                    )
                     ->maxLength(255),
                 Forms\Components\TextInput::make('name')
                     ->label('Nama')
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
                     ->options(UserType::class)
-                    ->hiddenOn('create'),
+                    ->required()
+                    // ->hiddenOn('create')
+                    ,
             ]);
     }
 

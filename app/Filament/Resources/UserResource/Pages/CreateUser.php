@@ -16,7 +16,7 @@ class CreateUser extends CreateRecord
     {
         $setting = new SettingSekolah();
 
-        $data['type'] = UserType::PANITIA;
+        // $data['type'] = UserType::PANITIA;
         $data['password'] = bcrypt($setting->default_password);
 
         return $data;

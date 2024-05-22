@@ -6,7 +6,7 @@ class Dashboard extends \Filament\Pages\Dashboard
 {
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->isAdmin || auth()->user()->isPanitia || auth()->user()->isPenguji;
+        return auth()->user()->isAdmin || auth()->user()->isPanitia || auth()->user()->isPenguji || auth()->user()->isSurveyor;
     }
 
     public function mount()

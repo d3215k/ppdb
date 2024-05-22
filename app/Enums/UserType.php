@@ -10,6 +10,7 @@ enum UserType: int implements HasLabel, HasColor
     case PENDAFTAR = 1;
     case PENGUJI = 2;
     case PANITIA = 3;
+    case SURVEYOR = 4;
     case ADMIN = 9;
 
     public function getLabel(): ?string
@@ -18,6 +19,7 @@ enum UserType: int implements HasLabel, HasColor
             self::PENDAFTAR => 'Pendaftar',
             self::PENGUJI => 'Penguji',
             self::PANITIA => 'Panitia',
+            self::SURVEYOR => 'Surveyor',
             self::ADMIN => 'Admin',
         };
     }
@@ -28,6 +30,7 @@ enum UserType: int implements HasLabel, HasColor
             self::PENDAFTAR => 'success',
             self::PENGUJI => 'warning',
             self::PANITIA => 'info',
+            self::SURVEYOR => 'warning',
             self::ADMIN => 'danger',
         };
     }

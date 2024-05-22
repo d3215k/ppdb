@@ -19,7 +19,7 @@ class DashboardPendaftaranChart extends ChartWidget
 
     public static function canView(): bool
     {
-        return ! auth()->user()->isPenguji;
+        return ! auth()->user()->isPenguji && ! auth()->user()->isSurveyor;
     }
 
     protected function getData(): array

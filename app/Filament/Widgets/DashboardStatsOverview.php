@@ -18,7 +18,7 @@ class DashboardStatsOverview extends BaseWidget
 
     public static function canView(): bool
     {
-        return ! auth()->user()->isPenguji;
+        return ! auth()->user()->isPenguji && ! auth()->user()->isSurveyor;
     }
 
     protected function getStats(): array

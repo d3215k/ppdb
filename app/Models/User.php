@@ -92,6 +92,11 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->type === UserType::PENGUJI;
     }
 
+    public function getIsSurveyorAttribute(): bool
+    {
+        return $this->type === UserType::SURVEYOR;
+    }
+
     public function getIsPanitiaAttribute(): bool
     {
         return $this->type === UserType::PANITIA;

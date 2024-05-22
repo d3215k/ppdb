@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PeriodikResource extends Resource
 {
-    use EnsureOnlyPanitiaCanAccess;
+    // use EnsureOnlyPanitiaCanAccess;
 
     protected static ?string $model = Periodik::class;
 
@@ -33,6 +33,16 @@ class PeriodikResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationGroup = 'Tes';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isAdmin || auth()->user()->isPanitia || auth()->user()->isSurveyor;
+    }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isAdmin || auth()->user()->isPanitia || auth()->user()->isSurveyor;
+    }
 
     public static function getEloquentQuery(): Builder
     {
@@ -221,7 +231,8 @@ class PeriodikResource extends Resource
                 Tables\Actions\Action::make('Calon Peserta Didik')
                     ->url(fn (Periodik $record) => route('filament.app.resources.calon-peserta-didiks.periodik', $record->calonPesertaDidik))
                     ->icon('heroicon-m-user')
-                    ->iconButton(),
+                    ->iconButton()
+                    ->hidden(fn () => auth()->user()->isSurveyor),
             ])
             ->bulkActions([
                 //

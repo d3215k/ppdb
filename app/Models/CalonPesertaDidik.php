@@ -148,8 +148,10 @@ class CalonPesertaDidik extends Model
             'nomor_hp',
             'email',
             'asal_sekolah_id',
-            // 'username',
-            // 'password',
+
+            'nomor_pendaftaran',
+            'username',
+            'password',
         ];
 
         foreach ($requiredProperties as $property) {

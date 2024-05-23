@@ -190,7 +190,7 @@ class BiodataComponent extends Component implements HasForms
                             ->prefix('tiktok.com/'),
                     ]),
 
-                Forms\Components\Fieldset::make('Akun PPDB Dinas')
+                Forms\Components\Fieldset::make('Akun PPDB JABAR')
                     ->schema([
                         Forms\Components\TextInput::make('nomor_pendaftaran')
                             ->maxLength(64),

@@ -125,7 +125,7 @@ class UserCalonPesertaDidik extends Page implements HasForms
                             ->required()
                             ->maxLength(255),
                     ])->hidden(! $this->getRecord()->user),
-                Forms\Components\Fieldset::make('Akun PPDB Dinas')
+                Forms\Components\Fieldset::make('Akun PPDB JABAR')
                     ->schema([
                         Forms\Components\TextInput::make('nomor_pendaftaran')
                             ->maxLength(64),

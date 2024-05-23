@@ -188,7 +188,7 @@ class CalonPesertaDidikResource extends Resource
                     ->label('Asal Sekolah')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\ColumnGroup::make('Akun PPDB Dinas', [
+                Tables\Columns\ColumnGroup::make('Akun PPDB JABAR', [
                     Tables\Columns\TextColumn::make('username')
                         ->label('Username')
                         ->copyable()

@@ -26,6 +26,7 @@ class PeriodikExporter extends Exporter
             ExportColumn::make('tindik'),
             ExportColumn::make('tato'),
             ExportColumn::make('cat_rambut'),
+            ExportColumn::make('catatan'),
         ];
     }
 

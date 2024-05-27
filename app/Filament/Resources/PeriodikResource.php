@@ -98,6 +98,10 @@ class PeriodikResource extends Resource
                         false => 'success',
                     ])
                     ->inline(),
+                Forms\Components\Textarea::make('catatan')
+                    ->nullable()
+                    ->maxLength(255)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -162,6 +166,12 @@ class PeriodikResource extends Resource
                         condition:true,
                         isToggledHiddenByDefault:true
                     ),
+                Tables\Columns\TextColumn::make('catatan')
+                    ->toggleable(
+                        condition:true,
+                        isToggledHiddenByDefault:true
+                    )
+                    ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('Gelombang')

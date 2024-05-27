@@ -88,7 +88,7 @@ class UserCalonPesertaDidik extends Page implements HasForms
     private function fillForm()
     {
         $this->form->fill([
-            'nomor_pendaftaran' => $this->getRecord()->nomor_pendaftaran,
+            // 'nomor_pendaftaran' => $this->getRecord()->nomor_pendaftaran,
             'username' => $this->getRecord()->username,
             'password' => $this->getRecord()->password,
             'email' => $this->getRecord()->user->email ?? null,
@@ -162,7 +162,7 @@ class UserCalonPesertaDidik extends Page implements HasForms
             }
 
             $this->getRecord()->update([
-               'nomor_pendaftaran' =>  $data['nomor_pendaftaran'],
+            //    'nomor_pendaftaran' =>  $data['nomor_pendaftaran'],
                'username' =>  $data['username'],
                'password' =>  $data['password'],
             ]);

@@ -111,6 +111,9 @@ class PeriodikResource extends Resource
                     ->description(fn (Periodik $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.nomor')
+                    ->searchable()
+                    ->default('-'),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.pilihanKesatu.kode')
                     ->sortable()
                     ->default('-'),

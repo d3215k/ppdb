@@ -64,10 +64,11 @@ class TesResource extends Resource
                 Tables\Columns\TextColumn::make('No.')
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.nama')
+                    ->description(fn (Tes $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('calonPesertaDidik.asalSekolah.nama')
-                    ->sortable()
+                Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.nomor')
+                    ->searchable()
                     ->default('-'),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.pilihanKesatu.kode')
                     ->sortable()

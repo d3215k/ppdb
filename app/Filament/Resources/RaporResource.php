@@ -53,6 +53,9 @@ class RaporResource extends Resource
                     ->description(fn (Rapor $record) => $record->calonPesertaDidik->asalSekolah->nama ?? '-')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.nomor')
+                    ->searchable()
+                    ->default('-'),
                 Tables\Columns\TextColumn::make('calonPesertaDidik.pendaftaran.pilihanKesatu.kode')
                     ->sortable()
                     ->default('-'),

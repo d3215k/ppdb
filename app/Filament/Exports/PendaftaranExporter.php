@@ -36,7 +36,7 @@ class PendaftaranExporter extends Exporter
                 ->label('Asal Sekolah'),
             ExportColumn::make('calonPesertaDidik.lp')
                 ->label('Jenis Kelamin')
-                ->state(fn (Pendaftaran $record) => isset($record->lp) ? $record->lp->getLabel() : '-' ),
+                ->state(fn (Pendaftaran $record) => isset($record->calonPesertaDidik->lp) ? $record->calonPesertaDidik->lp->getLabel() : '-' ),
             ExportColumn::make('calonPesertaDidik.nisn')
                 ->label('NISN'),
             ExportColumn::make('calonPesertaDidik.kewarganegaraan')

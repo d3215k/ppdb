@@ -54,11 +54,13 @@ class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
                 Forms\Components\FileUpload::make('dokumen_kelulusan')
                     // ->required()
                     ->nullable()
+                    ->label('Ijazah/Surat Keterangan Lulus/Kartu Peserta Ujian Sekolah')
                     ->acceptedFileTypes(['application/pdf'])
                     ->maxSize(512)
                     ->downloadable(),
                 Forms\Components\FileUpload::make('dokumen_kelahiran')
                     // ->required()
+                    ->label('Akta Kelahiran / KIA')
                     ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
                     ->maxSize(512)
@@ -72,6 +74,7 @@ class PersyaratanUmumCalonPesertaDidik extends Page implements HasForms
                 Forms\Components\FileUpload::make('ktp_ortu')
                     // ->required()
                     ->nullable()
+                    ->label('KTP Orang Tua')
                     ->acceptedFileTypes(['application/pdf'])
                     ->maxSize(512)
                     ->downloadable(),

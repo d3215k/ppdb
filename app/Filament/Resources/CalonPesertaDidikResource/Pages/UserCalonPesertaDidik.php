@@ -130,9 +130,9 @@ class UserCalonPesertaDidik extends Page implements HasForms
                         // Forms\Components\TextInput::make('nomor_pendaftaran')
                         //     ->maxLength(64),
                         Forms\Components\TextInput::make('username')
-                            ->maxLength(64),
+                            ->length(14),
                         Forms\Components\TextInput::make('password')
-                            ->maxLength(64),
+                            ->length(6),
                     ]),
             ])
             ->columns(2)

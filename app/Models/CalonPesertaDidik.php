@@ -149,7 +149,6 @@ class CalonPesertaDidik extends Model
             'email',
             'asal_sekolah_id',
 
-            // 'nomor_pendaftaran',
             'username',
             'password',
         ];

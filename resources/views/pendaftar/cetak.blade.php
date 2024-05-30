@@ -30,7 +30,9 @@
                 <x-item-list title="Jalur" description="{{ $pendaftaran->jalur->nama }}" />
                 <x-item-list title="Pilihan Jurusan Pertama" description="{{ $pendaftaran->pilihanKesatu->nama }}" />
                 <x-item-list title="Pilihan Jurusan Kedua" description="{{ $pendaftaran->pilihanKedua->nama }}" />
-                <x-item-list title="Email" description="{{ $pendaftaran->calonPesertaDidik->user->email }}" />
+                {{-- <x-item-list title="Email" description="{{ $pendaftaran->calonPesertaDidik->user->email }}" /> --}}
+                <x-item-list title="Username" description="{{ $pendaftaran->calonPesertaDidik->username }}" />
+                <x-item-list title="Password" description="{{ $pendaftaran->calonPesertaDidik->password }}" />
             </dl>
         </div>
 

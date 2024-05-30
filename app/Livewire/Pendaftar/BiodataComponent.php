@@ -196,10 +196,10 @@ class BiodataComponent extends Component implements HasForms
                         //     ->maxLength(64),
                         Forms\Components\TextInput::make('username')
                             ->required()
-                            ->maxLength(64),
+                            ->length(14),
                         Forms\Components\TextInput::make('password')
                             ->required()
-                            ->maxLength(64),
+                            ->length(6),
                     ]),
             ])
             ->columns(2)

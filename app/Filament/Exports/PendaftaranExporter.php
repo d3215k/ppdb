@@ -16,6 +16,8 @@ class PendaftaranExporter extends Exporter
     public static function getColumns(): array
     {
         return [
+            ExportColumn::make('created_at')
+                ->label('Tanggal Pendataan'),
             ExportColumn::make('calonPesertaDidik.nama')
                 ->label('Nama Lengkap Calon Peserta Didik'),
             ExportColumn::make('nomor'),

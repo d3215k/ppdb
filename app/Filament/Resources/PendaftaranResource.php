@@ -184,6 +184,7 @@ class PendaftaranResource extends Resource
                     ->action(function (Collection $records, array $data): void {
                         try {
                             foreach ($records as $record) {
+                                $record->status = StatusPendaftaran::LULUS;
                                 $record->kompetensi_keahlian = $data['kompetensi_keahlian_id'];
                                 $record->save();
                             }
